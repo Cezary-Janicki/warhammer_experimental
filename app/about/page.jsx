@@ -1,14 +1,23 @@
 import React from "react";
-import Papa from "papaparse";
-import path from "path";
-import fs, { lchown } from "fs";
-import dataFetch from "../(components)/dataFetch";
+import DataFetch from "../(components)/dataFetch";
+import Test from "../(components)/test";
+
+async function fetch() {
+  const data = await DataFetch();
+  // console.log("data in fetch", data);
+  return data;
+}
+
 export default async function about() {
-  const data = dataFetch();
+  // const data = DataFetch();
+  const data = await fetch();
+  console.log("data in page", data[3]);
+
   return (
     <div>
       <p>about</p>
-      {console.log("data", data)}
+      {/* <DataFetch /> */}
+      <Test />
     </div>
   );
 }
