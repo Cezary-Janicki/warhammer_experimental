@@ -9,7 +9,7 @@ const csvFilePath = path.join(
 // Function to read csv which returns a promise so you can do async / await.
 
 // const readCSV = async (filePath) => {
-export default async function DataFetch() {
+export default async function Wargear_list() {
   const csvFile = fs.readFileSync(csvFilePath);
   const csvData = csvFile.toString();
   return new Promise((resolve) => {
