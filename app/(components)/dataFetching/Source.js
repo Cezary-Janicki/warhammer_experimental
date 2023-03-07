@@ -13,7 +13,6 @@ export default async function Source() {
     Papa.parse(csvData, {
       header: true,
       complete: (results) => {
-        // console.log("Complete", results.data.length, "records.");
         resolve(results.data);
       },
     });

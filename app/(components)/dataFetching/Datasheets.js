@@ -13,8 +13,22 @@ export default async function Datasheets() {
     Papa.parse(csvData, {
       header: true,
       complete: (results) => {
-        // console.log("Complete", results.data.length, "records.");
         resolve(results.data);
+      },
+    });
+  });
+}
+export async function getDatasheetByFaction(faction) {
+  const csvFile = fs.readFileSync(csvFilePath);
+  const csvData = csvFile.toString();
+  return new Promise((resolve) => {
+    Papa.parse(csvData, {
+      header: true,
+      complete: (results) => {
+        const filteredResults = results.data.filter(function (test) {
+          return test.faction_id === faction;
+        });
+        resolve(filteredResults);
       },
     });
   });

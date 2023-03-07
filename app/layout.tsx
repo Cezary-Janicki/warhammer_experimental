@@ -16,3 +16,4 @@ export default function RootLayout({
     </html>
   );
 }
+export const dynamicParams = false;
