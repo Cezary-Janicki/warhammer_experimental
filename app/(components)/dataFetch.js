@@ -45,9 +45,3 @@ export default async function DataFetch() {
     });
   });
 }
-
-// const test = async () => {
-//   let parsedData = await readCSV(csvFilePath);
-// };
-
-// test();

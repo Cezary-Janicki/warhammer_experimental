@@ -19,3 +19,30 @@ export default async function Factions() {
     });
   });
 }
+// subfaction scrapper this would need to be the same function as above but witha  ternary expression to weed out the factions via parent id
+// faction scrapper this would just reject all of the subfactions, it is needed for us to generate the faction pages with next |
+
+export async function MainFactions() {
+  // let data = await Factions();
+  // let factions = [];
+  // let FilteredData = data.map((item, index) => {
+  //   {
+  //     item.is_subfaction === false ? factions.push(item.name) : {};
+  //   }
+  // });
+  // console.log("factions", factions);
+  // return FilteredData;
+  const csvFile = fs.readFileSync(csvFilePath);
+  const csvData = csvFile.toString();
+  return new Promise((resolve) => {
+    Papa.parse(csvData, {
+      header: true,
+      complete: (results) => {
+        const filteredResults = results.data.filter(function (test) {
+          return test.is_subfaction === "false";
+        });
+        resolve(filteredResults);
+      },
+    });
+  });
+}

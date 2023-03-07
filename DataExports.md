@@ -72,4 +72,4 @@ http://wahapedia.ru/wh40k9ed/Secondaries.csv
 
 ## Last_update
 
-http://wahapedia.ru/wh40k9ed/Secondaries.csv
+http://wahapedia.ru/wh40k9ed/Last_update.csv
