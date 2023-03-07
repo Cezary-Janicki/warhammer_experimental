@@ -46,3 +46,12 @@ export async function MainFactions() {
     });
   });
 }
+// export async function FactionNames() {
+//   const data = await MainFactions();
+//   let factionNames = [];
+
+//   data.map((item, index) => {
+//     factionNames.push(item.name);
+//   });
+//   return factionNames;
+// }

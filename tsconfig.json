@@ -29,7 +29,8 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "app/(components)/dataFetch.js"
+    "app/(components)/dataFetch.js",
+    "app/factions/[faction]/page.jsx"
   ],
   "exclude": ["node_modules"]
 }

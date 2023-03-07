@@ -17,7 +17,6 @@ export default async function about() {
   const unit = await fetchUnit();
   // console.log("units", unit);
   let factionNames = [];
-
   data.map((item, index) => {
     factionNames.push(item.name);
   });
