@@ -30,7 +30,7 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "app/(components)/dataFetch.js",
-    "app/factions/[faction]/page.jsx"
+    "app/factions/[category]/page.jsx"
   ],
   "exclude": ["node_modules"]
 }
