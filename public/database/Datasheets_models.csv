@@ -1,4 +1,4 @@
-﻿datasheet_id|line|name|M|WS|BS|S|T|W|A|Ld|Sv|Cost|cost_description|models_per_unit|cost_including_wargear|base_size|base_size_descr|
+datasheet_id|line|name|M|WS|BS|S|T|W|A|Ld|Sv|Cost|cost_description|models_per_unit|cost_including_wargear|base_size|base_size_descr|
 000000001|1|Warboss|5"|2+|5+|6|6|6|5|8|4+|90||1|false|40mm||
 000000002|1|Warboss in Mega Armour|5"|2+|5+|6|6|7|5|8|2+|115||1|false|50mm||
 000000003|1|Warboss on Warbike|14"|2+|5+|6|7|7|5|8|4+|115||1|false|100 x 40mm||

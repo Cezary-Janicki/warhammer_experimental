@@ -8,6 +8,9 @@ async function fetch(props: string) {
 }
 async function createArray() {
   const units = await Datasheets();
+  console.log("units", units[0].id); // i somehow need to get the id from a file i dont know why it's invalid
+  // even when fist header is changed it still returns in apostrophes https://github.com/mholt/PapaParse/issues/407#issuecomment-388314710
+
   return units.map((item: { faction_id: string; name: string }) => ({
     faction: `${item.faction_id}`,
     unit: `${item.name}`,
@@ -15,8 +18,8 @@ async function createArray() {
 }
 export async function generateStaticParams() {
   const factions = await MainFactions();
-  const xxx = await createArray(); // here faction and unit is a string
-  return xxx; // but not on return
+  const xxx = await createArray();
+  return xxx;
 }
 
 export default async function Page({

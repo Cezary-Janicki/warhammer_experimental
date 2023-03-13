@@ -1,4 +1,4 @@
-﻿id|name|type|description|source_id|is_relic|faction_id|faction_name|legend|
+id|name|type|description|source_id|is_relic|faction_id|faction_name|legend|
 000000002|Big shoota|Ranged Weapons|||false|ORK|Orks||
 000000004|Bubblechukka|Ranged Weapons|After selecting targets, roll one D3 to determine which of the profiles below to make attacks with. If a unit contains more than one bubblechukka that is targeting the same unit, determine the profiles for each weapon separately before any attacks are resolved against that target.||false|ORK|Orks||
 000000005|Burna (shooting)|Ranged Weapons|||false|ORK|Orks||

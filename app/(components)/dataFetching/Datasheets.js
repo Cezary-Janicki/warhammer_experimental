@@ -12,7 +12,10 @@ export default async function Datasheets() {
   return new Promise((resolve) => {
     Papa.parse(csvData, {
       header: true,
+      dynamicTyping: true,
+      delimiter: "|",
       complete: (results) => {
+        // console.log("results.meta", results.meta);
         resolve(results.data);
       },
     });
