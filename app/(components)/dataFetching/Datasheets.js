@@ -15,7 +15,6 @@ export default async function Datasheets() {
       dynamicTyping: true,
       delimiter: "|",
       complete: (results) => {
-        // console.log("results.meta", results.meta);
         resolve(results.data);
       },
     });
@@ -30,6 +29,22 @@ export async function getDatasheetByFaction(faction) {
       complete: (results) => {
         const filteredResults = results.data.filter(function (test) {
           return test.faction_id === faction;
+        });
+        resolve(filteredResults);
+      },
+    });
+  });
+}
+
+export async function getDatasheetByFactionAndRole(faction, role) {
+  const csvFile = fs.readFileSync(csvFilePath);
+  const csvData = csvFile.toString();
+  return new Promise((resolve) => {
+    Papa.parse(csvData, {
+      header: true,
+      complete: (results) => {
+        const filteredResults = results.data.filter(function (test) {
+          return test.faction_id === faction && test.role === role;
         });
         resolve(filteredResults);
       },
