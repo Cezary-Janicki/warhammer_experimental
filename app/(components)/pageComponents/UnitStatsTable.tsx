@@ -9,6 +9,8 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 
+import Datasheet_models from "../dataFetching/Datasheets_models";
+
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
     backgroundColor: theme.palette.common.black,
@@ -29,47 +31,47 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
-function createData(
-  name: string,
-  calories: number,
-  fat: number,
-  carbs: number,
-  protein: number
-) {
-  return { name, calories, fat, carbs, protein };
-}
+export default function UnitStatsTable(props: any) {
+  const models = props.models;
+  // console.log("models in table", models);
 
-const rows = [
-  createData("Frozen yoghurt", 159, 6.0, 24, 4.0),
-  createData("Ice cream sandwich", 237, 9.0, 37, 4.3),
-  createData("Eclair", 262, 16.0, 24, 6.0),
-  createData("Cupcake", 305, 3.7, 67, 4.3),
-  createData("Gingerbread", 356, 16.0, 49, 3.9),
-];
-
-export default function UnitStatsTable() {
   return (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 700 }} aria-label="customized table">
         <TableHead>
           <TableRow>
-            <StyledTableCell>Dessert (100g serving)</StyledTableCell>
-            <StyledTableCell align="right">Calories</StyledTableCell>
-            <StyledTableCell align="right">Fat&nbsp;(g)</StyledTableCell>
-            <StyledTableCell align="right">Carbs&nbsp;(g)</StyledTableCell>
-            <StyledTableCell align="right">Protein&nbsp;(g)</StyledTableCell>
+            {/* I would need to somehow loop on table keys or maybe just hardcode it  */}
+            <StyledTableCell align="left">No</StyledTableCell>
+            <StyledTableCell>Unit Name</StyledTableCell>
+            <StyledTableCell align="right">M</StyledTableCell>
+            <StyledTableCell align="right">WS</StyledTableCell>
+            <StyledTableCell align="right">BS</StyledTableCell>
+            <StyledTableCell align="right">S</StyledTableCell>
+            <StyledTableCell align="right">T</StyledTableCell>
+            <StyledTableCell align="right">W</StyledTableCell>
+            <StyledTableCell align="right">A</StyledTableCell>
+            <StyledTableCell align="right">Ld</StyledTableCell>
+            <StyledTableCell align="right">Sv</StyledTableCell>
+            <StyledTableCell align="right">Base</StyledTableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
-            <StyledTableRow key={row.name}>
+          {models.map((model: any) => (
+            <StyledTableRow key={model.name}>
+              <StyledTableCell align="left">{model.line}</StyledTableCell>
               <StyledTableCell component="th" scope="row">
-                {row.name}
+                {model.name}
               </StyledTableCell>
-              <StyledTableCell align="right">{row.calories}</StyledTableCell>
-              <StyledTableCell align="right">{row.fat}</StyledTableCell>
-              <StyledTableCell align="right">{row.carbs}</StyledTableCell>
-              <StyledTableCell align="right">{row.protein}</StyledTableCell>
+              <StyledTableCell align="right">{model.M}</StyledTableCell>
+              <StyledTableCell align="right">{model.WS}</StyledTableCell>
+              <StyledTableCell align="right">{model.BS}</StyledTableCell>
+              <StyledTableCell align="right">{model.S}</StyledTableCell>
+              <StyledTableCell align="right">{model.T}</StyledTableCell>
+              <StyledTableCell align="right">{model.W}</StyledTableCell>
+              <StyledTableCell align="right">{model.A}</StyledTableCell>
+              <StyledTableCell align="right">{model.Sv}</StyledTableCell>
+              <StyledTableCell align="right">{model.Ld}</StyledTableCell>
+              <StyledTableCell align="right">{model.base_size}</StyledTableCell>
             </StyledTableRow>
           ))}
         </TableBody>

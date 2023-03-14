@@ -1,16 +1,13 @@
 import Link from "next/link";
-import { MainFactions } from "../../../(components)/dataFetching/Factions";
-import Datasheets, {
-  getDatasheetByFactionAndRole,
-} from "../../../(components)/dataFetching/Datasheets";
-import { getDatasheetByFaction } from "../../../(components)/dataFetching/Datasheets";
-import BattlefieldRoles from "../../../(components)/dataFetching/BattlefieldRoles";
+import Datasheets from "../../../(components)/dataFetching/Datasheets";
+// import { getDatasheetByFaction } from "../../../(components)/dataFetching/Datasheets";
 import UnitStatsTable from "@/app/(components)/pageComponents/UnitStatsTable";
-async function getUnitsByFaction(props: string) {
-  const data = await getDatasheetByFaction(props);
-  return data;
-}
+import Datasheets_models from "@/app/(components)/dataFetching/Datasheets_models";
 
+export async function generateStaticParams() {
+  const xxx = await createArray();
+  return xxx;
+}
 async function createArray() {
   const units = await Datasheets();
   return units.map((item: { faction_id: string; name: string }) => ({
@@ -18,9 +15,27 @@ async function createArray() {
     unit: `${item.name}`,
   }));
 }
-export async function generateStaticParams() {
-  const xxx = await createArray();
-  return xxx;
+// async function getUnitsByFaction(faction: string) {
+//   const data = await getDatasheetByFaction(faction);
+//   return data; // prodoably redundant right now but going to keep it
+// }
+
+async function getDatasheetModels(props: string) {
+  const datasheetModels = await Datasheets_models();
+  const filteredModels = datasheetModels.filter(function (test: any) {
+    return test.name === props;
+  });
+  return filteredModels;
+}
+
+async function getModelId(model: string) {
+  const models = await Datasheets();
+  const filteredModels = models.filter(function (test: any) {
+    if (test.name === model) {
+      return test.id;
+    }
+  });
+  return filteredModels[0].id;
 }
 
 export default async function Page({
@@ -29,8 +44,14 @@ export default async function Page({
   params: { faction: string; unit: string };
 }) {
   const { faction, unit } = await params;
+  const models = await getDatasheetModels(decodeURI(unit));
+  const modelId = await getModelId(unit);
+
+  // console.log("unit id", modelId);
+  // console.log("unit name", decodeURI(unit));
+  // console.log("models", models); // this properly fetches all of the model stats
+
   // const unitsByFaction = await getUnitsByFaction(`${faction}`);
-  // const roles = BattlefieldRoles();
   return (
     <>
       <p>Faction: {faction}</p>
@@ -41,7 +62,9 @@ export default async function Page({
       <p>
         <Link href={`./`}>Return to Main Page</Link>
       </p>
-      <UnitStatsTable />
+      <UnitStatsTable models={models} />
+      {/* all of the data needed for Unit Stats Table would need to be fetched here and passed into the component as props
+          This also goes for any other data that other client side component could need */}
     </>
   );
 }

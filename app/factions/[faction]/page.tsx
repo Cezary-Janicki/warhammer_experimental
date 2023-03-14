@@ -20,7 +20,6 @@ async function createArray() {
 }
 export async function generateStaticParams() {
   const factions = await MainFactions();
-  console.log("facitons", factions);
   return factions.map((item: any) => ({
     faction: `${item.id}`,
   }));
