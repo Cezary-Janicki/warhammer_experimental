@@ -58,7 +58,9 @@ export default function UnitStatsTable(props: any) {
         <TableBody>
           {models.map((model: any) => (
             <StyledTableRow key={model.name}>
-              <StyledTableCell align="left">{model.line}</StyledTableCell>
+              <StyledTableCell align="left">
+                {model.models_per_unit}
+              </StyledTableCell>
               <StyledTableCell component="th" scope="row">
                 {model.name}
               </StyledTableCell>

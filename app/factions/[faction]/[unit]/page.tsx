@@ -20,12 +20,33 @@ async function createArray() {
 //   return data; // prodoably redundant right now but going to keep it
 // }
 
+async function getDatasheetModelsById(props: number) {
+  // const unitId = props.toString();
+  console.log("props", props); // props return a number as they should
+  const datasheetModels = await Datasheets_models();
+  const modelId = (id: number) => {
+    if (id.toString().length === 9) {
+      return id;
+    } else {
+      return id.toString().padStart(9, "0");
+    }
+  };
+  let filteredModels: any[] = [];
+  datasheetModels.map((item, index) => {
+    if (item.datasheet_id === modelId(props)) {
+      console.log("item to be pushed", item);
+      return filteredModels.push(item);
+    }
+  });
+  return filteredModels;
+}
+
 async function getDatasheetModels(props: string) {
   const datasheetModels = await Datasheets_models();
   const filteredModels = datasheetModels.filter(function (test: any) {
     return test.name === props;
   });
-  return filteredModels;
+  return filteredModels; // this function filters by unit name we need it to filter by unit id and return an array of units
 }
 
 async function getModelId(model: string) {
@@ -35,7 +56,7 @@ async function getModelId(model: string) {
       return test.id;
     }
   });
-  return filteredModels[0].id;
+  return filteredModels[0].id; // this function is broken somehow??
 }
 
 export default async function Page({
@@ -45,13 +66,11 @@ export default async function Page({
 }) {
   const { faction, unit } = await params;
   const models = await getDatasheetModels(decodeURI(unit));
+
   const modelId = await getModelId(unit);
+  const modelsById = await getDatasheetModelsById(modelId);
+  console.log("models by id", modelsById);
 
-  // console.log("unit id", modelId);
-  // console.log("unit name", decodeURI(unit));
-  // console.log("models", models); // this properly fetches all of the model stats
-
-  // const unitsByFaction = await getUnitsByFaction(`${faction}`);
   return (
     <>
       <p>Faction: {faction}</p>
@@ -62,7 +81,7 @@ export default async function Page({
       <p>
         <Link href={`./`}>Return to Main Page</Link>
       </p>
-      <UnitStatsTable models={models} />
+      <UnitStatsTable models={modelsById} />
       {/* all of the data needed for Unit Stats Table would need to be fetched here and passed into the component as props
           This also goes for any other data that other client side component could need */}
     </>
