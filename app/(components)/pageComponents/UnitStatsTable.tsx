@@ -64,16 +64,18 @@ export default function UnitStatsTable(props: any) {
               <StyledTableCell component="th" scope="row">
                 {model.name}
               </StyledTableCell>
-              <StyledTableCell align="right">{model.M}</StyledTableCell>
-              <StyledTableCell align="right">{model.WS}</StyledTableCell>
-              <StyledTableCell align="right">{model.BS}</StyledTableCell>
-              <StyledTableCell align="right">{model.S}</StyledTableCell>
-              <StyledTableCell align="right">{model.T}</StyledTableCell>
-              <StyledTableCell align="right">{model.W}</StyledTableCell>
-              <StyledTableCell align="right">{model.A}</StyledTableCell>
-              <StyledTableCell align="right">{model.Sv}</StyledTableCell>
-              <StyledTableCell align="right">{model.Ld}</StyledTableCell>
-              <StyledTableCell align="right">{model.base_size}</StyledTableCell>
+              <StyledTableCell align="right">{model?.M}</StyledTableCell>
+              <StyledTableCell align="right">{model?.WS}</StyledTableCell>
+              <StyledTableCell align="right">{model?.BS}</StyledTableCell>
+              <StyledTableCell align="right">{model?.S}</StyledTableCell>
+              <StyledTableCell align="right">{model?.T}</StyledTableCell>
+              <StyledTableCell align="right">{model?.W}</StyledTableCell>
+              <StyledTableCell align="right">{model?.A}</StyledTableCell>
+              <StyledTableCell align="right">{model?.Sv}</StyledTableCell>
+              <StyledTableCell align="right">{model?.Ld}</StyledTableCell>
+              <StyledTableCell align="right">
+                {model?.base_size}
+              </StyledTableCell>
             </StyledTableRow>
           ))}
         </TableBody>

@@ -3,7 +3,7 @@ import Datasheets from "../../../(components)/dataFetching/Datasheets";
 // import { getDatasheetByFaction } from "../../../(components)/dataFetching/Datasheets";
 import UnitStatsTable from "@/app/(components)/pageComponents/UnitStatsTable";
 import Datasheets_models from "@/app/(components)/dataFetching/Datasheets_models";
-
+import Datsheets_damage from "@/app/(components)/dataFetching/Datasheets_Damage";
 export async function generateStaticParams() {
   const xxx = await createArray();
   return xxx;
@@ -24,6 +24,7 @@ async function getDatasheetModelsById(props: number) {
   // const unitId = props.toString();
   // console.log("props", props); // props return a number as they should
   const datasheetModels = await Datasheets_models();
+  const datasheetsDamage = await Datsheets_damage();
   const modelId = (id: number) => {
     if (id.toString().length === 9) {
       return id;
@@ -37,15 +38,15 @@ async function getDatasheetModelsById(props: number) {
       return filteredModels.push(item);
     }
   });
-  return filteredModels;
-}
-
-async function getDatasheetModels(props: string) {
-  const datasheetModels = await Datasheets_models();
-  const filteredModels = datasheetModels.filter(function (test: any) {
-    return test.name === props;
-  });
-  return filteredModels; // this function filters by unit name we need it to filter by unit id and return an array of units
+  datasheetsDamage.map((item, index) => {
+    if (item.datasheet_id === modelId(props)) {
+      return filteredModels.push(item);
+    }
+  }); // the datasheetsDamage array needs to be restructured to fit with other arrays
+  // I need to make it into an object with multiple arrays first returned array being the key
+  console.log("filtered models", filteredModels);
+  return filteredModels; // getDatasheetModelsById function needs to check if a model is in the datasheets_damage table and if it is so
+  // then it needs to add additional objects to the array
 }
 
 async function getModelId(props: string) {
@@ -56,9 +57,7 @@ async function getModelId(props: string) {
       return test.id;
     }
   });
-  console.log("filteredModels id", filteredModels);
-  return filteredModels[0].id; // this function is broken somehow??
-  // filtered models function returns emtpy somehow?
+  return filteredModels[0].id;
 }
 
 export default async function Page({
@@ -67,8 +66,6 @@ export default async function Page({
   params: { faction: string; unit: string };
 }) {
   const { faction, unit } = await params;
-  const models = await getDatasheetModels(decodeURI(unit));
-
   const modelId = await getModelId(unit);
   const modelsById = await getDatasheetModelsById(modelId);
   // console.log("models by id", modelsById);
