@@ -22,7 +22,7 @@ async function createArray() {
 
 async function getDatasheetModelsById(props: number) {
   // const unitId = props.toString();
-  console.log("props", props); // props return a number as they should
+  // console.log("props", props); // props return a number as they should
   const datasheetModels = await Datasheets_models();
   const modelId = (id: number) => {
     if (id.toString().length === 9) {
@@ -34,7 +34,6 @@ async function getDatasheetModelsById(props: number) {
   let filteredModels: any[] = [];
   datasheetModels.map((item, index) => {
     if (item.datasheet_id === modelId(props)) {
-      console.log("item to be pushed", item);
       return filteredModels.push(item);
     }
   });
@@ -49,14 +48,17 @@ async function getDatasheetModels(props: string) {
   return filteredModels; // this function filters by unit name we need it to filter by unit id and return an array of units
 }
 
-async function getModelId(model: string) {
+async function getModelId(props: string) {
+  const model = decodeURI(props);
   const models = await Datasheets();
   const filteredModels = models.filter(function (test: any) {
     if (test.name === model) {
       return test.id;
     }
   });
+  console.log("filteredModels id", filteredModels);
   return filteredModels[0].id; // this function is broken somehow??
+  // filtered models function returns emtpy somehow?
 }
 
 export default async function Page({
@@ -69,7 +71,7 @@ export default async function Page({
 
   const modelId = await getModelId(unit);
   const modelsById = await getDatasheetModelsById(modelId);
-  console.log("models by id", modelsById);
+  // console.log("models by id", modelsById);
 
   return (
     <>
