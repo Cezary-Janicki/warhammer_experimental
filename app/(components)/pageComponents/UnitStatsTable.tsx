@@ -33,7 +33,6 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 
 export default function UnitStatsTable(props: any) {
   const models = props.models;
-  // console.log("models in table", models);
 
   return (
     <TableContainer component={Paper}>
@@ -56,11 +55,9 @@ export default function UnitStatsTable(props: any) {
           </TableRow>
         </TableHead>
         <TableBody>
-          {models.map((model: any) => (
+          {models.map((model: any, index: number) => (
             <StyledTableRow key={model.name}>
-              <StyledTableCell align="left">
-                {model.models_per_unit}
-              </StyledTableCell>
+              <StyledTableCell align="left">{model.line}</StyledTableCell>
               <StyledTableCell component="th" scope="row">
                 {model.name}
               </StyledTableCell>
@@ -77,6 +74,8 @@ export default function UnitStatsTable(props: any) {
                 {model?.base_size}
               </StyledTableCell>
             </StyledTableRow>
+            // all of the table cells would need to have ternary expressions to check if the datasheets_damage table has a statistic that could be changed
+            // The first array in models object would then need to be recalled if nessesary
           ))}
         </TableBody>
       </Table>

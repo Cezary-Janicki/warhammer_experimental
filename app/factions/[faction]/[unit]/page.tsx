@@ -1,6 +1,5 @@
 import Link from "next/link";
 import Datasheets from "../../../(components)/dataFetching/Datasheets";
-// import { getDatasheetByFaction } from "../../../(components)/dataFetching/Datasheets";
 import UnitStatsTable from "@/app/(components)/pageComponents/UnitStatsTable";
 import Datasheets_models from "@/app/(components)/dataFetching/Datasheets_models";
 import Datsheets_damage from "@/app/(components)/dataFetching/Datasheets_Damage";
@@ -15,14 +14,8 @@ async function createArray() {
     unit: `${item.name}`,
   }));
 }
-// async function getUnitsByFaction(faction: string) {
-//   const data = await getDatasheetByFaction(faction);
-//   return data; // prodoably redundant right now but going to keep it
-// }
 
 async function getDatasheetModelsById(props: number) {
-  // const unitId = props.toString();
-  // console.log("props", props); // props return a number as they should
   const datasheetModels = await Datasheets_models();
   const datasheetsDamage = await Datsheets_damage();
   const modelId = (id: number) => {
@@ -33,22 +26,146 @@ async function getDatasheetModelsById(props: number) {
     }
   };
   let filteredModels: any[] = [];
-  datasheetModels.map((item, index) => {
+  datasheetModels.map((item) => {
     if (item.datasheet_id === modelId(props)) {
       return filteredModels.push(item);
     }
   });
-  datasheetsDamage.map((item, index) => {
+  let damageTables: any[] = [];
+  datasheetsDamage.map((item) => {
     if (item.datasheet_id === modelId(props)) {
-      return filteredModels.push(item);
+      return damageTables.push(item);
     }
-  }); // the datasheetsDamage array needs to be restructured to fit with other arrays
-  // I need to make it into an object with multiple arrays first returned array being the key
-  console.log("filtered models", filteredModels);
-  return filteredModels; // getDatasheetModelsById function needs to check if a model is in the datasheets_damage table and if it is so
-  // then it needs to add additional objects to the array
-}
+  });
 
+  function createDamageArray(bracketStats: any) {
+    const damageArray = {};
+    const keys = filteredModels[1];
+    const values = bracketStats;
+    Object.values(keys).forEach(
+      (key, i) => (damageArray[key] = Object.values(values)[i])
+    );
+    // now i need to find a way to somwhow modify the damage stats into a new array
+    // i need to make a copy of the old array with the basic stats in it and then replace the stats that bracket
+    // return console.log("new arraty", damageArray);
+  }
+  // const test = filteredModels.map((model: any, index: number) => {
+  //   // i think that this function would need to map the damageTables
+  //   console.log("filtered models", damageTables);
+  //   const keys = filteredModels[1];
+  //   const originalStats = Object.values(filteredModels)[0];
+  //   const testFunction = () => {
+  //     if (index <= 0) {
+  //       return;
+  //     } else {
+  //       // the else function needs to go not nessesary right now
+  //       let newArray = Object.values(filteredModels)[0];
+  //       originalStats.map((newArrayItem, index) => {
+  //         // return console.log("new array item", newArrayItem);
+  //         // this map loops over every element of the original array
+  //         // this map would need to check for every element in "model" and if it isn't present in damagebracket table(ie undefined) then it would replace the old value with new one
+  //         model.map((damageTableItem, index) => {
+  //           // this map replaces it if nessesary
+  //           return console.log("nested map original stats item", newArrayItem); // why those lines return nothing? is it cos the else has no return?
+  //         });
+  //       });
+  //     }
+  //   };
+  //   console.log("testfunction", testFunction());
+  //   // return originalStats;
+
+  //   // To prevent the script from selecting a nob/other model in the unit i could pass two seperate arrays with two tables
+
+  //   // i could also use Object.fromEntries() function to do this I
+  //   // Object would be created via map, the map would need to skip the first entry but then it would look like
+  //   //damage.map(()=>{
+  //   //entries <create a map here for a single damage bracket>
+  //   //return push map to filteredModels
+  // });
+
+  function testArray() {
+    // creating the model keys array
+    let modelsKeys = Object.keys(filteredModels[0]);
+    // creating the bracket damage keys array
+    let damageKeys = Object.values(damageTables[0]);
+    damageKeys[0] = "datasheet_id";
+    damageKeys[1] = "line";
+    damageKeys[2] = "W";
+
+    let damageBrackets = () => {
+      let bracketData = () => {
+        let data = damageTables;
+        data.shift();
+        return data;
+      };
+      // console.log("damage tables", bracketData());
+      // console.log("damageKeys", damageKeys);
+      let allBracketsWithKeys: any[] = [];
+      bracketData().map((damage, i) => {
+        let damageArrayWithKeys = {};
+        damageKeys.forEach((key, index) => {
+          damageArrayWithKeys[key] = Object.values(damage)[index];
+        });
+        allBracketsWithKeys.push(damageArrayWithKeys);
+      });
+
+      return allBracketsWithKeys;
+    };
+
+    // testModels.map((model) => { this is a working basic nested map
+    //   // return console.log("this is unit", model.name);
+    //   testDamage.map((damage) => {
+    //     if (model.name === damage.name) {
+    //       return console.log("this is damage for", model.name, damage);
+    //     } else {
+    //       return console.log("this model doesnt bracket");
+    //     }
+    //   });
+    // });
+
+    // console.log("damageKeys", damageKeys);
+    // console.log("modelsKeys", modelsKeys);
+
+    filteredModels.map((model, modelIndex) => {
+      // const bracketingModelName = damageBrackets()[1]["Model"];
+      const xxx = damageBrackets();
+      const bracketingModelName = xxx[1]["Model"];
+      // console.log("model", model);
+      // console.log("damage keys", damageKeys);
+      damageKeys.map((damageKey, damageKeyIndex) => {
+        // make a copy array here
+        modelsKeys.map((modelsKey, modelKeyIndex) => {
+          // here i would need to loop damageBrackets to change each and every bracket
+          if (damageKey !== "") {
+            // console.log("test bool ", damageBrackets())
+            if (
+              damageKey === modelsKey &&
+              model["name"] === bracketingModelName
+            ) {
+              // if a change is detected swap the value here from damage brackets by index
+              console.log(
+                "this model brackets:",
+                model.name,
+                "with a stat of",
+                modelsKey,
+                "at model index of ",
+                modelKeyIndex
+              );
+              // now i need to take a <model> and copy it, when the script detects the change i should swap the items on a copy when one loop is finished i have to push the change
+
+              return;
+            } else {
+              //   return testing.push(model.modelKey);
+            }
+          }
+        });
+      });
+    });
+    return;
+  }
+  testArray();
+  return filteredModels;
+}
 async function getModelId(props: string) {
   const model = decodeURI(props);
   const models = await Datasheets();
@@ -68,7 +185,6 @@ export default async function Page({
   const { faction, unit } = await params;
   const modelId = await getModelId(unit);
   const modelsById = await getDatasheetModelsById(modelId);
-  // console.log("models by id", modelsById);
 
   return (
     <>
