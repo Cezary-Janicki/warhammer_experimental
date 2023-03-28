@@ -38,17 +38,17 @@ async function getDatasheetModelsById(props: number) {
     }
   });
 
-  function createDamageArray(bracketStats: any) {
-    const damageArray = {};
-    const keys = filteredModels[1];
-    const values = bracketStats;
-    Object.values(keys).forEach(
-      (key, i) => (damageArray[key] = Object.values(values)[i])
-    );
-    // now i need to find a way to somwhow modify the damage stats into a new array
-    // i need to make a copy of the old array with the basic stats in it and then replace the stats that bracket
-    // return console.log("new arraty", damageArray);
-  }
+  // function createDamageArray(bracketStats: any) {
+  //   const damageArray = {};
+  //   const keys = filteredModels[1];
+  //   const values = bracketStats;
+  //   Object.values(keys).forEach(
+  //     (key, i) => (damageArray[key] = Object.values(values)[i])
+  //   );
+  //   // now i need to find a way to somwhow modify the damage stats into a new array
+  //   // i need to make a copy of the old array with the basic stats in it and then replace the stats that bracket
+  //   // return console.log("new arraty", damageArray);
+  // }
   // const test = filteredModels.map((model: any, index: number) => {
   //   // i think that this function would need to map the damageTables
   //   console.log("filtered models", damageTables);
@@ -126,45 +126,57 @@ async function getDatasheetModelsById(props: number) {
     // console.log("damageKeys", damageKeys);
     // console.log("modelsKeys", modelsKeys);
 
+    let testObject: any[] = [];
     filteredModels.map((model, modelIndex) => {
-      // const bracketingModelName = damageBrackets()[1]["Model"];
-      const xxx = damageBrackets();
-      const bracketingModelName = xxx[1]["Model"];
-      // console.log("model", model);
-      // console.log("damage keys", damageKeys);
-      damageKeys.map((damageKey, damageKeyIndex) => {
-        // make a copy array here
-        modelsKeys.map((modelsKey, modelKeyIndex) => {
-          // here i would need to loop damageBrackets to change each and every bracket
-          if (damageKey !== "") {
-            // console.log("test bool ", damageBrackets())
-            if (
-              damageKey === modelsKey &&
-              model["name"] === bracketingModelName
-            ) {
-              // if a change is detected swap the value here from damage brackets by index
-              console.log(
-                "this model brackets:",
-                model.name,
-                "with a stat of",
-                modelsKey,
-                "at model index of ",
-                modelKeyIndex
-              );
-              // now i need to take a <model> and copy it, when the script detects the change i should swap the items on a copy when one loop is finished i have to push the change
+      const damageBracketValues = damageBrackets();
+      const bracketingModelName = damageBracketValues[1]["Model"];
+      if (model["name"] === bracketingModelName) {
+        let tempModel = { ...model };
+        damageBracketValues.map((damageValue, damageValueIndex) => {
+          damageKeys.map((damageKey, damageKeyIndex) => {
+            // make a copy array here
+            modelsKeys.map((modelsKey, modelKeyIndex) => {
+              // here i would need to loop damageBrackets to change each and every bracket
+              if (damageKey !== "") {
+                if (
+                  damageKey === modelsKey &&
+                  model["name"] === bracketingModelName
+                ) {
+                  tempModel[modelsKey] = damageValue[damageKey];
 
-              return;
-            } else {
-              //   return testing.push(model.modelKey);
-            }
-          }
-        });
-      });
-    });
-    return;
+                  // if a change is detected swap the value here from damage brackets by index
+                  // console.log(
+                  //   "this model brackets:",
+                  //   model.name,
+                  //   "with a stat of",
+                  //   modelsKey,
+                  //   "at model index of ",
+                  //   modelKeyIndex,
+                  //   "stat value being changed is",
+                  //   damageValue[damageKey],
+                  //   "from",
+                  //   model[damageKey]
+                  // );
+
+                  return;
+                } else {
+                  //   return testing.push(model.modelKey);
+                }
+              }
+            });
+          }); //dmg keys
+          testObject.push(tempModel);
+          tempModel = { ...model }; // without this line the code displays only the last iteration
+        }); // dmg bracket values
+      } // if loop
+    }); // models loop
+    console.log("test object", testObject);
+    return testObject;
   }
-  testArray();
+  console.log("test array", testArray());
+  // console.log("filtered models", filteredModels);
   return filteredModels;
+  // return testArray(); //this throws up undefined
 }
 async function getModelId(props: string) {
   const model = decodeURI(props);
