@@ -24,13 +24,12 @@ export async function createUnitTables(props: number) {
       return damageTables.push(item);
     }
   });
-
-  function createDamageBracketArrays() {
+  function createDamageBracketArrays() { 
     // creating the model keys array
     let modelsKeys = Object.keys(filteredModels[0]);
     // creating the bracket damage keys array
     let damageKeys = Object.values(damageTables[0]);
-    damageKeys[0] = "datasheet_id";
+    damageKeys[0] = "datasheet_id"; // also trukkdoesnt bracket but it should
     damageKeys[1] = "line";
     damageKeys[2] = "W";
 
@@ -52,6 +51,8 @@ export async function createUnitTables(props: number) {
 
       return allBracketsWithKeys;
     };
+
+
     function clearName(props) {
       let data = props;
       data["name"] = "";
@@ -59,13 +60,14 @@ export async function createUnitTables(props: number) {
       data["base_size"] = "";
       return data;
     }
+
     let testObject: any[] = [];
-    filteredModels.map((model, modelIndex) => {
+    filteredModels.map((model, modelIndex) => { 
       const damageBracketValues = damageBrackets();
-      const bracketingModelName = damageBracketValues[1]["Model"];
+      const bracketingModelName =(typeof damageBracketValues[1]["Model"] === "undefined" )? model["name"] : damageBracketValues[1]["Model"] 
+      // Line above omits the name check if there is only one model (name is undefied then)
       if (model["name"] === bracketingModelName) {
         let tempModel = { ...model };
-        clearName(tempModel);
         damageBracketValues.map((damageValue, damageValueIndex) => {
           damageKeys.map((damageKey, damageKeyIndex) => {
             modelsKeys.map((modelsKey, modelKeyIndex) => {
@@ -84,21 +86,13 @@ export async function createUnitTables(props: number) {
           }); //dmg keys
           testObject.push(tempModel);
           tempModel = { ...model };
-          clearName(tempModel); // without this line the code displays only the last iteration
+          clearName(tempModel); // without this lin with e the code displays only the last iteration
         });
       }
     });
     return testObject;
   }
-
   const damageBracketArrays = await createDamageBracketArrays();
+  return damageBracketArrays;
 
-  damageBracketArrays.map((damageBracketArray, index) => {
-    // first damage bracket array is the full strength one so we always want to ommit it
-    if (index > 0) {
-      filteredModels.splice(filteredModels.length - 1, 0, damageBracketArray);
-      return;
-    }
-  });
-  return filteredModels;
 }

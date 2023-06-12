@@ -1,7 +1,10 @@
 import Link from "next/link";
 import Datasheets from "../../../(components)/dataFetching/Datasheets";
 import UnitStatsTable from "@/app/(components)/pageComponents/UnitStatsTable";
+import { datasheetOptions } from "@/app/(components)/datasheetOptions";
 import { createUnitTables } from "@/app/(components)/createUnitTables";
+import { selectUnitTables } from "@/app/(components)/selectUnitTables";
+import parse from "node-html-parser";
 export async function generateStaticParams() {
   const xxx = await createArray();
   return xxx;
@@ -24,7 +27,17 @@ async function getModelId(props: string) {
   });
   return filteredModels[0].id;
 }
-
+async function getDatasheetDataByModel(props: string) {
+  const data = await Datasheets();
+  const unitName = decodeURI(props);
+  let filteredDatasheets: any[] = [];
+  data.map((item) => {
+    if (item.name === unitName) {
+      return filteredDatasheets.push(item);
+    }
+  });
+  return filteredDatasheets;
+}
 export default async function Page({
   params,
 }: {
@@ -32,9 +45,20 @@ export default async function Page({
 }) {
   const { faction, unit } = await params;
   const modelId = await getModelId(unit);
-  const unitTables = await createUnitTables(modelId);
-
+  // const unitTables = await createUnitTables(modelId);
+  const selectTables = await selectUnitTables(modelId);
+  const datasheets = await getDatasheetDataByModel(unit);
+  const datasheets_options = await datasheetOptions(modelId); // this doesn't filter options
+  const test = datasheets[0].unit_composition;
+  // console.log("unitTables", selectTables)
+  // const htmlDoc = parse(test);
+  // console.log("html doc", htmlDoc);
+// console.log("select tables", SelectUnitTables(modelId))
   return (
+    // to get all of the wargear i need to search datasheets_wargear for model i want
+    // and then get all of the wargear id's
+    // to get options for a model import datasheets_options by id
+    // weapons/psyker powers are listed in datasheets.csv
     <>
       <p>Faction: {faction}</p>
       <p>Unit: {decodeURI(unit)}</p>
@@ -44,7 +68,10 @@ export default async function Page({
       <p>
         <Link href={`./`}>Return to Main Page</Link>
       </p>
-      <UnitStatsTable models={unitTables} />
+      <p>{datasheets[0].unit_composition}</p>
+      {/* <UnitStatsTable models={unitTables} /> */}
+      <UnitStatsTable models={selectTables} />
+      
     </>
   );
 }
