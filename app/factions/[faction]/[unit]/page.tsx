@@ -70,7 +70,7 @@ export default async function Page({
       </p>
       <p>{datasheets[0].unit_composition}</p>
       {/* <UnitStatsTable models={unitTables} /> */}
-      <UnitStatsTable models={selectTables} />
+      <UnitStatsTable models={selectTables} /> 
       
     </>
   );

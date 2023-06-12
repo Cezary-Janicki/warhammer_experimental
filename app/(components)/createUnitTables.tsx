@@ -39,7 +39,6 @@ export async function createUnitTables(props: number) {
         data.shift();
         return data;
       };
-
       let allBracketsWithKeys: any[] = [];
       bracketData().map((damage, i) => {
         let damageArrayWithKeys = {};
@@ -60,6 +59,7 @@ export async function createUnitTables(props: number) {
       data["base_size"] = "";
       return data;
     }
+      console.log("model", filteredModels[1])
 
     let testObject: any[] = [];
     filteredModels.map((model, modelIndex) => { 
@@ -92,7 +92,14 @@ export async function createUnitTables(props: number) {
     });
     return testObject;
   }
+
   const damageBracketArrays = await createDamageBracketArrays();
-  return damageBracketArrays;
+  if(filteredModels.length===1){
+  return damageBracketArrays
+}
+  else{
+    damageBracketArrays.push(filteredModels[1])
+    return damageBracketArrays
+  }
 
 }
