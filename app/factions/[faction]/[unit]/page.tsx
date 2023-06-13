@@ -4,6 +4,7 @@ import UnitStatsTable from "@/app/(components)/pageComponents/UnitStatsTable";
 import { datasheetOptions } from "@/app/(components)/datasheetOptions";
 import { createUnitTables } from "@/app/(components)/createUnitTables";
 import { selectUnitTables } from "@/app/(components)/selectUnitTables";
+import { datasheetsWargear } from "@/app/(components)/wargearOptions";
 import parse from "node-html-parser";
 export async function generateStaticParams() {
   const xxx = await createArray();
@@ -49,8 +50,11 @@ export default async function Page({
   const selectTables = await selectUnitTables(modelId);
   const datasheets = await getDatasheetDataByModel(unit);
   const datasheets_options = await datasheetOptions(modelId); // this doesn't filter options
-  const test = datasheets[0].unit_composition;
-  // console.log("unitTables", selectTables)
+  const cleanComp = datasheets[0].unit_composition.replace(/<\/?[^>]+(>|$)/g, "");
+
+  const wargear = await datasheetsWargear(modelId);
+  // console.log("wargear", wargear)
+
   // const htmlDoc = parse(test);
   // console.log("html doc", htmlDoc);
 // console.log("select tables", SelectUnitTables(modelId))
@@ -68,7 +72,7 @@ export default async function Page({
       <p>
         <Link href={`./`}>Return to Main Page</Link>
       </p>
-      <p>{datasheets[0].unit_composition}</p>
+      <p>{cleanComp}</p>
       {/* <UnitStatsTable models={unitTables} /> */}
       <UnitStatsTable models={selectTables} /> 
       

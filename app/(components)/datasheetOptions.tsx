@@ -23,7 +23,7 @@ export async function datasheetOptions(props: string) {
 
     if (item.datasheet_id === modelId) {
       // console.log("map datasheet id", item.datasheet_id);
-      return allOptions.push(data);
+      return allOptions.push(item);
     }
   });
   return allOptions;
