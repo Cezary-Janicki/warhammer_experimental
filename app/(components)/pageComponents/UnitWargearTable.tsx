@@ -31,9 +31,13 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
-export default function UnitStatsTable(props: any) {
-  const models = props.models;
-console.log("props", props)
+export default function UnitWargearTable(props: any) {
+  const allWargearList = props.allWargearList 
+  const allWargear = props.allWargear
+  function stripHTML(props:string){
+    const cleanComp = props.replace(/<\/?[^>]+(>|$)/g, "");
+    return cleanComp
+  }
   return (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 700 }} aria-label="customized table">
@@ -46,32 +50,25 @@ console.log("props", props)
             <StyledTableCell align="right">S</StyledTableCell>
             <StyledTableCell align="right">AP</StyledTableCell>
             <StyledTableCell align="right">D</StyledTableCell>
-            <StyledTableCell align="right">Abilities</StyledTableCell>
+            <StyledTableCell align="left">Abilities</StyledTableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {/* {models.map((model: any, index: number) => (
-            <StyledTableRow key={model.name}>
-              <StyledTableCell align="left">{model.line}</StyledTableCell>
+          {allWargearList.map((wargear: any, index: number) => (
+            <StyledTableRow key={wargear.name}>
               <StyledTableCell component="th" scope="row">
-                {model.name}
+                {wargear.name}
               </StyledTableCell>
-              <StyledTableCell align="right">{model?.M}</StyledTableCell>
-              <StyledTableCell align="right">{model?.WS}</StyledTableCell>
-              <StyledTableCell align="right">{model?.BS}</StyledTableCell>
-              <StyledTableCell align="right">{model?.S}</StyledTableCell>
-              <StyledTableCell align="right">{model?.T}</StyledTableCell>
-              <StyledTableCell align="right">{model?.W}</StyledTableCell>
-              <StyledTableCell align="right">{model?.A}</StyledTableCell>
-              <StyledTableCell align="right">{model?.Sv}</StyledTableCell>
-              <StyledTableCell align="right">{model?.Ld}</StyledTableCell>
-              <StyledTableCell align="right">
-                {model?.base_size}
-              </StyledTableCell>
+              <StyledTableCell align="right">{wargear?.Range}</StyledTableCell>
+              <StyledTableCell align="right">{wargear?.Type}</StyledTableCell>
+              <StyledTableCell align="right">{wargear?.S}</StyledTableCell>
+              <StyledTableCell align="right">{wargear?.AP}</StyledTableCell>
+              <StyledTableCell align="right">{wargear?.D}</StyledTableCell>
+              <StyledTableCell align="left">{stripHTML(wargear?.abilities)}</StyledTableCell>
             </StyledTableRow>
             // all of the table cells would need to have ternary expressions to check if the datasheets_damage table has a statistic that could be changed
             // The first array in models object would then need to be recalled if nessesary
-          ))} */}
+          ))}
         </TableBody>
       </Table>
     </TableContainer>

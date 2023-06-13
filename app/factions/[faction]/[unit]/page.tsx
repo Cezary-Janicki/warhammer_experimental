@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Datasheets from "../../../(components)/dataFetching/Datasheets";
 import UnitStatsTable from "@/app/(components)/pageComponents/UnitStatsTable";
+import UnitWargearTable from "@/app/(components)/pageComponents/UnitWargearTable";
 import { datasheetOptions } from "@/app/(components)/datasheetOptions";
 import { createUnitTables } from "@/app/(components)/createUnitTables";
 import { selectUnitTables } from "@/app/(components)/selectUnitTables";
@@ -51,10 +52,7 @@ export default async function Page({
   const datasheets = await getDatasheetDataByModel(unit);
   const datasheets_options = await datasheetOptions(modelId); // this doesn't filter options
   const cleanComp = datasheets[0].unit_composition.replace(/<\/?[^>]+(>|$)/g, "");
-
   const wargear = await datasheetsWargear(modelId);
-  // console.log("wargear", wargear)
-
   // const htmlDoc = parse(test);
   // console.log("html doc", htmlDoc);
 // console.log("select tables", SelectUnitTables(modelId))
@@ -75,6 +73,8 @@ export default async function Page({
       <p>{cleanComp}</p>
       {/* <UnitStatsTable models={unitTables} /> */}
       <UnitStatsTable models={selectTables} /> 
+      <UnitWargearTable allWargear={wargear.allWargear}
+                        allWargearList={wargear.allWargearList} />
       
     </>
   );

@@ -43,6 +43,5 @@ export async function datasheetsWargear(props: string) {
         allWargearList.push(item2);
     }})
   });
-
-
+return {allWargearList ,allWargear}
 }

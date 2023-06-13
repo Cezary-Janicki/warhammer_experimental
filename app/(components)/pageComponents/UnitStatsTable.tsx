@@ -33,7 +33,6 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 
 export default function UnitStatsTable(props: any) {
   const models = props.models;
-console.log("props", props)
   return (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 700 }} aria-label="customized table">
