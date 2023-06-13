@@ -30,47 +30,81 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
     border: 0,
   },
 }));
-
+// i need to fetch wargear, there there are profiles for combi weapons that need to be displayed in a diffrent manner, maybe a loop?
 export default function UnitWargearTable(props: any) {
   const allWargearList = props.allWargearList 
   const allWargear = props.allWargear
+  const datasheets_options = props.datasheets_options
   function stripHTML(props:string){
     const cleanComp = props.replace(/<\/?[^>]+(>|$)/g, "");
     return cleanComp
   }
   return (
+<>
+      <TableContainer component={Paper}>
+        <Table sx={{ minWidth: 700 }} aria-label="customized table">
+          <TableHead>
+            <TableRow>
+              <StyledTableCell>Weapon</StyledTableCell>
+              <StyledTableCell align="right">Range</StyledTableCell>
+              <StyledTableCell align="right">Type</StyledTableCell>
+              <StyledTableCell align="right">S</StyledTableCell>
+              <StyledTableCell align="right">AP</StyledTableCell>
+              <StyledTableCell align="right">D</StyledTableCell>
+              <StyledTableCell align="left">Abilities</StyledTableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {allWargearList.map((wargear: any, index: number) => (
+              <StyledTableRow key={wargear.name}>
+                <StyledTableCell component="th" scope="row">
+                  {wargear.name}
+                </StyledTableCell>
+                <StyledTableCell align="right">{wargear?.Range}</StyledTableCell>
+                <StyledTableCell align="right">{wargear?.Type}</StyledTableCell>
+                <StyledTableCell align="right">{wargear?.S}</StyledTableCell>
+                <StyledTableCell align="right">{wargear?.AP}</StyledTableCell>
+                <StyledTableCell align="right">{wargear?.D}</StyledTableCell>
+                <StyledTableCell align="left">{stripHTML(wargear?.abilities)}</StyledTableCell>
+              </StyledTableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
+
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 700 }} aria-label="customized table">
         <TableHead>
           <TableRow>
-            {/* I would need to somehow loop on table keys or maybe just hardcode it  */}
-            <StyledTableCell>Weapon</StyledTableCell>
-            <StyledTableCell align="right">Range</StyledTableCell>
-            <StyledTableCell align="right">Type</StyledTableCell>
-            <StyledTableCell align="right">S</StyledTableCell>
-            <StyledTableCell align="right">AP</StyledTableCell>
-            <StyledTableCell align="right">D</StyledTableCell>
-            <StyledTableCell align="left">Abilities</StyledTableCell>
+            <StyledTableCell>Other wargear</StyledTableCell>
+            <StyledTableCell align="left">Abilites</StyledTableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {allWargearList.map((wargear: any, index: number) => (
-            <StyledTableRow key={wargear.name}>
+          {/* {datasheets_options.map((option: any, index: number) => (
+            <StyledTableRow key={option.line}>
               <StyledTableCell component="th" scope="row">
-                {wargear.name}
+                Wargear Options
               </StyledTableCell>
-              <StyledTableCell align="right">{wargear?.Range}</StyledTableCell>
-              <StyledTableCell align="right">{wargear?.Type}</StyledTableCell>
-              <StyledTableCell align="right">{wargear?.S}</StyledTableCell>
-              <StyledTableCell align="right">{wargear?.AP}</StyledTableCell>
-              <StyledTableCell align="right">{wargear?.D}</StyledTableCell>
-              <StyledTableCell align="left">{stripHTML(wargear?.abilities)}</StyledTableCell>
+              <StyledTableCell align="left">{option?.description}</StyledTableCell>
             </StyledTableRow>
-            // all of the table cells would need to have ternary expressions to check if the datasheets_damage table has a statistic that could be changed
-            // The first array in models object would then need to be recalled if nessesary
-          ))}
+          ))} */}
+            <StyledTableCell component="th" scope="row">
+                Wargear Options               
+            </StyledTableCell>
+            <StyledTableCell align="left">
+               <ul>
+                  {datasheets_options.map((option: any,  index: number) => (
+                <li key={index}>{option?.description}</li>
+                   ))}
+               </ul>
+            </StyledTableCell>
+
         </TableBody>
       </Table>
     </TableContainer>
+
+
+</>
   );
 }

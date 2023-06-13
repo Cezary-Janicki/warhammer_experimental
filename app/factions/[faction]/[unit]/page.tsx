@@ -47,12 +47,13 @@ export default async function Page({
 }) {
   const { faction, unit } = await params;
   const modelId = await getModelId(unit);
-  // const unitTables = await createUnitTables(modelId);
+  // const unitTables = await createUnitTables(modelId);  
   const selectTables = await selectUnitTables(modelId);
   const datasheets = await getDatasheetDataByModel(unit);
   const datasheets_options = await datasheetOptions(modelId); // this doesn't filter options
   const cleanComp = datasheets[0].unit_composition.replace(/<\/?[^>]+(>|$)/g, "");
   const wargear = await datasheetsWargear(modelId);
+  console.log("datasheets options", datasheets_options)
   // const htmlDoc = parse(test);
   // console.log("html doc", htmlDoc);
 // console.log("select tables", SelectUnitTables(modelId))
@@ -74,7 +75,8 @@ export default async function Page({
       {/* <UnitStatsTable models={unitTables} /> */}
       <UnitStatsTable models={selectTables} /> 
       <UnitWargearTable allWargear={wargear.allWargear}
-                        allWargearList={wargear.allWargearList} />
+                        allWargearList={wargear.allWargearList}
+                        datasheets_options={datasheets_options} />
       
     </>
   );

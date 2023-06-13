@@ -14,15 +14,11 @@ export async function datasheetOptions(props: string) {
     }
   };
   const modelId = getModelId(props);
-  //   console.log("props", modelId);
   const data = await getDatasheetOptions();
-  //   console.log("datasheet options id", data[5].datasheet_id);
   let allOptions: any[] = [];
   data.map((item, index) => {
-    // console.log("map datasheet id", item.datasheet_id);
 
     if (item.datasheet_id === modelId) {
-      // console.log("map datasheet id", item.datasheet_id);
       return allOptions.push(item);
     }
   });

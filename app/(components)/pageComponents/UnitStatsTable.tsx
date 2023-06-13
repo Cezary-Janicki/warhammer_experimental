@@ -38,7 +38,6 @@ export default function UnitStatsTable(props: any) {
       <Table sx={{ minWidth: 700 }} aria-label="customized table">
         <TableHead>
           <TableRow>
-            {/* I would need to somehow loop on table keys or maybe just hardcode it  */}
             <StyledTableCell align="left">No</StyledTableCell>
             <StyledTableCell>Unit Name</StyledTableCell>
             <StyledTableCell align="right">M</StyledTableCell>
@@ -73,8 +72,6 @@ export default function UnitStatsTable(props: any) {
                 {model?.base_size}
               </StyledTableCell>
             </StyledTableRow>
-            // all of the table cells would need to have ternary expressions to check if the datasheets_damage table has a statistic that could be changed
-            // The first array in models object would then need to be recalled if nessesary
           ))}
         </TableBody>
       </Table>

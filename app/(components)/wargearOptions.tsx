@@ -43,5 +43,9 @@ export async function datasheetsWargear(props: string) {
         allWargearList.push(item2);
     }})
   });
+
+  // i need to get all of the abilites from datasheets_abilites, then if it is wargear display it in other wargear
+  // if it is an ability then display it in abilities below
+  // 
 return {allWargearList ,allWargear}
 }
