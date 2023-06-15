@@ -34,7 +34,10 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 export default function UnitWargearTable(props: any) {
   const allWargearList = props.allWargearList 
   const allWargear = props.allWargear
+  const modelAbilites = props.modelAbilites
+  const otherWargear = props.otherWargear
   const datasheets_options = props.datasheets_options
+
   function stripHTML(props:string){
     const cleanComp = props.replace(/<\/?[^>]+(>|$)/g, "");
     return cleanComp
@@ -81,14 +84,7 @@ export default function UnitWargearTable(props: any) {
           </TableRow>
         </TableHead>
         <TableBody>
-          {/* {datasheets_options.map((option: any, index: number) => (
-            <StyledTableRow key={option.line}>
-              <StyledTableCell component="th" scope="row">
-                Wargear Options
-              </StyledTableCell>
-              <StyledTableCell align="left">{option?.description}</StyledTableCell>
-            </StyledTableRow>
-          ))} */}
+          {/* Wargear options table */}
             <StyledTableCell component="th" scope="row">
                 Wargear Options               
             </StyledTableCell>
@@ -99,6 +95,20 @@ export default function UnitWargearTable(props: any) {
                    ))}
                </ul>
             </StyledTableCell>
+          {/* Other wargear table */}
+            {otherWargear.map((wargear: any, index: number) => (
+                <StyledTableRow key={wargear.name}>
+                  <StyledTableCell component="th" scope="row">{wargear.name}</StyledTableCell>
+                  <StyledTableCell align="left">{stripHTML(wargear?.description)}</StyledTableCell>
+                </StyledTableRow>   
+            ))}
+          {/* Abilites/traits table */}
+            {modelAbilites.map((ability: any, index: number) => (
+                <StyledTableRow key={ability.name}>
+                  <StyledTableCell component="th" scope="row">{ability.name}</StyledTableCell>
+                  <StyledTableCell align="left">{stripHTML(ability?.description)}</StyledTableCell>
+                </StyledTableRow>  
+            ))}
 
         </TableBody>
       </Table>

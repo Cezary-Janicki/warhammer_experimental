@@ -4,7 +4,7 @@ const Papa = require("papaparse");
 
 const csvFilePath = path.join(
   process.cwd(),
-  "public/database/Datasheet_abilities.csv"
+  "public/database/Datasheets_abilities.csv"
 );
 // Function to read csv which returns a promise so you can do async / await.
 
