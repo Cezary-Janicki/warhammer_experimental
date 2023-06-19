@@ -6,7 +6,7 @@ async function getDatasheetOptions() {
 }
 
 export async function datasheetOptions(props: string) {
-  const getModelId = (id: number) => {
+  const getModelId = (id: string) => {
     if (id.toString().length === 9) {
       return id;
     } else {
@@ -16,7 +16,7 @@ export async function datasheetOptions(props: string) {
   const modelId = getModelId(props);
   const data = await getDatasheetOptions();
   let allOptions: any[] = [];
-  data.map((item, index) => {
+  data.map((item) => {
 
     if (item.datasheet_id === modelId) {
       return allOptions.push(item);

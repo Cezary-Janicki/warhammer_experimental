@@ -33,7 +33,7 @@ async function getDatasheetDataByModel(props: string) {
   const data = await Datasheets();
   const unitName = decodeURI(props);
   let filteredDatasheets: any[] = [];
-  data.map((item) => {
+  data.map((item: { name: string; }) => {
     if (item.name === unitName) {
       return filteredDatasheets.push(item);
     }
@@ -50,13 +50,11 @@ export default async function Page({
   // const unitTables = await createUnitTables(modelId);  
   const selectTables = await selectUnitTables(modelId);
   const datasheets = await getDatasheetDataByModel(unit);
-  const datasheets_options = await datasheetOptions(modelId); // this doesn't filter options
+  const datasheets_options = await datasheetOptions(modelId);
   const cleanComp = datasheets[0].unit_composition.replace(/<\/?[^>]+(>|$)/g, "");
   const wargear = await datasheetsWargear(modelId);
-  // console.log("datasheets options", datasheets_options)
   // const htmlDoc = parse(test);
   // console.log("html doc", htmlDoc);
-// console.log("select tables", SelectUnitTables(modelId))
   return (
     // to get all of the wargear i need to search datasheets_wargear for model i want
     // and then get all of the wargear id's
