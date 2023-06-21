@@ -16,8 +16,7 @@ export async function datasheetOptions(props: string) {
   const modelId = getModelId(props);
   const data = await getDatasheetOptions();
   let allOptions: any[] = [];
-  data.map((item) => {
-
+  data.map((item: { datasheet_id: string; }) => {
     if (item.datasheet_id === modelId) {
       return allOptions.push(item);
     }

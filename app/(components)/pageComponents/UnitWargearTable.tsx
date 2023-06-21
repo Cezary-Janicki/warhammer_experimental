@@ -91,7 +91,7 @@ export default function UnitWargearTable(props: any) {
             <StyledTableCell align="left">
                <ul>
                   {datasheets_options.map((option: any,  index: number) => (
-                <li key={index}>{option?.description}</li>
+                <li key={index}>{stripHTML(option?.description)}</li>
                    ))}
                </ul>
             </StyledTableCell>

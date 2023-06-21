@@ -12,13 +12,13 @@ export async function createUnitTables(props: number) {
     }
   };
   let filteredModels: any[] = [];
-  datasheetModels.map((item) => {
+  datasheetModels.map((item: { datasheet_id: string | number; }) => {
     if (item.datasheet_id === modelId(props)) {
       return filteredModels.push(item);
     }
   });
   let damageTables: any[] = [];
-  datasheetsDamage.map((item) => {
+  datasheetsDamage.map((item: { datasheet_id: string | number; }) => {
     ``;
     if (item.datasheet_id === modelId(props)) {
       return damageTables.push(item);
@@ -28,7 +28,7 @@ export async function createUnitTables(props: number) {
     // creating the model keys array
     let modelsKeys = Object.keys(filteredModels[0]);
     // creating the bracket damage keys array
-    let damageKeys = Object.values(damageTables[0]);
+    let damageKeys: string[] = Object.values(damageTables[0]);
     damageKeys[0] = "datasheet_id"; // also trukkdoesnt bracket but it should
     damageKeys[1] = "line";
     damageKeys[2] = "W";
@@ -41,25 +41,24 @@ export async function createUnitTables(props: number) {
       };
       let allBracketsWithKeys: any[] = [];
       bracketData().map((damage, i) => {
-        let damageArrayWithKeys = {};
+        let damageArrayWithKeys: { [key: string]: any } = {};
         damageKeys.forEach((key, index) => {
-          damageArrayWithKeys[key] = Object.values(damage)[index];
+          damageArrayWithKeys[key] = Object.values(damage)[index]; // this causes an error i need to read into this
         });
         allBracketsWithKeys.push(damageArrayWithKeys);
       });
-
       return allBracketsWithKeys;
     };
 
 
-    function clearName(props) {
+    function clearName(props: any) {
       let data = props;
       data["name"] = "";
       data["line"] = "";
       data["base_size"] = "";
       return data;
     }
-      console.log("model", filteredModels[1])
+      // console.log("model", filteredModels[1])
 
     let testObject: any[] = [];
     filteredModels.map((model, modelIndex) => { 

@@ -12,13 +12,13 @@ export async function createUnitTablesWithoutBrackets(props: number) {
     }
   };
   let filteredModels: any[] = [];
-  datasheetModels.map((item) => {
+  datasheetModels.map((item: { datasheet_id: string | number; }) => {
     if (item.datasheet_id === modelId(props)) {
       return filteredModels.push(item);
     }
   });
   let damageTables: any[] = [];
-  datasheetsDamage.map((item) => {
+  datasheetsDamage.map((item: { datasheet_id: string | number; }) => {
     ``;
     if (item.datasheet_id === modelId(props)) {
       return damageTables.push(item);

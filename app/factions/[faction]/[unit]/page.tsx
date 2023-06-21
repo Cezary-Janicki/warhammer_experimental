@@ -20,7 +20,7 @@ async function createArray() {
 }
 
 async function getModelId(props: string) {
-  const model = decodeURI(props);
+  const model = decodeURI(props).replaceAll("%3A",":");
   const models = await Datasheets();
   const filteredModels = models.filter(function (test: any) {
     if (test.name === model) {
@@ -31,7 +31,7 @@ async function getModelId(props: string) {
 }
 async function getDatasheetDataByModel(props: string) {
   const data = await Datasheets();
-  const unitName = decodeURI(props);
+  const unitName = decodeURI(props).replaceAll("%3A",":");
   let filteredDatasheets: any[] = [];
   data.map((item: { name: string; }) => {
     if (item.name === unitName) {
@@ -51,7 +51,9 @@ export default async function Page({
   const selectTables = await selectUnitTables(modelId);
   const datasheets = await getDatasheetDataByModel(unit);
   const datasheets_options = await datasheetOptions(modelId);
-  const cleanComp = datasheets[0].unit_composition.replace(/<\/?[^>]+(>|$)/g, "");
+  // const cleanComp = datasheets[0].unit_composition.replace(/<\/?[^>]+(>|$)/g, "");
+  const cleanComp =(datasheets[0].unit_composition===null || datasheets[0].unit_composition===undefined? "" :datasheets[0].unit_composition.replace(/<\/?[^>]+(>|$)/g, ""));
+
   const wargear = await datasheetsWargear(modelId);
   // const htmlDoc = parse(test);
   // console.log("html doc", htmlDoc);

@@ -15,14 +15,13 @@ export  async function selectUnitTables(props:any) {
   };
 
     let damageTables: any[] = [];
-  datasheetsDamage.map((item) => {
+  datasheetsDamage.map((item: { datasheet_id: string | number; }) => {
     ``;
     if (item.datasheet_id === modelId(props)) {
       return damageTables.push(item);
     }
   });
-// console.log("datasheets damage",damageTables)
-//         return createUnitTablesWithoutBrackets(props)
+
 
     if(Object.keys(damageTables).length>0){
         return createUnitTables(props)

@@ -24,7 +24,7 @@ async function getDatasheetsAbilites(){
   return data  
 }
 export async function datasheetsWargear(props: string) {
-  const getModelId = (id: number) => {
+  const getModelId = (id: string) => {
     if (id.toString().length === 9) {
       return id;
     } else {
@@ -39,15 +39,15 @@ export async function datasheetsWargear(props: string) {
   let allWargear: any[] = [];
   let allWargearList: any[] = [];
 
-  datasheetsWargear.map((item, index) => {
+  datasheetsWargear.map((item: { datasheet_id: string; }) => {
     if (item.datasheet_id === modelId) {
       return allWargear.push(item);
     }
   });
 
 
-   allWargear.map((item, index) => {
-    wargearList.map((item2,index2)=>{
+   allWargear.map((item) => {
+    wargearList.map((item2: { wargear_id: any; })=>{
     if (item.wargear_id === item2.wargear_id) {
         allWargearList.push(item2);
     }})
@@ -58,8 +58,8 @@ export async function datasheetsWargear(props: string) {
   let modelAbilites: any [] =[];
   let otherWargear: any[]=[];
   let keyWords: any[]=[];
-  datasheetsAbilites.map((item,index)=>{
-   abilites.map((item2,index2)=>{
+  datasheetsAbilites.map((item: { datasheet_id: string; ability_id: any; })=>{
+   abilites.map((item2: { id: any; is_other_wargear: string; type: string; })=>{
      if(item.datasheet_id=== modelId && item2.id===item.ability_id){
       //  modelAbilites.push(item2)
       if(item2.is_other_wargear==='true'){
