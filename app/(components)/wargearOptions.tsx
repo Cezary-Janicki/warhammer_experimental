@@ -38,6 +38,12 @@ export async function datasheetsWargear(props: string) {
   const wargearList = await getWargearList()
   let allWargear: any[] = [];
   let allWargearList: any[] = [];
+  let allCombiWeapons :any[] =[]; // all weapons with duped combi guns
+  let testArray:any[]=[] // filtered combi weapons
+  let testArray2:any[]=[];
+
+
+
 
   datasheetsWargear.map((item: { datasheet_id: string; }) => {
     if (item.datasheet_id === modelId) {
@@ -52,6 +58,30 @@ export async function datasheetsWargear(props: string) {
         allWargearList.push(item2);
     }})
   });
+
+  // i need to write the function that would seperate the combi weapons from others
+  // the function would need to look up the wargear_id, if the ID within allWargearList repeats then 
+  // push both of items with repeating id into another object
+
+allWargearList.map((item,index)=>{
+let filterResults = wargearList.filter(function(entry:any){return entry.wargear_id===item.wargear_id})
+allCombiWeapons.filter(function(entry){
+  if(entry[0].wargear_id===filterResults[0].wargear_id){
+    // console.log("item", item,index)
+    testArray.push(filterResults)
+    allWargearList.splice(index-1,2)
+    allWargearList.splice(index-1,2) // this doesnt work as inteneded
+
+  }
+})
+
+// console.log("dupe check", testArray)
+allCombiWeapons.push(filterResults)
+})
+// console.log("all wargear list ",  allWargearList)
+
+//  let filterResults = wargearList.filter(function(entry){return entry.wargear_id==="000000015"})
+//  console.log("filter results", filterResults)
 
   const datasheetsAbilites = await getDatasheetsAbilites()
   const abilites = await getAbilites()
@@ -72,7 +102,7 @@ export async function datasheetsWargear(props: string) {
       }
     })
   })
-  // console.log("testing",modelAbilites)
+  // console.log("testing", allWargearList)
   // combi weapons need to be sperated i could use MUI collapsible table for that
 
 

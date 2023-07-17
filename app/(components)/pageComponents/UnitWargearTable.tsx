@@ -42,6 +42,10 @@ export default function UnitWargearTable(props: any) {
     const cleanComp = props.replace(/<\/?[^>]+(>|$)/g, "");
     return cleanComp
   }
+
+  // if wargear id is the same they should be displayed in a single "space"
+  // in order to do this everytime there is a combi weapon it should be displayed in a single cell as a list
+  // title of the list being combi - 1st weapon name and the subtract hitroll rules text
   return (
 <>
       <TableContainer component={Paper}>
@@ -102,6 +106,26 @@ export default function UnitWargearTable(props: any) {
                   <StyledTableCell align="left">{stripHTML(wargear?.description)}</StyledTableCell>
                 </StyledTableRow>   
             ))}
+          {/* Abilites/traits table
+            {modelAbilites.map((ability: any, index: number) => (
+                <StyledTableRow key={ability.name}>
+                  <StyledTableCell component="th" scope="row">{ability.name}</StyledTableCell>
+                  <StyledTableCell align="left">{stripHTML(ability?.description)}</StyledTableCell>
+                </StyledTableRow>  
+            ))} */}
+
+        </TableBody>
+      </Table>
+    </TableContainer>
+    <TableContainer component={Paper}>
+      <Table sx={{ minWidth: 700 }} aria-label="customized table">
+        <TableHead>
+          <TableRow>
+            <StyledTableCell>Ability name</StyledTableCell>
+            <StyledTableCell align="left">Ability text</StyledTableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
           {/* Abilites/traits table */}
             {modelAbilites.map((ability: any, index: number) => (
                 <StyledTableRow key={ability.name}>
@@ -109,11 +133,10 @@ export default function UnitWargearTable(props: any) {
                   <StyledTableCell align="left">{stripHTML(ability?.description)}</StyledTableCell>
                 </StyledTableRow>  
             ))}
-
+{}
         </TableBody>
       </Table>
     </TableContainer>
-
 
 </>
   );
