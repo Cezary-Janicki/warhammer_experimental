@@ -8,6 +8,7 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
+import MountCheck from "../mountCheck";
 
 import Datasheet_models from "../dataFetching/Datasheets_models";
 
@@ -39,7 +40,9 @@ export default function UnitWargearTable(props: any) {
   const datasheets_options = props.datasheets_options
 
   function stripHTML(props:string){
-    const cleanComp = props.replace(/<\/?[^>]+(>|$)/g, "");
+    // const cleanComp = props.replace(/<\/?[^>]+(>|$)/g, "");
+    const cleanComp = props.replace(/<\/?("[^"]*"|'[^']*'|[^>])*(>|$)/g, "");
+    cleanComp.replace(/<\/?tbody>/g, ''); // remove tbody
     return cleanComp
   }
 
@@ -48,95 +51,96 @@ export default function UnitWargearTable(props: any) {
   // title of the list being combi - 1st weapon name and the subtract hitroll rules text
   return (
 <>
+     <MountCheck>
+        <TableContainer component={Paper}>
+          <Table sx={{ minWidth: 700 }} aria-label="customized table">
+            <TableHead>
+              <TableRow>
+                <StyledTableCell>Weapon</StyledTableCell>
+                <StyledTableCell align="right">Range</StyledTableCell>
+                <StyledTableCell align="right">Type</StyledTableCell>
+                <StyledTableCell align="right">S</StyledTableCell>
+                <StyledTableCell align="right">AP</StyledTableCell>
+                <StyledTableCell align="right">D</StyledTableCell>
+                <StyledTableCell align="left">Abilities</StyledTableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {allWargearList.map((wargear: any, index: number) => (
+                <StyledTableRow key={wargear.name}>
+                  <StyledTableCell component="th" scope="row">
+                    {wargear.name}
+                  </StyledTableCell>
+                  <StyledTableCell align="right">{wargear?.Range}</StyledTableCell>
+                  <StyledTableCell align="right">{wargear?.Type}</StyledTableCell>
+                  <StyledTableCell align="right">{wargear?.S}</StyledTableCell>
+                  <StyledTableCell align="right">{wargear?.AP}</StyledTableCell>
+                  <StyledTableCell align="right">{wargear?.D}</StyledTableCell>
+                  <StyledTableCell align="left">{stripHTML(wargear?.abilities)}</StyledTableCell>
+                </StyledTableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+  
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 700 }} aria-label="customized table">
           <TableHead>
             <TableRow>
-              <StyledTableCell>Weapon</StyledTableCell>
-              <StyledTableCell align="right">Range</StyledTableCell>
-              <StyledTableCell align="right">Type</StyledTableCell>
-              <StyledTableCell align="right">S</StyledTableCell>
-              <StyledTableCell align="right">AP</StyledTableCell>
-              <StyledTableCell align="right">D</StyledTableCell>
-              <StyledTableCell align="left">Abilities</StyledTableCell>
+              <StyledTableCell>Other wargear</StyledTableCell>
+              <StyledTableCell align="left">Abilites</StyledTableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {allWargearList.map((wargear: any, index: number) => (
-              <StyledTableRow key={wargear.name}>
-                <StyledTableCell component="th" scope="row">
-                  {wargear.name}
-                </StyledTableCell>
-                <StyledTableCell align="right">{wargear?.Range}</StyledTableCell>
-                <StyledTableCell align="right">{wargear?.Type}</StyledTableCell>
-                <StyledTableCell align="right">{wargear?.S}</StyledTableCell>
-                <StyledTableCell align="right">{wargear?.AP}</StyledTableCell>
-                <StyledTableCell align="right">{wargear?.D}</StyledTableCell>
-                <StyledTableCell align="left">{stripHTML(wargear?.abilities)}</StyledTableCell>
-              </StyledTableRow>
-            ))}
+            {/* Wargear options table */}
+              <StyledTableCell component="th" scope="row">
+                  Wargear Options               
+              </StyledTableCell>
+              <StyledTableCell align="left">
+                 <ul>
+                    {datasheets_options.map((option: any,  index: number) => (
+                  <li key={index}>{stripHTML(option.description)}</li>
+                     ))}
+                 </ul>
+              </StyledTableCell>
+            {/* Other wargear table */}
+              {otherWargear.map((wargear: any, index: number) => (
+                  <StyledTableRow key={wargear.name}>
+                    <StyledTableCell component="th" scope="row">{stripHTML(wargear.name)}</StyledTableCell>
+                    <StyledTableCell align="left">{stripHTML(wargear.description)}</StyledTableCell>
+                  </StyledTableRow>   
+              ))}
+            {/* Abilites/traits table
+              {modelAbilites.map((ability: any, index: number) => (
+                  <StyledTableRow key={ability.name}>
+                    <StyledTableCell component="th" scope="row">{ability.name}</StyledTableCell>
+                    <StyledTableCell align="left">{stripHTML(ability?.description)}</StyledTableCell>
+                  </StyledTableRow>  
+              ))} */}
+  
           </TableBody>
         </Table>
       </TableContainer>
-
-    <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 700 }} aria-label="customized table">
-        <TableHead>
-          <TableRow>
-            <StyledTableCell>Other wargear</StyledTableCell>
-            <StyledTableCell align="left">Abilites</StyledTableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {/* Wargear options table */}
-            <StyledTableCell component="th" scope="row">
-                Wargear Options               
-            </StyledTableCell>
-            <StyledTableCell align="left">
-               <ul>
-                  {datasheets_options.map((option: any,  index: number) => (
-                <li key={index}>{stripHTML(option?.description)}</li>
-                   ))}
-               </ul>
-            </StyledTableCell>
-          {/* Other wargear table */}
-            {otherWargear.map((wargear: any, index: number) => (
-                <StyledTableRow key={wargear.name}>
-                  <StyledTableCell component="th" scope="row">{wargear.name}</StyledTableCell>
-                  <StyledTableCell align="left">{stripHTML(wargear?.description)}</StyledTableCell>
-                </StyledTableRow>   
-            ))}
-          {/* Abilites/traits table
-            {modelAbilites.map((ability: any, index: number) => (
-                <StyledTableRow key={ability.name}>
-                  <StyledTableCell component="th" scope="row">{ability.name}</StyledTableCell>
-                  <StyledTableCell align="left">{stripHTML(ability?.description)}</StyledTableCell>
-                </StyledTableRow>  
-            ))} */}
-
-        </TableBody>
-      </Table>
-    </TableContainer>
-    <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 700 }} aria-label="customized table">
-        <TableHead>
-          <TableRow>
-            <StyledTableCell>Ability name</StyledTableCell>
-            <StyledTableCell align="left">Ability text</StyledTableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {/* Abilites/traits table */}
-            {modelAbilites.map((ability: any, index: number) => (
-                <StyledTableRow key={ability.name}>
-                  <StyledTableCell component="th" scope="row">{ability.name}</StyledTableCell>
-                  <StyledTableCell align="left">{stripHTML(ability?.description)}</StyledTableCell>
-                </StyledTableRow>  
-            ))}
-{}
-        </TableBody>
-      </Table>
-    </TableContainer>
+      <TableContainer component={Paper}>
+        <Table sx={{ minWidth: 700 }} aria-label="customized table">
+          <TableHead>
+            <TableRow>
+              <StyledTableCell>Ability name</StyledTableCell>
+              <StyledTableCell align="left">Ability text</StyledTableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {/* Abilites/traits table */}
+              {modelAbilites.map((ability: any, index: number) => (
+                    <StyledTableRow key={ability.name}>
+                      <StyledTableCell component="th" scope="row">{stripHTML(ability.name)}</StyledTableCell>
+                      <StyledTableCell align="left">{stripHTML(ability.description)}</StyledTableCell>
+                    </StyledTableRow>  
+              ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
+     </MountCheck>
 
 </>
   );
