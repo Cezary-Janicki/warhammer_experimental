@@ -32,6 +32,6 @@
     ".next/types/**/*.ts",
     "app/(components)/dataFetch.js",
     "app/factions/[category]/page.jsx"
-  ],
+, "app/(components)/mountCheck.js"  ],
   "exclude": ["node_modules"]
 }

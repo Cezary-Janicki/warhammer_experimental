@@ -14,6 +14,7 @@
 //   else return children
   
 // }
+
 'use client'
 import { useState,useEffect } from "react";
 export default function MountCheck({children}){
@@ -22,7 +23,7 @@ export default function MountCheck({children}){
     setMounted(true);
   }, []);
 
-  if (!mounted) return <>loading</>;
+  if (!mounted) return <>Loading data...</>;
   else return children
   
 }
