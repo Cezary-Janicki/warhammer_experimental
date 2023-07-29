@@ -42,35 +42,39 @@ export default async function Page({
       </p>
       <p>All Faction units links</p>
 
-      {roles.map((role, roleIndex) => {
-        return (
-          <div key={roleIndex}>
-            <h1>{role}</h1>
-            {unitsByFaction.map(
-              (
-                unit1: {
-                  faction_id: string;
-                  role: string;
-                  name: string;
-                },
-                unitIndex: number
-              ) => {
-                if (unit1.role === role) {
-                  return (
-                    <p key={unitIndex}>
-                      <Link
-                        href={`/factions/${unit1.faction_id}/${unit1.name}`}
-                      >
-                        {unit1.name}
-                      </Link>
-                    </p>
-                  );
-                }
-              }
-            )}
-          </div>
-        );
-      })}
+ <div className="flex flex-wrap">
+        {roles.map((role, roleIndex) => {
+          return (
+            <div key={roleIndex}>
+              <h1 className="font-semibold">{role}</h1>
+             <ul>
+                {unitsByFaction.map(
+                  (
+                    unit1: {
+                      faction_id: string;
+                      role: string;
+                      name: string;
+                    },
+                    unitIndex: number
+                  ) => {
+                    if (unit1.role === role) {
+                      return (
+                        <li key={unitIndex} className="list-none indent-6">
+                            <Link
+                              href={`/factions/${unit1.faction_id}/${unit1.name}`}
+                            >
+                              {unit1.name}
+                            </Link>
+                        </li>
+                      );
+                    }
+                  }
+                  )}
+                  </ul>
+            </div>
+          );
+        })}
+ </div>
     </>
   );
 }

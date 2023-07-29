@@ -63,23 +63,23 @@ export default async function Page({
     // to get options for a model import datasheets_options by id
     // weapons/psyker powers are listed in datasheets.csv
     <>
-      <p>Faction: {faction}</p>
-      <p>Unit: {decodeURI(unit)}</p>
-      <p>
-        <Link href={`./factions/${faction}`}>Return to Faction Page</Link>
-      </p>
-      <p>
-        <Link href={`./`}>Return to Main Page</Link>
-      </p>
-      <p>{cleanComp}</p>
-      {/* <UnitStatsTable models={unitTables} /> */}
-      <UnitStatsTable models={selectTables} /> 
-      <UnitWargearTable allWargear={wargear.allWargear}
-                        allWargearList={wargear.allWargearList}
-                        modelAbilites={wargear.modelAbilites}
-                        otherWargear={wargear.otherWargear}
-                        datasheets_options={datasheets_options} />
-      
+        <p>Faction: {faction}</p>
+        <p>Unit: {decodeURI(unit)}</p>
+        <p>
+          <Link href={`./factions/${faction}`}>Return to Faction Page</Link>
+        </p>
+        <p>
+          <Link href={`./`}>Return to Main Page</Link>
+        </p>
+        <p>{cleanComp}</p>
+        {/* <UnitStatsTable models={unitTables} /> */}
+        <UnitStatsTable models={selectTables} /> 
+        <UnitWargearTable allWargear={wargear.allWargear}
+                          allWargearList={wargear.allWargearList}
+                          modelAbilites={wargear.modelAbilites}
+                          otherWargear={wargear.otherWargear}
+                          datasheets_options={datasheets_options} />
+        
     </>
   );
 }

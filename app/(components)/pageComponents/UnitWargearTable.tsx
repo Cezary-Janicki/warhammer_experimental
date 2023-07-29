@@ -82,64 +82,31 @@ export default function UnitWargearTable(props: any) {
             </TableBody>
           </Table>
         </TableContainer>
-  
-      <TableContainer component={Paper}>
-        <Table sx={{ minWidth: 700 }} aria-label="customized table">
-          <TableHead>
-            <TableRow>
-              <StyledTableCell>Other wargear</StyledTableCell>
-              <StyledTableCell align="left">Abilites</StyledTableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {/* Wargear options table */}
-              <StyledTableCell component="th" scope="row">
-                  Wargear Options               
-              </StyledTableCell>
-              <StyledTableCell align="left">
-                 <ul>
+      {/* Other wargear */}
+      {Object.keys(datasheets_options).length>=1?
+      <div  className={"flex flex-row gap-1 bg-neutral-50 border border-neutral-300 rounded-md p-2.5 drop-shadow-md"}>
+        <div className={"basis-1/5 p-2 font-semibold"}>Wargear options</div>
+                  <ul className={"basis-4/5 list-disc"}>
                     {datasheets_options.map((option: any,  index: number) => (
                   <li key={index}>{stripHTML(option.description)}</li>
                      ))}
                  </ul>
-              </StyledTableCell>
-            {/* Other wargear table */}
-              {otherWargear.map((wargear: any, index: number) => (
-                  <StyledTableRow key={wargear.name}>
-                    <StyledTableCell component="th" scope="row">{stripHTML(wargear.name)}</StyledTableCell>
-                    <StyledTableCell align="left">{stripHTML(wargear.description)}</StyledTableCell>
-                  </StyledTableRow>   
+              </div>
+              :<p></p>}
+      {/* Abilites/traits table */}
+      {Object.keys(modelAbilites).length>=1?
+      <div className={"flex flex-row gap-1 bg-neutral-50 border border-neutral-300 rounded-md p-2.5 drop-shadow-md"}>
+      <p className={"basis-1/5 p-2 font-semibold"}>Abilities</p>
+      <div  className={"columns-3 gap-8 break-inside-avoid-column basis-4/5"}>
+                    {modelAbilites.map((ability: any, index: number) => ( 
+                      <p key={ability.name} className="break-inside-avoid-column">
+                        <div className="text-red-700 font-semibold">{ability.name}</div>
+                        <div>{ability.description}</div>
+                      </p>
               ))}
-            {/* Abilites/traits table
-              {modelAbilites.map((ability: any, index: number) => (
-                  <StyledTableRow key={ability.name}>
-                    <StyledTableCell component="th" scope="row">{ability.name}</StyledTableCell>
-                    <StyledTableCell align="left">{stripHTML(ability?.description)}</StyledTableCell>
-                  </StyledTableRow>  
-              ))} */}
-  
-          </TableBody>
-        </Table>
-      </TableContainer>
-      <TableContainer component={Paper}>
-        <Table sx={{ minWidth: 700 }} aria-label="customized table">
-          <TableHead>
-            <TableRow>
-              <StyledTableCell>Ability name</StyledTableCell>
-              <StyledTableCell align="left">Ability text</StyledTableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {/* Abilites/traits table */}
-              {modelAbilites.map((ability: any, index: number) => (
-                    <StyledTableRow key={ability.name}>
-                      <StyledTableCell component="th" scope="row">{stripHTML(ability.name)}</StyledTableCell>
-                      <StyledTableCell align="left">{stripHTML(ability.description)}</StyledTableCell>
-                    </StyledTableRow>  
-              ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
+              </div>
+      </div>
+      :<p></p>}
      </MountCheck>
 
 </>
