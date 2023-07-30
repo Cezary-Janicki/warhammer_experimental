@@ -1,80 +1,50 @@
 "use client";
 import * as React from "react";
-import { styled } from "@mui/material/styles";
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableCell, { tableCellClasses } from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
-import TableRow from "@mui/material/TableRow";
-import Paper from "@mui/material/Paper";
-
-import Datasheet_models from "../dataFetching/Datasheets_models";
-
-const StyledTableCell = styled(TableCell)(({ theme }) => ({
-  [`&.${tableCellClasses.head}`]: {
-    backgroundColor: theme.palette.common.black,
-    color: theme.palette.common.white,
-  },
-  [`&.${tableCellClasses.body}`]: {
-    fontSize: 14,
-  },
-}));
-
-const StyledTableRow = styled(TableRow)(({ theme }) => ({
-  "&:nth-of-type(odd)": {
-    backgroundColor: theme.palette.action.hover,
-  },
-  // hide last border
-  "&:last-child td, &:last-child th": {
-    border: 0,
-  },
-}));
 
 export default function UnitStatsTable(props: any) {
   const models = props.models;
   return (
-    <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 700 }} aria-label="customized table">
-        <TableHead>
-          <TableRow>
-            <StyledTableCell align="left">No</StyledTableCell>
-            <StyledTableCell>Unit Name</StyledTableCell>
-            <StyledTableCell align="right">M</StyledTableCell>
-            <StyledTableCell align="right">WS</StyledTableCell>
-            <StyledTableCell align="right">BS</StyledTableCell>
-            <StyledTableCell align="right">S</StyledTableCell>
-            <StyledTableCell align="right">T</StyledTableCell>
-            <StyledTableCell align="right">W</StyledTableCell>
-            <StyledTableCell align="right">A</StyledTableCell>
-            <StyledTableCell align="right">Ld</StyledTableCell>
-            <StyledTableCell align="right">Sv</StyledTableCell>
-            <StyledTableCell align="right">Base</StyledTableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {models.map((model: any, index: number) => (
-            <StyledTableRow key={model.name}>
-              <StyledTableCell align="left">{model.line}</StyledTableCell>
-              <StyledTableCell component="th" scope="row">
-                {model.name}
-              </StyledTableCell>
-              <StyledTableCell align="right">{model?.M}</StyledTableCell>
-              <StyledTableCell align="right">{model?.WS}</StyledTableCell>
-              <StyledTableCell align="right">{model?.BS}</StyledTableCell>
-              <StyledTableCell align="right">{model?.S}</StyledTableCell>
-              <StyledTableCell align="right">{model?.T}</StyledTableCell>
-              <StyledTableCell align="right">{model?.W}</StyledTableCell>
-              <StyledTableCell align="right">{model?.A}</StyledTableCell>
-              <StyledTableCell align="right">{model?.Sv}</StyledTableCell>
-              <StyledTableCell align="right">{model?.Ld}</StyledTableCell>
-              <StyledTableCell align="right">
-                {model?.base_size}
-              </StyledTableCell>
-            </StyledTableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
+    <>
+      <div
+        className={
+          "grid grid-cols-15 bg-neutral-500 border border-neutral-800 rounded-md p-2.5 drop-shadow-md text-neutral-50 font-semibold"
+        }
+      >
+        <div className={"ml-2.5 col-span-1"}>No</div>
+        <div className={"col-span-3"}>Unit Name</div>
+        <div className={"col-span-1"}>M</div>
+        <div className={"col-span-1"}>WS</div>
+        <div className={"col-span-1"}>BS</div>
+        <div className={"col-span-1"}>S</div>
+        <div className={"col-span-1"}>T</div>
+        <div className={"col-span-1"}>W</div>
+        <div className={"col-span-1"}>A</div>
+        <div className={"col-span-1"}>Ld</div>
+        <div className={"col-span-1"}>Sv</div>
+        <div className={"col-span-2"}>Base</div>
+      </div>
+
+      {models.map((model: any, index: number) => (
+        <div
+          key={model.name}
+          className={
+            "grid grid-cols-15 border border-neutral-300 rounded-md p-2.5 drop-shadow-md  odd:bg-neutral-200 even:bg-neutral-50 "
+          }
+        >
+          <div className={"ml-2.5 col-span-1 font-semibold"}> {model.line}</div>
+          <div className={"col-span-3 font-semibold"}> {model.name}</div>
+          <div className={"col-span-1"}> {model?.M}</div>
+          <div className={"col-span-1"}> {model?.WS}</div>
+          <div className={"col-span-1"}> {model?.BS}</div>
+          <div className={"col-span-1"}> {model?.S}</div>
+          <div className={"col-span-1"}> {model?.T}</div>
+          <div className={"col-span-1"}> {model?.W}</div>
+          <div className={"col-span-1"}> {model?.A}</div>
+          <div className={"col-span-1"}> {model?.Sv}</div>
+          <div className={"col-span-1"}> {model?.Ld}</div>
+          <div className={"col-span-2"}> {model?.base_size}</div>
+        </div>
+      ))}
+    </>
   );
 }

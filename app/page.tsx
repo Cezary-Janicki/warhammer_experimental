@@ -1,22 +1,21 @@
-import Image from "next/image";
-import Link from "next/link";
-import { Inter } from "@next/font/google";
-import styles from "./page.module.css";
-import { MainFactions } from "./(components)/dataFetching/Factions";
-const inter = Inter({ subsets: ["latin"] });
+import Link from 'next/link'
+import { Inter } from '@next/font/google'
+import styles from './page.module.css'
+import { MainFactions } from './(components)/dataFetching/Factions'
+const inter = Inter({ subsets: ['latin'] })
 
-async function getMainFactions() {
-  const factions = await MainFactions();
-  return factions;
+async function getMainFactions () {
+  const factions = await MainFactions()
+  return factions
 }
 
-export default async function Home() {
-  const factions = await getMainFactions();
+export default async function Home () {
+  const factions = await getMainFactions()
   return (
     <>
       <p className="text-3xl font-bold underline"> Hello next 13!</p>
 <div className="flex">
-  
+
             <div>
               <h1 className="font-semibold">Imperium</h1>
               <ul>
@@ -67,7 +66,7 @@ export default async function Home() {
         );
       })} */}
     </>
-  );
+  )
 }
 {
   /* {roles.map((role, roleIndex) => {

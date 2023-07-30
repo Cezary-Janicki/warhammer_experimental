@@ -4,20 +4,20 @@
 
 // import {Factions} from "../(components)/dataFetching/Factions"
 // import {Data}
-import { MainFactions } from "../../../(components)/dataFetching/Factions";
-import { getDatasheetByFaction } from "../../../(components)/dataFetching/Datasheets";
+import { MainFactions } from '../../../(components)/dataFetching/Factions'
+import { getDatasheetByFaction } from '../../../(components)/dataFetching/Datasheets'
 
-async function fetchFactions() {
-  const data = await MainFactions();
-  return data;
+async function fetchFactions () {
+  const data = await MainFactions()
+  return data
 }
-async function fetchDatasheetByFaction({ props: string }) {
-  const data = await getDatasheetByFaction(props);
-  return data;
+async function fetchDatasheetByFaction ({ props: string }) {
+  const data = await getDatasheetByFaction(props)
+  return data
 }
 
-export default async function unitsByFaction() {
-  const factions = await fetchFactions();
+export default async function unitsByFaction () {
+  const factions = await fetchFactions()
   // const units = ()=>{let data= await fetchDatasheetByFaction() return data}
   // factions.map((faction)=>{
   // const units = await fetchDatasheetByFaction()

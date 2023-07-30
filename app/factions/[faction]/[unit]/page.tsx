@@ -20,7 +20,7 @@ async function createArray() {
 }
 
 async function getModelId(props: string) {
-  const model = decodeURI(props).replaceAll("%3A",":");
+  const model = decodeURI(props).replaceAll("%3A", ":");
   const models = await Datasheets();
   const filteredModels = models.filter(function (test: any) {
     if (test.name === model) {
@@ -31,9 +31,9 @@ async function getModelId(props: string) {
 }
 async function getDatasheetDataByModel(props: string) {
   const data = await Datasheets();
-  const unitName = decodeURI(props).replaceAll("%3A",":");
+  const unitName = decodeURI(props).replaceAll("%3A", ":");
   let filteredDatasheets: any[] = [];
-  data.map((item: { name: string; }) => {
+  data.map((item: { name: string }) => {
     if (item.name === unitName) {
       return filteredDatasheets.push(item);
     }
@@ -47,12 +47,16 @@ export default async function Page({
 }) {
   const { faction, unit } = await params;
   const modelId = await getModelId(unit);
-  // const unitTables = await createUnitTables(modelId);  
+  // const unitTables = await createUnitTables(modelId);
   const selectTables = await selectUnitTables(modelId);
   const datasheets = await getDatasheetDataByModel(unit);
   const datasheets_options = await datasheetOptions(modelId);
   // const cleanComp = datasheets[0].unit_composition.replace(/<\/?[^>]+(>|$)/g, "");
-  const cleanComp =(datasheets[0].unit_composition===null || datasheets[0].unit_composition===undefined? "" :datasheets[0].unit_composition.replace(/<\/?[^>]+(>|$)/g, ""));
+  const cleanComp =
+    datasheets[0].unit_composition === null ||
+    datasheets[0].unit_composition === undefined
+      ? ""
+      : datasheets[0].unit_composition.replace(/<\/?[^>]+(>|$)/g, "");
 
   const wargear = await datasheetsWargear(modelId);
   // const htmlDoc = parse(test);
@@ -63,23 +67,36 @@ export default async function Page({
     // to get options for a model import datasheets_options by id
     // weapons/psyker powers are listed in datasheets.csv
     <>
-        <p>Faction: {faction}</p>
-        <p>Unit: {decodeURI(unit)}</p>
-        <p>
-          <Link href={`./factions/${faction}`}>Return to Faction Page</Link>
-        </p>
-        <p>
-          <Link href={`./`}>Return to Main Page</Link>
-        </p>
-        <p>{cleanComp}</p>
-        {/* <UnitStatsTable models={unitTables} /> */}
-        <UnitStatsTable models={selectTables} /> 
-        <UnitWargearTable allWargear={wargear.allWargear}
-                          allWargearList={wargear.allWargearList}
-                          modelAbilites={wargear.modelAbilites}
-                          otherWargear={wargear.otherWargear}
-                          datasheets_options={datasheets_options} />
-        
+      <p>Faction: {faction}</p>
+      <p>Unit: {decodeURI(unit)}</p>
+      <p>
+        <Link href={`./factions/${faction}`}>Return to Faction Page</Link>
+      </p>
+      <p>
+        <Link href={`./`}>Return to Main Page</Link>
+      </p>
+      <div
+        className={
+          "bg-neutral-800 text-neutral-50 text-center text-2xl font-bold rounded-md p-2.5 drop-shadow-md"
+        }
+      >
+        {decodeURI(unit)}
+      </div>
+      <UnitStatsTable models={selectTables} />
+      <div
+        className={
+          "bg-neutral-50 border border-neutral-300 rounded-md p-2.5  drop-shadow-md"
+        }
+      >
+        <p className={"ml-2.5"}>{cleanComp}</p>
+      </div>
+      <UnitWargearTable
+        allWargear={wargear.allWargear}
+        allWargearList={wargear.allWargearList}
+        modelAbilites={wargear.modelAbilites}
+        otherWargear={wargear.otherWargear}
+        datasheets_options={datasheets_options}
+      />
     </>
   );
 }

@@ -1,5 +1,5 @@
 {
-  "compilerOptions": {
+  "compilerOptions":{
     "target": "es5",
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
@@ -32,6 +32,6 @@
     ".next/types/**/*.ts",
     "app/(components)/dataFetch.js",
     "app/factions/[category]/page.jsx"
-, "app/(components)/mountCheck.js"  ],
+, "app/(components)/mountCheck.js", "app/factions/[faction]/[unit]/page.jsx", "app/factions/[faction]/[unit]/loading.jsx"  ],
   "exclude": ["node_modules"]
 }
