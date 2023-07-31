@@ -13,6 +13,8 @@ export default function UnitWargearTable(props: any) {
   const modelAbilites = props.modelAbilites;
   const otherWargear = props.otherWargear;
   const datasheets_options = props.datasheets_options;
+  const unit_keywords = props.unit_keywords;
+  const faction_keywords = props.faction_keywords;
 
   function stripHTML(props: string) {
     // const cleanComp = props.replace(/<\/?[^>]+(>|$)/g, "");
@@ -127,6 +129,51 @@ export default function UnitWargearTable(props: any) {
                 </p>
               ))}
             </div>
+          </div>
+        ) : (
+          <p></p>
+        )}
+
+        {/* Unit keywords*/}
+        {Object.keys(unit_keywords).length >= 1 ? (
+          <div
+            className={
+              "flex flex-row gap-1 bg-neutral-50 border border-neutral-300 rounded-md p-2.5 drop-shadow-md"
+            }
+          >
+            <p className={"basis-1/5 p-2 text-xl font-light "}>Keywords</p>
+
+            {unit_keywords.map((keyword: any, index: number) => (
+              <p
+                key={keyword.keyword}
+                className="font-semibold p-2 underline decoration-dotted"
+              >
+                {keyword.keyword}
+              </p>
+            ))}
+          </div>
+        ) : (
+          <p></p>
+        )}
+        {/* Faction keywords*/}
+        {Object.keys(faction_keywords).length >= 1 ? (
+          <div
+            className={
+              "flex flex-row gap-1 bg-neutral-50 border border-neutral-300 rounded-md p-2.5 drop-shadow-md"
+            }
+          >
+            <p className={"basis-1/5 p-2 text-xl font-light "}>
+              Faction Keywords
+            </p>
+
+            {faction_keywords.map((keyword: any, index: number) => (
+              <p
+                key={keyword.keyword}
+                className="font-semibold p-2 underline decoration-dotted"
+              >
+                {keyword.keyword}
+              </p>
+            ))}
           </div>
         ) : (
           <p></p>

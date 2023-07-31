@@ -2,6 +2,7 @@ import Link from "next/link";
 import Datasheets from "../../../(components)/dataFetching/Datasheets";
 import UnitStatsTable from "@/app/(components)/pageComponents/UnitStatsTable";
 import UnitWargearTable from "@/app/(components)/pageComponents/UnitWargearTable";
+import Datasheets_keywords from "@/app/(components)/dataFetching/Datasheets_keywords";
 import { datasheetOptions } from "@/app/(components)/datasheetOptions";
 import { createUnitTables } from "@/app/(components)/createUnitTables";
 import { selectUnitTables } from "@/app/(components)/selectUnitTables";
@@ -17,6 +18,38 @@ async function createArray() {
     faction: `${item.faction_id}`,
     unit: `${item.name}`,
   }));
+}
+async function getUnitKeywords(props: string) {
+  {
+    console.log("type");
+  }
+  const keywords = await Datasheets_keywords();
+  let filteredKeywords: any[] = [];
+  const filter = keywords.filter(function (keyword: any) {
+    if (
+      keyword.datasheet_id == props &&
+      keyword.is_faction_keyword == "false"
+    ) {
+      return filteredKeywords.push(keyword);
+    }
+  });
+  filter;
+  return filteredKeywords;
+}
+
+async function getFactionKeywords(props: string) {
+  {
+    console.log("type");
+  }
+  const keywords = await Datasheets_keywords();
+  let filteredKeywords: any[] = [];
+  const filter = keywords.filter(function (keyword: any) {
+    if (keyword.datasheet_id == props && keyword.is_faction_keyword == "true") {
+      return filteredKeywords.push(keyword);
+    }
+  });
+  filter;
+  return filteredKeywords;
 }
 
 async function getModelId(props: string) {
@@ -51,6 +84,8 @@ export default async function Page({
   const selectTables = await selectUnitTables(modelId);
   const datasheets = await getDatasheetDataByModel(unit);
   const datasheets_options = await datasheetOptions(modelId);
+  const unit_keywords = await getUnitKeywords(modelId);
+  const faction_keywords = await getFactionKeywords(modelId);
   // const cleanComp = datasheets[0].unit_composition.replace(/<\/?[^>]+(>|$)/g, "");
   const cleanComp =
     datasheets[0].unit_composition === null ||
@@ -90,12 +125,18 @@ export default async function Page({
       >
         <p className={"ml-2.5"}>{cleanComp}</p>
       </div>
+      {console.log("keywords", unit_keywords)}
+      {unit_keywords.map((keyword) => {
+        return <p>{keyword.keyword}</p>;
+      })}
       <UnitWargearTable
         allWargear={wargear.allWargear}
         allWargearList={wargear.allWargearList}
         modelAbilites={wargear.modelAbilites}
         otherWargear={wargear.otherWargear}
         datasheets_options={datasheets_options}
+        unit_keywords={unit_keywords}
+        faction_keywords={faction_keywords}
       />
     </>
   );
