@@ -125,10 +125,6 @@ export default async function Page({
       >
         <p className={"ml-2.5"}>{cleanComp}</p>
       </div>
-      {console.log("keywords", unit_keywords)}
-      {unit_keywords.map((keyword) => {
-        return <p>{keyword.keyword}</p>;
-      })}
       <UnitWargearTable
         allWargear={wargear.allWargear}
         allWargearList={wargear.allWargearList}
