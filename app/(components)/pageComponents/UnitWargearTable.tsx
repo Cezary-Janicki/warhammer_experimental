@@ -6,25 +6,6 @@ import TableRow from "@mui/material/TableRow";
 import MountCheck from "../mountCheck";
 import Datasheet_models from "../dataFetching/Datasheets_models";
 
-const StyledTableCell = styled(TableCell)(({ theme }) => ({
-  [`&.${tableCellClasses.head}`]: {
-    backgroundColor: theme.palette.common.black,
-    color: theme.palette.common.white,
-  },
-  [`&.${tableCellClasses.body}`]: {
-    fontSize: 14,
-  },
-}));
-
-const StyledTableRow = styled(TableRow)(({ theme }) => ({
-  "&:nth-of-type(odd)": {
-    backgroundColor: theme.palette.action.hover,
-  },
-  // hide last border
-  "&:last-child td, &:last-child th": {
-    border: 0,
-  },
-}));
 // i need to fetch wargear, there there are profiles for combi weapons that need to be displayed in a diffrent manner, maybe a loop?
 export default function UnitWargearTable(props: any) {
   const allWargearList = props.allWargearList;
@@ -67,11 +48,10 @@ export default function UnitWargearTable(props: any) {
             }
           >
             <div className={"ml-2.5 col-span-3 font-semibold"}>
-              {" "}
               {wargear.name}
             </div>
             <div className={"col-span-1"}> {wargear?.Range}</div>
-            <div className={"col-span-2"}> {wargear?.Type}</div>
+            <div className={"col-span-2"}> {wargear?.type}</div>
             <div className={"col-span-1"}> {wargear?.S}</div>
             <div className={"col-span-1"}> {wargear?.AP}</div>
             <div className={"col-span-1"}> {wargear?.D}</div>
@@ -79,6 +59,35 @@ export default function UnitWargearTable(props: any) {
           </div>
         ))}
         {/* Other wargear */}
+        {Object.keys(otherWargear).length >= 1 ? (
+          <>
+            <div
+              className={
+                "grid grid-cols-20 bg-neutral-500 border border-neutral-800 rounded-md p-2.5 drop-shadow-md text-neutral-50 font-semibold"
+              }
+            >
+              <div className={"ml-2.5 col-span-3"}>Other wargear</div>
+              <div className={"col-span-17"}>Abilites</div>
+            </div>
+            {otherWargear.map((wargear: any, index: number) => (
+              <div
+                className={
+                  "grid grid-cols-20 border border-neutral-300 rounded-md p-2.5 drop-shadow-md  odd:bg-neutral-200 even:bg-neutral-50 "
+                }
+              >
+                <div className={"ml-2.5 col-span-3 font-semibold"}>
+                  {wargear.name}
+                </div>
+                <div className={"col-span-17 mr-2.5"}>
+                  {stripHTML(wargear.description)}
+                </div>
+              </div>
+            ))}
+          </>
+        ) : (
+          <p></p>
+        )}
+        {/* Wargear options */}
         {Object.keys(datasheets_options).length >= 1 ? (
           <div
             className={
@@ -95,6 +104,9 @@ export default function UnitWargearTable(props: any) {
         ) : (
           <p></p>
         )}
+        {/* <div>{stripHTML(option.name)}</div>
+                <div>{stripHTML(option.description)}</div> */}
+
         {/* Abilites/traits table */}
         {Object.keys(modelAbilites).length >= 1 ? (
           <div
