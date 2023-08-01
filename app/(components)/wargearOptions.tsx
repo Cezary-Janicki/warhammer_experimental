@@ -55,9 +55,6 @@ export async function datasheetsWargear(props: string) {
       }
     });
   });
-  // i need to write the function that would seperate the combi weapons from others
-  // the function would need to look up the wargear_id, if the ID within allWargearList repeats then
-  // push both of items with repeating id into another object
 
   allWargearList.map((item, index) => {
     let filterResults = wargearList.filter(function (entry: any) {
@@ -88,16 +85,10 @@ export async function datasheetsWargear(props: string) {
         }
       });
     });
-    return filteredObject; // thsi function deletes the terminator flamer but it should not
+    return filteredObject;
   }
   filterObjectArray(allCombiWeaponsList);
   allWargearList = allWargearList.filter((item) => !testArray2.includes(item));
-
-  // console.log("filtered arrays?", filterObjectArray(allCombiWeapons));
-  // console.log("dupe check", allCombiWeaponsList);
-  // console.log("combi weapons", allCombiWeapons);
-  // console.log("all wargear list ", allWargearList);
-
   const datasheetsAbilites = await getDatasheetsAbilites();
   const abilites = await getAbilites();
   let modelAbilites: any[] = [];

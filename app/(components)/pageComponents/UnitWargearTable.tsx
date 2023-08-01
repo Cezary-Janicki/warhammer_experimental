@@ -24,11 +24,6 @@ export default function UnitWargearTable(props: any) {
     return cleanComp;
   }
 
-  // console.log("combi weapons keys", Object.values(allCombiWeaponsList[0][0]));
-
-  // if wargear id is the same they should be displayed in a single "space"
-  // in order to do this everytime there is a combi weapon it should be displayed in a single cell as a list
-  // title of the list being combi - 1st weapon name and the subtract hitroll rules text
   return (
     <>
       <MountCheck>
@@ -109,8 +104,6 @@ export default function UnitWargearTable(props: any) {
         ) : (
           <p></p>
         )}
-        {/* <div>{stripHTML(option.name)}</div>
-                <div>{stripHTML(option.description)}</div> */}
 
         {/* Abilites/traits table */}
         {Object.keys(modelAbilites).length >= 1 ? (
