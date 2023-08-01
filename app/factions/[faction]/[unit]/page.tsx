@@ -20,9 +20,6 @@ async function createArray() {
   }));
 }
 async function getUnitKeywords(props: string) {
-  {
-    console.log("type");
-  }
   const keywords = await Datasheets_keywords();
   let filteredKeywords: any[] = [];
   const filter = keywords.filter(function (keyword: any) {
@@ -38,9 +35,6 @@ async function getUnitKeywords(props: string) {
 }
 
 async function getFactionKeywords(props: string) {
-  {
-    console.log("type");
-  }
   const keywords = await Datasheets_keywords();
   let filteredKeywords: any[] = [];
   const filter = keywords.filter(function (keyword: any) {
