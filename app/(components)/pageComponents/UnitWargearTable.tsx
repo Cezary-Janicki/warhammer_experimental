@@ -24,7 +24,6 @@ export default function UnitWargearTable(props: any) {
     return cleanComp;
   }
 
-  // console.log("combi weapons", allCombiWeaponsList);
   // console.log("combi weapons keys", Object.values(allCombiWeaponsList[0][0]));
 
   // if wargear id is the same they should be displayed in a single "space"

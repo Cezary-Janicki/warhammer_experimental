@@ -55,7 +55,6 @@ export async function datasheetsWargear(props: string) {
       }
     });
   });
-
   // i need to write the function that would seperate the combi weapons from others
   // the function would need to look up the wargear_id, if the ID within allWargearList repeats then
   // push both of items with repeating id into another object
@@ -65,14 +64,18 @@ export async function datasheetsWargear(props: string) {
       return entry.wargear_id === item.wargear_id;
     });
     allCombiWeapons.filter(function (entry) {
-      console.log("keys", typeof entry[0]);
       if (entry[0].wargear_id === filterResults[0].wargear_id) {
+        entry.forEach((item: any) => {
+          testArray2.push(item);
+        });
         allCombiWeaponsList.push(filterResults);
       }
     });
 
     allCombiWeapons.push(filterResults);
   });
+  allWargearList.filter((item) => !testArray2.includes(item));
+
   function filterObjectArray(arrayOfObjects: any[]) {
     let filteredObject = arrayOfObjects.forEach((record, recordIndex) => {
       arrayOfObjects.forEach((rec, recIndex) => {
@@ -81,7 +84,6 @@ export async function datasheetsWargear(props: string) {
           record[1].name == rec[1].name &&
           recIndex != recordIndex
         ) {
-          // console.log("deleting:", arrayOfObjects[index]);
           arrayOfObjects.splice(recIndex, 1);
         }
       });
@@ -89,6 +91,8 @@ export async function datasheetsWargear(props: string) {
     return filteredObject; // thsi function deletes the terminator flamer but it should not
   }
   filterObjectArray(allCombiWeaponsList);
+  allWargearList = allWargearList.filter((item) => !testArray2.includes(item));
+
   // console.log("filtered arrays?", filterObjectArray(allCombiWeapons));
   // console.log("dupe check", allCombiWeaponsList);
   // console.log("combi weapons", allCombiWeapons);
