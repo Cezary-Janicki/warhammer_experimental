@@ -122,6 +122,7 @@ export default async function Page({
       <UnitWargearTable
         allWargear={wargear.allWargear}
         allWargearList={wargear.allWargearList}
+        allCombiWeaponsList={wargear.allCombiWeaponsList}
         modelAbilites={wargear.modelAbilites}
         otherWargear={wargear.otherWargear}
         datasheets_options={datasheets_options}

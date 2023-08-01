@@ -39,7 +39,7 @@ export async function datasheetsWargear(props: string) {
   let allWargear: any[] = [];
   let allWargearList: any[] = [];
   let allCombiWeapons: any[] = []; // all weapons with duped combi guns
-  let testArray: any[] = []; // filtered combi weapons
+  let allCombiWeaponsList: any[] = []; // filtered combi weapons
   let testArray2: any[] = [];
 
   datasheetsWargear.map((item: { datasheet_id: string }) => {
@@ -65,23 +65,34 @@ export async function datasheetsWargear(props: string) {
       return entry.wargear_id === item.wargear_id;
     });
     allCombiWeapons.filter(function (entry) {
+      console.log("keys", typeof entry[0]);
       if (entry[0].wargear_id === filterResults[0].wargear_id) {
-        // console.log("item", item,index)
-        testArray.push(filterResults);
-        allWargearList.splice(index - 1, 2);
-        allWargearList.splice(index - 1, 2); // this doesnt work as inteneded
+        allCombiWeaponsList.push(filterResults);
       }
-      // this need to make a new object and each time check if an weapon id is present in that object if not make a new array with that weapon in it if not push into an existing array
     });
 
-    // console.log("dupe check", testArray)
     allCombiWeapons.push(filterResults);
-    console.log("combi weapons", allCombiWeapons);
   });
-  // console.log("all wargear list ",  allWargearList)
-
-  //  let filterResults = wargearList.filter(function(entry){return entry.wargear_id==="000000015"})
-  //  console.log("filter results", filterResults)
+  function filterObjectArray(arrayOfObjects: any[]) {
+    let filteredObject = arrayOfObjects.forEach((record, recordIndex) => {
+      arrayOfObjects.forEach((rec, recIndex) => {
+        if (
+          record[1].wargear_id == rec[1].wargear_id && //
+          record[1].name == rec[1].name &&
+          recIndex != recordIndex
+        ) {
+          // console.log("deleting:", arrayOfObjects[index]);
+          arrayOfObjects.splice(recIndex, 1);
+        }
+      });
+    });
+    return filteredObject; // thsi function deletes the terminator flamer but it should not
+  }
+  filterObjectArray(allCombiWeaponsList);
+  // console.log("filtered arrays?", filterObjectArray(allCombiWeapons));
+  // console.log("dupe check", allCombiWeaponsList);
+  // console.log("combi weapons", allCombiWeapons);
+  // console.log("all wargear list ", allWargearList);
 
   const datasheetsAbilites = await getDatasheetsAbilites();
   const abilites = await getAbilites();
@@ -105,11 +116,12 @@ export async function datasheetsWargear(props: string) {
       }
     );
   });
-  // console.log("testing", allWargearList)
-  // combi weapons need to be sperated i could use MUI collapsible table for that
 
-  // i need to get all of the abilites from datasheets_abilites, then if it is wargear display it in other wargear
-  // if it is an ability then display it in abilities below
-  //
-  return { allWargearList, allWargear, modelAbilites, otherWargear };
+  return {
+    allWargearList,
+    allWargear,
+    allCombiWeaponsList,
+    modelAbilites,
+    otherWargear,
+  };
 }

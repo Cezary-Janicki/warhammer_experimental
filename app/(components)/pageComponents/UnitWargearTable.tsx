@@ -9,6 +9,7 @@ import Datasheet_models from "../dataFetching/Datasheets_models";
 // i need to fetch wargear, there there are profiles for combi weapons that need to be displayed in a diffrent manner, maybe a loop?
 export default function UnitWargearTable(props: any) {
   const allWargearList = props.allWargearList;
+  const allCombiWeaponsList = props.allCombiWeaponsList;
   const allWargear = props.allWargear;
   const modelAbilites = props.modelAbilites;
   const otherWargear = props.otherWargear;
@@ -22,6 +23,9 @@ export default function UnitWargearTable(props: any) {
     cleanComp.replace(/<\/?tbody>/g, ""); // remove tbody
     return cleanComp;
   }
+
+  // console.log("combi weapons", allCombiWeaponsList);
+  // console.log("combi weapons keys", Object.values(allCombiWeaponsList[0][0]));
 
   // if wargear id is the same they should be displayed in a single "space"
   // in order to do this everytime there is a combi weapon it should be displayed in a single cell as a list
@@ -177,6 +181,26 @@ export default function UnitWargearTable(props: any) {
           </div>
         ) : (
           <p></p>
+        )}
+
+        {allCombiWeaponsList.map((wargear: any, index: number) =>
+          wargear.map((profile: any) => (
+            <div
+              className={
+                "grid grid-cols-20 border border-neutral-300 rounded-md p-2.5 drop-shadow-md  odd:bg-neutral-200 even:bg-neutral-50 "
+              }
+            >
+              <div className={"ml-2.5 col-span-3 font-semibold"}>
+                {profile.name}
+              </div>
+              <div className={"col-span-1"}> {profile?.Range}</div>
+              <div className={"col-span-2"}> {profile?.type}</div>
+              <div className={"col-span-1"}> {profile?.S}</div>
+              <div className={"col-span-1"}> {profile?.AP}</div>
+              <div className={"col-span-1"}> {profile?.D}</div>
+              <div className={"col-span-7"}>{profile?.abilities}</div>
+            </div>
+          ))
         )}
       </MountCheck>
     </>
