@@ -23,7 +23,7 @@ async function getDatasheetsAbilites() {
   const data = await Datasheets_abilities();
   return data;
 }
-export async function datasheetsWargear(props: string) {
+export async function datasheetsWargear(props: string, faction: string) {
   const getModelId = (id: string) => {
     if (id.toString().length === 9) {
       return id;
@@ -32,7 +32,7 @@ export async function datasheetsWargear(props: string) {
     }
   };
   const modelId = getModelId(props);
-
+  const factionId = faction;
   const datasheetsWargear = await getDatasheetsWargear(); // wargear id's
   const wargear = await getWargear(); // wargear
   const wargearList = await getWargearList();
@@ -107,8 +107,17 @@ export async function datasheetsWargear(props: string) {
   let keyWords: any[] = [];
   datasheetsAbilites.map((item: { datasheet_id: string; ability_id: any }) => {
     abilites.map(
-      (item2: { id: any; is_other_wargear: string; type: string }) => {
-        if (item.datasheet_id === modelId && item2.id === item.ability_id) {
+      (item2: {
+        id: any;
+        is_other_wargear: string;
+        type: string;
+        faction_id: string;
+      }) => {
+        if (
+          item.datasheet_id === modelId &&
+          item2.id === item.ability_id &&
+          item2.faction_id == factionId
+        ) {
           //  modelAbilites.push(item2)
           if (item2.is_other_wargear === "true") {
             otherWargear.push(item2);

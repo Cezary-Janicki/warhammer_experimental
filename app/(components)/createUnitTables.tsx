@@ -12,19 +12,19 @@ export async function createUnitTables(props: number) {
     }
   };
   let filteredModels: any[] = [];
-  datasheetModels.map((item: { datasheet_id: string | number; }) => {
+  datasheetModels.map((item: { datasheet_id: string | number }) => {
     if (item.datasheet_id === modelId(props)) {
       return filteredModels.push(item);
     }
   });
   let damageTables: any[] = [];
-  datasheetsDamage.map((item: { datasheet_id: string | number; }) => {
+  datasheetsDamage.map((item: { datasheet_id: string | number }) => {
     ``;
     if (item.datasheet_id === modelId(props)) {
       return damageTables.push(item);
     }
   });
-  function createDamageBracketArrays() { 
+  function createDamageBracketArrays() {
     // creating the model keys array
     let modelsKeys = Object.keys(filteredModels[0]);
     // creating the bracket damage keys array
@@ -50,7 +50,6 @@ export async function createUnitTables(props: number) {
       return allBracketsWithKeys;
     };
 
-
     function clearName(props: any) {
       let data = props;
       data["name"] = "";
@@ -58,12 +57,14 @@ export async function createUnitTables(props: number) {
       data["base_size"] = "";
       return data;
     }
-      // console.log("model", filteredModels[1])
 
     let testObject: any[] = [];
-    filteredModels.map((model, modelIndex) => { 
+    filteredModels.map((model, modelIndex) => {
       const damageBracketValues = damageBrackets();
-      const bracketingModelName =(typeof damageBracketValues[1]["Model"] === "undefined" )? model["name"] : damageBracketValues[1]["Model"] 
+      const bracketingModelName =
+        typeof damageBracketValues[1]["Model"] === "undefined"
+          ? model["name"]
+          : damageBracketValues[1]["Model"];
       // Line above omits the name check if there is only one model (name is undefied then)
       if (model["name"] === bracketingModelName) {
         let tempModel = { ...model };
@@ -93,12 +94,10 @@ export async function createUnitTables(props: number) {
   }
 
   const damageBracketArrays = await createDamageBracketArrays();
-  if(filteredModels.length===1){
-  return damageBracketArrays
-}
-  else{
-    damageBracketArrays.push(filteredModels[1])
-    return damageBracketArrays
+  if (filteredModels.length === 1) {
+    return damageBracketArrays;
+  } else {
+    damageBracketArrays.push(filteredModels[1]);
+    return damageBracketArrays;
   }
-
 }
