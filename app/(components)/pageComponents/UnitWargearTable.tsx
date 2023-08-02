@@ -32,7 +32,7 @@ export default function UnitWargearTable(props: any) {
             "grid grid-cols-20 bg-neutral-500 border border-neutral-800 rounded-md p-2.5 drop-shadow-md text-neutral-50 font-semibold"
           }
         >
-          <div className={"ml-2.5 col-span-3"}>Weapon</div>
+          <div className={"ml-2.5 col-span-5"}>Weapon</div>
           <div className={"col-span-1"}>Range</div>
           <div className={"col-span-2"}>Type</div>
           <div className={"col-span-1"}>S</div>
@@ -40,14 +40,13 @@ export default function UnitWargearTable(props: any) {
           <div className={"col-span-1"}>D</div>
           <div className={"col-span-7"}>Abilities</div>
         </div>
-
         {allWargearList.map((wargear: any, index: number) => (
           <div
             className={
               "grid grid-cols-20 border border-neutral-300 rounded-md p-2.5 drop-shadow-md  odd:bg-neutral-200 even:bg-neutral-50 "
             }
           >
-            <div className={"ml-2.5 col-span-3 font-semibold"}>
+            <div className={"ml-2.5 col-span-5 font-semibold"}>
               {wargear.name}
             </div>
             <div className={"col-span-1"}> {wargear?.Range}</div>
@@ -58,6 +57,78 @@ export default function UnitWargearTable(props: any) {
             <div className={"col-span-7"}>{stripHTML(wargear?.abilities)}</div>
           </div>
         ))}
+        {/* Combi weapons table section */}
+        {allCombiWeaponsList.map(
+          (wargear: any, combiIndex: number) => (
+            // wargear.map((profile: any, profileIndex: number) => (
+            <div
+              className={
+                "grid grid-cols-20 border border-neutral-300 rounded-md p-2.5 drop-shadow-md  odd:bg-neutral-200 even:bg-neutral-50 "
+              }
+            >
+              <>
+                {/* Combi weapons headers */}
+                <div className={"ml-2.5 col-span-5 font-semibold"}>
+                  {wargear[0].name}
+                </div>
+                <div className={"col-span-15"}>
+                  {stripHTML(wargear[0]?.description)}
+                </div>
+              </>
+              {/* Combi weapons profiles */}
+              {/* Profile 1 */}
+              <div
+                className={"ml-4 col-span-5 underline decoration-dotted py-0.5"}
+              >
+                {wargear[1].name}
+              </div>
+              <div className={"col-span-1"}> {wargear[1]?.Range}</div>
+              <div className={"col-span-2"}> {wargear[1]?.type}</div>
+              <div className={"col-span-1"}> {wargear[1]?.S}</div>
+              <div className={"col-span-1"}> {wargear[1]?.AP}</div>
+              <div className={"col-span-1"}> {wargear[1]?.D}</div>
+              <div className={"col-span-9"}>
+                {stripHTML(wargear[1]?.abilities)}
+              </div>
+              {/* Profile 2 */}
+              <div
+                className={"ml-4 col-span-5 underline decoration-dotted py-0.5"}
+              >
+                {wargear[2].name}
+              </div>
+              <div className={"col-span-1"}> {wargear[2]?.Range}</div>
+              <div className={"col-span-2"}> {wargear[2]?.type}</div>
+              <div className={"col-span-1"}> {wargear[2]?.S}</div>
+              <div className={"col-span-1"}> {wargear[2]?.AP}</div>
+              <div className={"col-span-1"}> {wargear[2]?.D}</div>
+              <div className={"col-span-9"}>
+                {stripHTML(wargear[2]?.abilities)}
+              </div>
+              {Object.keys(wargear).length == 4 ? (
+                <>
+                  <div
+                    className={
+                      "ml-4 col-span-5 underline decoration-dotted py-0.5"
+                    }
+                  >
+                    {wargear[3].name}
+                  </div>
+                  <div className={"col-span-1"}> {wargear[3]?.Range}</div>
+                  <div className={"col-span-2"}> {wargear[3]?.type}</div>
+                  <div className={"col-span-1"}> {wargear[3]?.S}</div>
+                  <div className={"col-span-1"}> {wargear[3]?.AP}</div>
+                  <div className={"col-span-1"}> {wargear[3]?.D}</div>
+                  <div className={"col-span-9"}>
+                    {stripHTML(wargear[3]?.abilities)}
+                  </div>
+                </>
+              ) : (
+                <></>
+              )}
+            </div>
+          )
+          // ))
+        )}
         {/* Other wargear */}
         {Object.keys(otherWargear).length >= 1 ? (
           <>
@@ -104,7 +175,6 @@ export default function UnitWargearTable(props: any) {
         ) : (
           <p></p>
         )}
-
         {/* Abilites/traits table */}
         {Object.keys(modelAbilites).length >= 1 ? (
           <div
@@ -129,7 +199,6 @@ export default function UnitWargearTable(props: any) {
         ) : (
           <p></p>
         )}
-
         {/* Unit keywords*/}
         {Object.keys(unit_keywords).length >= 1 ? (
           <div
@@ -174,27 +243,52 @@ export default function UnitWargearTable(props: any) {
         ) : (
           <p></p>
         )}
-
-        {allCombiWeaponsList.map((wargear: any, index: number) =>
-          wargear.map((profile: any) => (
-            <div
-              className={
-                "grid grid-cols-20 border border-neutral-300 rounded-md p-2.5 drop-shadow-md  odd:bg-neutral-200 even:bg-neutral-50 "
-              }
-            >
-              <div className={"ml-2.5 col-span-3 font-semibold"}>
-                {profile.name}
-              </div>
-              <div className={"col-span-1"}> {profile?.Range}</div>
-              <div className={"col-span-2"}> {profile?.type}</div>
-              <div className={"col-span-1"}> {profile?.S}</div>
-              <div className={"col-span-1"}> {profile?.AP}</div>
-              <div className={"col-span-1"}> {profile?.D}</div>
-              <div className={"col-span-7"}>{profile?.abilities}</div>
-            </div>
-          ))
-        )}
       </MountCheck>
     </>
   );
+}
+
+{
+  /* Combi weapons table section */
+}
+{
+  /* {allCombiWeaponsList.map((wargear: any, combiIndex: number) => {
+        
+          // Now i have to loop wargear and make it into a list
+          // Each loop is a single div that contains header and a list
+          // Those would also need to be looped but loop
+          // Would loop over elements of wargear and put those into list elements
+          // Starting from index 1 ( index 0 is always the header)
+          // <div>
+
+          // <> header</>
+          // <> for loop with delayed index</>
+          // Combi weapons headers
+          {
+            <>
+              <div className={"ml-2.5 col-span-3 font-semibold"}>
+                {wargear[0].name}
+              </div>
+              <div className={"col-span-17"}>
+                {stripHTML(wargear[0]?.description)}
+              </div>
+            </>;
+            for (let step = 1; step < Object.keys(wargear).length; step++) {
+              <li
+              >
+                <div className={"ml-2.5 col-span-3 font-semibold"}>
+                  {wargear[step]?.name}
+                </div>
+                <div className={"col-span-1"}> {wargear[step]?.Range}</div>
+                <div className={"col-span-2"}> {wargear[step]?.type}</div>
+                <div className={"col-span-1"}> {wargear[step]?.S}</div>
+                <div className={"col-span-1"}> {wargear[step]?.AP}</div>
+                <div className={"col-span-1"}> {wargear[step]?.D}</div>
+                <div className={"col-span-7"}>
+                  {stripHTML(wargear[step]?.abilities)}
+                </div>
+              </li>;
+            }
+          }
+        })} */
 }

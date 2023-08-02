@@ -87,8 +87,19 @@ export async function datasheetsWargear(props: string) {
     });
     return filteredObject;
   }
+  // removing duplicate combi weapon entries from all wargearlist object
   filterObjectArray(allCombiWeaponsList);
   allWargearList = allWargearList.filter((item) => !testArray2.includes(item));
+
+  // adding combi weapon headers
+  allCombiWeaponsList.forEach((combi) => {
+    wargear.forEach((item) => {
+      if (item.id == combi[0].wargear_id) {
+        combi.unshift(item);
+      }
+    });
+  });
+
   const datasheetsAbilites = await getDatasheetsAbilites();
   const abilites = await getAbilites();
   let modelAbilites: any[] = [];
