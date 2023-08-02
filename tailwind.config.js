@@ -21,6 +21,8 @@ module.exports = {
         "span-15": "span 15 / span 15",
         // 17 column span
         "span-17": "span 17 / span 17",
+        // 20 column span
+        "span-20": "span 20 / span 20",
       },
     },
   },

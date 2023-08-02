@@ -63,22 +63,27 @@ export default function UnitWargearTable(props: any) {
             // wargear.map((profile: any, profileIndex: number) => (
             <div
               className={
-                "grid grid-cols-20 border border-neutral-300 rounded-md p-2.5 drop-shadow-md  odd:bg-neutral-200 even:bg-neutral-50 "
+                "grid grid-cols-20 border border-neutral-300 rounded-md p-2.5 drop-shadow-md  odd:bg-neutral-200 even:bg-neutral-50 divide-y odd:divide-neutral-400 even:divide-neutral-300"
+                // i need to add gradient text decoration here
               }
             >
-              <>
-                {/* Combi weapons headers */}
-                <div className={"ml-2.5 col-span-5 font-semibold"}>
-                  {wargear[0].name}
+              {/* Combi weapons headers */}
+              <div className={"col-span-20"}>
+                <div className={"grid grid-cols-20"}>
+                  <div className={"ml-2.5 col-span-5  font-semibold"}>
+                    {wargear[0].name}
+                  </div>
+                  <div className={"col-span-15"}>
+                    {stripHTML(wargear[0]?.description)}
+                  </div>
                 </div>
-                <div className={"col-span-15"}>
-                  {stripHTML(wargear[0]?.description)}
-                </div>
-              </>
+              </div>
               {/* Combi weapons profiles */}
               {/* Profile 1 */}
               <div
-                className={"ml-4 col-span-5 underline decoration-dotted py-0.5"}
+                className={
+                  "ml-4 col-span-5 underline decoration-dotted py-0.5 "
+                }
               >
                 {wargear[1].name}
               </div>
