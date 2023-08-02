@@ -8,6 +8,7 @@ import Datasheet_models from "../dataFetching/Datasheets_models";
 
 // i need to fetch wargear, there there are profiles for combi weapons that need to be displayed in a diffrent manner, maybe a loop?
 export default function UnitWargearTable(props: any) {
+  const datasheets = props.datasheets;
   const allWargearList = props.allWargearList;
   const allCombiWeaponsList = props.allCombiWeaponsList;
   const allWargear = props.allWargear;
@@ -16,17 +17,19 @@ export default function UnitWargearTable(props: any) {
   const datasheets_options = props.datasheets_options;
   const unit_keywords = props.unit_keywords;
   const faction_keywords = props.faction_keywords;
-
+  const factionAbilites = props.factionAbilites;
   function stripHTML(props: string) {
     // const cleanComp = props.replace(/<\/?[^>]+(>|$)/g, "");
     const cleanComp = props.replace(/<\/?("[^"]*"|'[^']*'|[^>])*(>|$)/g, "");
     cleanComp.replace(/<\/?tbody>/g, ""); // remove tbody
     return cleanComp;
   }
-
+  // console.log("faction abilites", factionAbilites);
+  // faction abilites are there now i only need to make the popup
   return (
     <>
       <MountCheck>
+        {/* Unit stats tables */}
         <div
           className={
             "grid grid-cols-20 bg-neutral-500 border border-neutral-800 rounded-md p-2.5 drop-shadow-md text-neutral-50 font-semibold"
@@ -40,6 +43,7 @@ export default function UnitWargearTable(props: any) {
           <div className={"col-span-1"}>D</div>
           <div className={"col-span-7"}>Abilities</div>
         </div>
+        {/* Unit weapon tables */}
         {allWargearList.map((wargear: any, index: number) => (
           <div
             className={
@@ -204,6 +208,33 @@ export default function UnitWargearTable(props: any) {
         ) : (
           <p></p>
         )}
+        {/* Priest/psyker table */}
+        {datasheets[0]?.priest != null ? (
+          <div
+            className={
+              "flex flex-row gap-1 bg-neutral-50 border border-neutral-300 rounded-md p-2.5 drop-shadow-md"
+            }
+          >
+            <p className={"basis-1/5 p-2 font-semibold"}>Priest</p>
+            <div className={" break-inside-avoid-column basis-4/5"}>
+              <div>{stripHTML(datasheets[0]?.priest)}</div>
+            </div>
+          </div>
+        ) : datasheets[0]?.psyker != null ? (
+          <div
+            className={
+              "flex flex-row gap-1 bg-neutral-50 border border-neutral-300 rounded-md p-2.5 drop-shadow-md"
+            }
+          >
+            <p className={"basis-1/5 p-2 font-semibold"}>Psyker</p>
+            <div className={" break-inside-avoid-column basis-4/5"}>
+              <div>{stripHTML(datasheets[0]?.psyker)}</div>
+            </div>
+          </div>
+        ) : (
+          <></>
+        )}
+
         {/* Unit keywords*/}
         {Object.keys(unit_keywords).length >= 1 ? (
           <div

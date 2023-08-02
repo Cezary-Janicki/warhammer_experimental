@@ -103,6 +103,7 @@ export async function datasheetsWargear(props: string, faction: string) {
   const datasheetsAbilites = await getDatasheetsAbilites();
   const abilites = await getAbilites();
   let modelAbilites: any[] = [];
+  let factionAbilites: any[] = [];
   let otherWargear: any[] = [];
   let keyWords: any[] = [];
   datasheetsAbilites.map((item: { datasheet_id: string; ability_id: any }) => {
@@ -124,6 +125,9 @@ export async function datasheetsWargear(props: string, faction: string) {
           }
           if (item2.type === "" && item2.is_other_wargear === "false") {
             modelAbilites.push(item2);
+          }
+          if (item2.type === "Abilities") {
+            factionAbilites.push(item2);
           } else {
             keyWords.push(item2);
           }
@@ -138,5 +142,6 @@ export async function datasheetsWargear(props: string, faction: string) {
     allCombiWeaponsList,
     modelAbilites,
     otherWargear,
+    factionAbilites,
   };
 }

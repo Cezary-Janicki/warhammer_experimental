@@ -86,7 +86,6 @@ export default async function Page({
     datasheets[0].unit_composition === undefined
       ? ""
       : datasheets[0].unit_composition.replace(/<\/?[^>]+(>|$)/g, "");
-
   const wargear = await datasheetsWargear(modelId, faction);
   return (
     // to get all of the wargear i need to search datasheets_wargear for model i want
@@ -96,6 +95,7 @@ export default async function Page({
     <>
       <p>Faction: {faction}</p>
       <p>Unit: {decodeURI(unit)}</p>
+      <p>Model id: {modelId}</p>
       <p>
         <Link href={`./factions/${faction}`}>Return to Faction Page</Link>
       </p>
@@ -126,6 +126,8 @@ export default async function Page({
         datasheets_options={datasheets_options}
         unit_keywords={unit_keywords}
         faction_keywords={faction_keywords}
+        factionAbilites={wargear.factionAbilites}
+        datasheets={datasheets}
       />
     </>
   );
