@@ -77,8 +77,8 @@ export async function datasheetsWargear(props: string, faction: string) {
     let filteredObject = arrayOfObjects.forEach((record, recordIndex) => {
       arrayOfObjects.forEach((rec, recIndex) => {
         if (
-          record[1].wargear_id == rec[1].wargear_id && //
-          record[1].name == rec[1].name &&
+          record[1]?.wargear_id == rec[1]?.wargear_id && //
+          record[1]?.name == rec[1]?.name &&
           recIndex != recordIndex
         ) {
           arrayOfObjects.splice(recIndex, 1);

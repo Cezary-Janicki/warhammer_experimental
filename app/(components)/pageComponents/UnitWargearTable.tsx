@@ -1,10 +1,8 @@
 "use client";
 import * as React from "react";
-import { styled } from "@mui/material/styles";
-import TableCell, { tableCellClasses } from "@mui/material/TableCell";
-import TableRow from "@mui/material/TableRow";
 import MountCheck from "../mountCheck";
 import Datasheet_models from "../dataFetching/Datasheets_models";
+import Tooltip from "../tooltip";
 
 // i need to fetch wargear, there there are profiles for combi weapons that need to be displayed in a diffrent manner, maybe a loop?
 export default function UnitWargearTable(props: any) {
@@ -24,15 +22,14 @@ export default function UnitWargearTable(props: any) {
     cleanComp.replace(/<\/?tbody>/g, ""); // remove tbody
     return cleanComp;
   }
-  // console.log("faction abilites", factionAbilites);
   // faction abilites are there now i only need to make the popup
   return (
-    <>
+    <div className={"relative z-0 drop-shadow-md"}>
       <MountCheck>
         {/* Unit stats tables */}
         <div
           className={
-            "grid grid-cols-20 bg-neutral-500 border border-neutral-800 rounded-md p-2.5 drop-shadow-md text-neutral-50 font-semibold"
+            "grid grid-cols-20 bg-neutral-500 border border-neutral-800 rounded-md p-2.5  text-neutral-50 font-semibold"
           }
         >
           <div className={"ml-2.5 col-span-5"}>Weapon</div>
@@ -47,7 +44,7 @@ export default function UnitWargearTable(props: any) {
         {allWargearList.map((wargear: any, index: number) => (
           <div
             className={
-              "grid grid-cols-20 border border-neutral-300 rounded-md p-2.5 drop-shadow-md  odd:bg-neutral-200 even:bg-neutral-50 "
+              "grid grid-cols-20 border border-neutral-300 rounded-md p-2.5   odd:bg-neutral-200 even:bg-neutral-50 "
             }
           >
             <div className={"ml-2.5 col-span-5 font-semibold"}>
@@ -67,7 +64,7 @@ export default function UnitWargearTable(props: any) {
             // wargear.map((profile: any, profileIndex: number) => (
             <div
               className={
-                "grid grid-cols-20 border border-neutral-300 rounded-md p-2.5 drop-shadow-md  odd:bg-neutral-200 even:bg-neutral-50 divide-y odd:divide-neutral-400 even:divide-neutral-300"
+                "grid grid-cols-20 border border-neutral-300 rounded-md p-2.5   odd:bg-neutral-200 even:bg-neutral-50 divide-y odd:divide-neutral-400 even:divide-neutral-300"
                 // i need to add gradient text decoration here
               }
             >
@@ -143,7 +140,7 @@ export default function UnitWargearTable(props: any) {
           <>
             <div
               className={
-                "grid grid-cols-20 bg-neutral-500 border border-neutral-800 rounded-md p-2.5 drop-shadow-md text-neutral-50 font-semibold"
+                "grid grid-cols-20 bg-neutral-500 border border-neutral-800 rounded-md p-2.5  text-neutral-50 font-semibold"
               }
             >
               <div className={"ml-2.5 col-span-3"}>Other wargear</div>
@@ -152,7 +149,7 @@ export default function UnitWargearTable(props: any) {
             {otherWargear.map((wargear: any, index: number) => (
               <div
                 className={
-                  "grid grid-cols-20 border border-neutral-300 rounded-md p-2.5 drop-shadow-md  odd:bg-neutral-200 even:bg-neutral-50 "
+                  "grid grid-cols-20 border border-neutral-300 rounded-md p-2.5   odd:bg-neutral-200 even:bg-neutral-50 "
                 }
               >
                 <div className={"ml-2.5 col-span-3 font-semibold"}>
@@ -171,7 +168,7 @@ export default function UnitWargearTable(props: any) {
         {Object.keys(datasheets_options).length >= 1 ? (
           <div
             className={
-              "flex flex-row gap-1 bg-neutral-50 border border-neutral-300 rounded-md p-2.5 drop-shadow-md"
+              "flex flex-row gap-1 bg-neutral-50 border border-neutral-300 rounded-md p-2.5 "
             }
           >
             <div className={"basis-1/5 p-2 font-semibold"}>Wargear options</div>
@@ -185,16 +182,18 @@ export default function UnitWargearTable(props: any) {
           <p></p>
         )}
         {/* Abilites/traits table */}
+
         {Object.keys(modelAbilites).length >= 1 ? (
           <div
             className={
-              "flex flex-row gap-1 bg-neutral-50 border border-neutral-300 rounded-md p-2.5 drop-shadow-md"
+              "flex flex-row gap-1 bg-neutral-50 border border-neutral-300 rounded-md p-2.5 "
             }
           >
             <p className={"basis-1/5 p-2 font-semibold"}>Abilities</p>
             <div
               className={"columns-3 gap-8 break-inside-avoid-column basis-4/5"}
             >
+              <Tooltip factionAbilites={factionAbilites} />
               {modelAbilites.map((ability: any, index: number) => (
                 <p key={ability.name} className="break-inside-avoid-column">
                   <div className="text-red-700 font-semibold">
@@ -212,18 +211,18 @@ export default function UnitWargearTable(props: any) {
         {datasheets[0]?.priest != null ? (
           <div
             className={
-              "flex flex-row gap-1 bg-neutral-50 border border-neutral-300 rounded-md p-2.5 drop-shadow-md"
+              "flex flex-row gap-1 bg-neutral-50 border border-neutral-300 rounded-md p-2.5 "
             }
           >
             <p className={"basis-1/5 p-2 font-semibold"}>Priest</p>
-            <div className={" break-inside-avoid-column basis-4/5"}>
+            <div className={"break-inside-avoid-column basis-4/5"}>
               <div>{stripHTML(datasheets[0]?.priest)}</div>
             </div>
           </div>
         ) : datasheets[0]?.psyker != null ? (
           <div
             className={
-              "flex flex-row gap-1 bg-neutral-50 border border-neutral-300 rounded-md p-2.5 drop-shadow-md"
+              "flex flex-row gap-1 bg-neutral-50 border border-neutral-300 rounded-md p-2.5 "
             }
           >
             <p className={"basis-1/5 p-2 font-semibold"}>Psyker</p>
@@ -239,7 +238,7 @@ export default function UnitWargearTable(props: any) {
         {Object.keys(unit_keywords).length >= 1 ? (
           <div
             className={
-              "flex flex-row gap-1 bg-neutral-50 border border-neutral-300 rounded-md p-2.5 drop-shadow-md"
+              "flex flex-row gap-1 bg-neutral-50 border border-neutral-300 rounded-md p-2.5 "
             }
           >
             <p className={"basis-1/5 p-2 text-xl font-light "}>Keywords</p>
@@ -260,7 +259,7 @@ export default function UnitWargearTable(props: any) {
         {Object.keys(faction_keywords).length >= 1 ? (
           <div
             className={
-              "flex flex-row gap-1 bg-neutral-50 border border-neutral-300 rounded-md p-2.5 drop-shadow-md"
+              "flex flex-row gap-1 bg-neutral-50 border border-neutral-300 rounded-md p-2.5 "
             }
           >
             <p className={"basis-1/5 p-2 text-xl font-light "}>
@@ -280,51 +279,6 @@ export default function UnitWargearTable(props: any) {
           <p></p>
         )}
       </MountCheck>
-    </>
+    </div>
   );
-}
-
-{
-  /* Combi weapons table section */
-}
-{
-  /* {allCombiWeaponsList.map((wargear: any, combiIndex: number) => {
-        
-          // Now i have to loop wargear and make it into a list
-          // Each loop is a single div that contains header and a list
-          // Those would also need to be looped but loop
-          // Would loop over elements of wargear and put those into list elements
-          // Starting from index 1 ( index 0 is always the header)
-          // <div>
-
-          // <> header</>
-          // <> for loop with delayed index</>
-          // Combi weapons headers
-          {
-            <>
-              <div className={"ml-2.5 col-span-3 font-semibold"}>
-                {wargear[0].name}
-              </div>
-              <div className={"col-span-17"}>
-                {stripHTML(wargear[0]?.description)}
-              </div>
-            </>;
-            for (let step = 1; step < Object.keys(wargear).length; step++) {
-              <li
-              >
-                <div className={"ml-2.5 col-span-3 font-semibold"}>
-                  {wargear[step]?.name}
-                </div>
-                <div className={"col-span-1"}> {wargear[step]?.Range}</div>
-                <div className={"col-span-2"}> {wargear[step]?.type}</div>
-                <div className={"col-span-1"}> {wargear[step]?.S}</div>
-                <div className={"col-span-1"}> {wargear[step]?.AP}</div>
-                <div className={"col-span-1"}> {wargear[step]?.D}</div>
-                <div className={"col-span-7"}>
-                  {stripHTML(wargear[step]?.abilities)}
-                </div>
-              </li>;
-            }
-          }
-        })} */
 }
