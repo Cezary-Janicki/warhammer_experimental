@@ -89,7 +89,6 @@ export default async function Page({
   const wargear = await datasheetsWargear(modelId, faction);
   return (
     <>
-      {console.log(wargear.factionAbilites)}
       <p>Faction: {faction}</p>
       <p>Unit: {decodeURI(unit)}</p>
       <p>Model id: {modelId}</p>

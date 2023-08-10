@@ -5,14 +5,11 @@ export const StringToHtml = (props: string) => {
     /<\/?(?!(?:[^"]*li|[^"]*ul)\b)("[^"]*"|'[^']*'|[^>])*(>|$)/gm,
     ""
   );
+  const styling = "list-style-type: disc;";
   const [html, setHtml] = useState<string>("");
   useEffect(() => {
-    setHtml(`${cleanComp}`);
+    // setHtml(`${cleanComp}`);
+    setHtml(`<div style=${styling}>${cleanComp}</div>`);
   }, [html]);
-  return (
-    <div
-      className={"list - disc"}
-      dangerouslySetInnerHTML={{ __html: html }}
-    ></div>
-  );
+  return <div dangerouslySetInnerHTML={{ __html: html }} />;
 };
