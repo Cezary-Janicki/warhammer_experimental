@@ -88,11 +88,8 @@ export default async function Page({
       : datasheets[0].unit_composition.replace(/<\/?[^>]+(>|$)/g, "");
   const wargear = await datasheetsWargear(modelId, faction);
   return (
-    // to get all of the wargear i need to search datasheets_wargear for model i want
-    // and then get all of the wargear id's
-    // to get options for a model import datasheets_options by id
-    // weapons/psyker powers are listed in datasheets.csv
     <>
+      {console.log(wargear.factionAbilites)}
       <p>Faction: {faction}</p>
       <p>Unit: {decodeURI(unit)}</p>
       <p>Model id: {modelId}</p>

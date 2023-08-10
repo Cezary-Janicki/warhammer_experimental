@@ -3,7 +3,7 @@ import * as React from "react";
 import MountCheck from "../mountCheck";
 import Datasheet_models from "../dataFetching/Datasheets_models";
 import Tooltip from "../tooltip";
-
+import { StringToHtml } from "../stringToHtml";
 // i need to fetch wargear, there there are profiles for combi weapons that need to be displayed in a diffrent manner, maybe a loop?
 export default function UnitWargearTable(props: any) {
   const datasheets = props.datasheets;
@@ -19,10 +19,10 @@ export default function UnitWargearTable(props: any) {
   function stripHTML(props: string) {
     // const cleanComp = props.replace(/<\/?[^>]+(>|$)/g, "");
     const cleanComp = props.replace(/<\/?("[^"]*"|'[^']*'|[^>])*(>|$)/g, "");
-    cleanComp.replace(/<\/?tbody>/g, ""); // remove tbody
+    // cleanComp.replace(/<\/?tbody>/g, ""); // remove tbody
     return cleanComp;
   }
-  // faction abilites are there now i only need to make the popup
+
   return (
     <div className={"relative z-0 drop-shadow-md"}>
       <MountCheck>
@@ -199,7 +199,7 @@ export default function UnitWargearTable(props: any) {
                   <div className="text-red-700 font-semibold">
                     {ability.name}
                   </div>
-                  <div>{ability.description}</div>
+                  <div>{StringToHtml(ability.description)}</div>
                 </p>
               ))}
             </div>

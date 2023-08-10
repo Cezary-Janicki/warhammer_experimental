@@ -93,7 +93,7 @@ export async function datasheetsWargear(props: string, faction: string) {
 
   // adding combi weapon headers
   allCombiWeaponsList.forEach((combi) => {
-    wargear.forEach((item) => {
+    wargear.forEach((item: { id: number }) => {
       if (item.id == combi[0].wargear_id) {
         combi.unshift(item);
       }
