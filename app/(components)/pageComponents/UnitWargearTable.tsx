@@ -18,7 +18,7 @@ export default function UnitWargearTable(props: any) {
   const factionAbilites = props.factionAbilites;
   function stripHTML(props: string) {
     // const cleanComp = props.replace(/<\/?[^>]+(>|$)/g, "");
-    const cleanComp = props.replace(/<\/?("[^"]*"|'[^']*'|[^>])*(>|$)/g, "");
+    const cleanComp = props?.replace(/<\/?("[^"]*"|'[^']*'|[^>])*(>|$)/g, "");
     // cleanComp.replace(/<\/?tbody>/g, ""); // remove tbody
     return cleanComp;
   }
@@ -86,7 +86,7 @@ export default function UnitWargearTable(props: any) {
                   "ml-4 col-span-5 underline decoration-dotted py-0.5 "
                 }
               >
-                {wargear[1].name}
+                {wargear[1]?.name}
               </div>
               <div className={"col-span-1"}> {wargear[1]?.Range}</div>
               <div className={"col-span-2"}> {wargear[1]?.type}</div>
@@ -100,7 +100,7 @@ export default function UnitWargearTable(props: any) {
               <div
                 className={"ml-4 col-span-5 underline decoration-dotted py-0.5"}
               >
-                {wargear[2].name}
+                {wargear[2]?.name}
               </div>
               <div className={"col-span-1"}> {wargear[2]?.Range}</div>
               <div className={"col-span-2"}> {wargear[2]?.type}</div>

@@ -42,12 +42,12 @@ export default async function Page({
       </p>
       <p>All Faction units links</p>
 
- <div className="flex flex-wrap">
+      <div className="flex flex-wrap">
         {roles.map((role, roleIndex) => {
           return (
             <div key={roleIndex}>
               <h1 className="font-semibold">{role}</h1>
-             <ul>
+              <ul>
                 {unitsByFaction.map(
                   (
                     unit1: {
@@ -60,21 +60,21 @@ export default async function Page({
                     if (unit1.role === role) {
                       return (
                         <li key={unitIndex} className="list-none indent-6">
-                            <Link
-                              href={`/factions/${unit1.faction_id}/${unit1.name}`}
-                            >
-                              {unit1.name}
-                            </Link>
+                          <Link
+                            href={`/factions/${unit1.faction_id}/${unit1.name}`}
+                          >
+                            {unit1.name}
+                          </Link>
                         </li>
                       );
                     }
                   }
-                  )}
-                  </ul>
+                )}
+              </ul>
             </div>
           );
         })}
- </div>
+      </div>
     </>
   );
 }
