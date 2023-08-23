@@ -1,6 +1,7 @@
 import "./globals.css";
 import { Suspense } from "react";
 import Loading from "./loading";
+import Navbar from "./(components)/pageComponents/navbar/Navbar";
 export default function RootLayout({
   children,
 }: {

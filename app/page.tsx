@@ -3,6 +3,7 @@ import { Inter } from "@next/font/google";
 import styles from "./page.module.css";
 import { MainFactions } from "./(components)/dataFetching/Factions";
 import Navbar from "./(components)/pageComponents/navbar/Navbar";
+import ArmiesByFaction from "./(components)/dataFetching/ArmiesByFaction";
 const inter = Inter({ subsets: ["latin"] });
 
 async function getMainFactions() {
@@ -11,118 +12,92 @@ async function getMainFactions() {
 }
 
 export default async function Home() {
-  const factions = await getMainFactions();
+  // const factions = await getMainFactions();
+  // type factions = {
+  //   faction_name: string;
+  //   faction_id: string;
+  // };
+  const factions = ArmiesByFaction();
+  ``;
+  const chaos = factions.Chaos;
+  const imperium = factions.Imperium;
+  const xenos = factions.Xenos;
   return (
     <>
       <Navbar />
-      <p className="text-3xl font-bold underline"> Hello next 13!</p>
-      <div className="flex">
+      {/* I need to rewrite this into a for loop with length that matches factionValues.length */}
+      {Object.keys(factions).map((factionKeys: any) => {
+        return Object.values(factions).map(
+          (factionValues: any, index: number) => {
+            // console.log("fac", factionValues.length);
+            return (
+              <>
+                <div>
+                  <h1 className="font-semibold">{factionKeys}</h1>
+                  <ul>
+                    <li className="list-none indent-6">
+                      <a>
+                        <Link
+                          href={`/factions/${factionValues[index].faction_id}`}
+                        >
+                          {factionValues[index].faction_name}
+                        </Link>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              </>
+            );
+          }
+        );
+      })}
+
+      {/* <div className="flex">
         <div>
           <h1 className="font-semibold">Imperium</h1>
           <ul>
-            <li className="list-none indent-6">
-              <Link href="/factions/AS">Adepta Sororitas</Link>
-            </li>
-            <li className="list-none indent-6">
-              <Link href="/factions/AC">Adeptus Custodes</Link>
-            </li>
-            <li className="list-none indent-6">
-              <Link href="/factions/AdM">Adeptus Mechanicus</Link>
-            </li>
-            <li className="list-none indent-6">
-              <Link href="/factions/AoI">Agents of the Imperium</Link>
-            </li>
-            <li className="list-none indent-6">
-              <Link href="/factions/AM">Astra Militarum</Link>
-            </li>
-            <li className="list-none indent-6">
-              <Link href="/factions/GK">Grey Knights</Link>
-            </li>
-            <li className="list-none indent-6">
-              <Link href="/factions/QI">Imperial Knights</Link>
-            </li>
-            <li className="list-none indent-6">
-              <Link href="/factions/RT">Rogue Traders</Link>
-            </li>
-            <li className="list-none indent-6">
-              <Link href="/factions/SM">Space Marines</Link>
-            </li>
-            <li className="list-none indent-6">
-              <Link href="/factions/TL">Titan Legions</Link>
-            </li>
+            {imperium.map((faction: any) => {
+              return (
+                <li className="list-none indent-6">
+                  <a>
+                    <Link href={`/factions/${faction.faction_id}`}>
+                      {faction.faction_name}
+                    </Link>
+                  </a>
+                </li>
+              );
+            })}
           </ul>
         </div>
         <div>
           <h1 className="font-semibold">Chaos</h1>
           <ul>
-            <li className="list-none indent-6">
-              <Link href="/factions/CD">Chaos Daemons</Link>
-            </li>
-            <li className="list-none indent-6">
-              <Link href="/factions/CK">Chaos Knights</Link>
-            </li>
-            <li className="list-none indent-6">
-              <Link href="/factions/CSM">Chaos Space Marines</Link>
-            </li>
-            <li className="list-none indent-6">
-              <Link href="/factions/DG">Death Guard</Link>
-            </li>
-            <li className="list-none indent-6">
-              <Link href="/factions/HTL">Heretic Titan Legions</Link>
-            </li>
-            <li className="list-none indent-6">
-              <Link href="/factions/RaH">Renegades and Heretics</Link>
-            </li>
-            <li className="list-none indent-6">
-              <Link href="/factions/TS">Thousand Sons</Link>
-            </li>
-            <li className="list-none indent-6">
-              <Link href="/factions/WE">World Eaters</Link>
-            </li>
+            {chaos.map((faction: any) => {
+              return (
+                <li className="list-none indent-6">
+                  <Link href={`/factions/${faction.faction_id}`}>
+                    {faction.faction_name}
+                  </Link>
+                </li>
+              );
+            })}
           </ul>
         </div>
         <div>
           <h1 className="font-semibold">Xenos</h1>
           <ul>
-            <li className="list-none indent-6">
-              <Link href="/factions/AE">Aeldari</Link>
-            </li>
-            <li className="list-none indent-6">
-              <Link href="/factions/DRU">Drukhari</Link>
-            </li>
-            <li className="list-none indent-6">
-              <Link href="/factions/GC">Genestealer Cults</Link>
-            </li>
-            <li className="list-none indent-6">
-              <Link href="/factions/LoV">Leagues of Votann</Link>
-            </li>
-            <li className="list-none indent-6">
-              <Link href="/factions/NEC">Necrons</Link>
-            </li>
-            <li className="list-none indent-6">
-              <Link href="/factions/ORK">Orks</Link>
-            </li>
-            <li className="list-none indent-6">
-              <Link href="/factions/TAU">T’au Empire</Link>
-            </li>
-            <li className="list-none indent-6">
-              <Link href="/factions/TYR">Tyranids</Link>
-            </li>
+            {xenos.map((faction: any) => {
+              return (
+                <li className="list-none indent-6">
+                  <Link href={`/factions/${faction.faction_id}`}>
+                    {faction.faction_name}
+                  </Link>
+                </li>
+              );
+            })}
           </ul>
         </div>
-      </div>
-      {/* {factions.map((faction: any, factionIndex: number) => {
-        return (
-          <h1 key={factionIndex}>
-            <Link href={`/factions/${faction.id}`}>{faction.name}</Link>
-          </h1>
-        );
-      })} */}
+      </div> */}
     </>
   );
-}
-{
-  /* {roles.map((role, roleIndex) => {
-        return <h1 key={roleIndex}>{role}</h1>;
-      })} */
 }

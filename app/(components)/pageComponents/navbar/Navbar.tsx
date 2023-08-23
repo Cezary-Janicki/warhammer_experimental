@@ -17,10 +17,5 @@ export default async function Navbar() {
   const roles = BattlefieldRoles();
   // i could utilize useMemo to memoize the whole dataset so that it wouldn't need to be reloaded
   // the navbar popup works now i need to make a 2nd one that would filter factions and pass faction data
-  return (
-    <>
-      <p>testing</p>
-      <NavbarFactions units={unitsByFaction} roles={roles} />
-    </>
-  );
+  return <NavbarFactions units={unitsByFaction} roles={roles} />;
 }
