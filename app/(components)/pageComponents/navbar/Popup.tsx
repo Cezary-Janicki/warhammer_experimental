@@ -12,18 +12,17 @@ export default function NavbarPopup(props: any) {
       }
       return acc;
     }, {});
-    return result;
+    return Object.keys(result);
   }
   // i need to reduce here to find out what roles are being used and which shouldnt be displayed
   return (
     <>
-      {console.log("count roles", Object.keys(countRoles()).includes("Troops"))}
       <div>
         <ul className="dropdown-content absolute text-gray-700 pt-1">
           {roles.map((role: string, index: number) => {
             return (
               <li className="dropdown">
-                {Object.keys(countRoles()).includes(role) == true ? (
+                {countRoles().includes(role) == true ? (
                   <a
                     className="rounded-t bg-gray-200 hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap"
                     href="#"
