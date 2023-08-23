@@ -49,7 +49,7 @@ export default function ArmiesByFaction() {
       },
       {
         faction_name: "Chaos Knights",
-        faction_id: "CK",
+        faction_id: "QT",
       },
       {
         faction_name: "Chaos Space Marines",
