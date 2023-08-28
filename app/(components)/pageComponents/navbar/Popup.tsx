@@ -6,25 +6,28 @@ export default function NavbarPopup(props: any) {
   let faction = props.faction;
 
   function countRoles() {
-    let result = units.reduce(function (acc, val) {
+    let result = units.reduce(function (
+      acc: { [x: string]: any },
+      val: { faction_id: any; role: string | number }
+    ) {
       if (faction == val.faction_id) {
         acc[val.role] = (acc[val.role] || 0) + 1;
       }
       return acc;
-    }, {});
+    },
+    {});
     return Object.keys(result);
   }
-  // i need to reduce here to find out what roles are being used and which shouldnt be displayed
   return (
     <>
       <div>
-        <ul className="dropdown-content absolute text-gray-700 pt-1">
+        <ul className="dropdown-content absolute border-4 border-l-0 border-neutral-400 divide-y divide-neutral-300 text-gray-700">
           {roles.map((role: string, index: number) => {
             return (
               <li className="dropdown">
                 {countRoles().includes(role) == true ? (
                   <a
-                    className="rounded-t bg-gray-200 hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap"
+                    className="bg-neutral-200 hover:bg-neutral-400 py-2 px-4 block whitespace-no-wrap"
                     href="#"
                     key={index}
                   >
@@ -40,7 +43,7 @@ export default function NavbarPopup(props: any) {
                       return (
                         <li key={unit.name}>
                           <a
-                            className="bg-gray-200 hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap"
+                            className="bg-neutral-200 hover:bg-neutral-400 py-2 px-4 block whitespace-no-wrap"
                             href="#"
                           >
                             <Link

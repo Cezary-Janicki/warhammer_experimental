@@ -14,7 +14,7 @@ export default function RootLayout({
         head.tsx. Find out more at https://beta.nextjs.org/docs/api-reference/file-conventions/head
       */}
       <head />
-      <body className={"text-gray-800 bg-stone-200 mx-10"}> {children}</body>
+      <body className={"text-gray-800 bg-stone-100 mx-10"}> {children}</body>
       {/* how to add the suspense boundary?  */}
     </html>
   );
