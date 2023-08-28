@@ -14,10 +14,6 @@ export default function ArmiesByFaction() {
         faction_id: "AdM",
       },
       {
-        faction_name: "Agents of the Imperium",
-        faction_id: "AoI",
-      },
-      {
         faction_name: "Astra Militarum",
         faction_id: "AM",
       },

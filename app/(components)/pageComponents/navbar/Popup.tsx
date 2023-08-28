@@ -28,7 +28,6 @@ export default function NavbarPopup(props: any) {
                 {countRoles().includes(role) == true ? (
                   <a
                     className="bg-neutral-200 hover:bg-neutral-400 py-2 px-4 block "
-                    href="#"
                     key={index}
                   >
                     {role}
