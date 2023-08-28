@@ -11,8 +11,8 @@ export default function NavbarFactions(props: any) {
       {Object.keys(factions).map((factionKeys: any, index) => {
         let factionArmies = Object.values(factions)[index];
         return (
-          <div className="dropdown inline-block relative">
-            <button className="bg-neutral-400 text-neutral-50 font-semibold py-2 px-4 mr-4 rounded inline-flex items-center w-[10.2rem] ">
+          <div className="dropdown inline-block relative mr-4">
+            <button className="bg-neutral-400 text-neutral-50 font-semibold py-2 px-4 rounded inline-flex items-center w-[10.5rem] ">
               <span>{factionKeys}</span>
             </button>
             <ul className="dropdown-content absolute hidden border-4 border-neutral-400 divide-y divide-neutral-300 text-gray-700">
@@ -28,7 +28,7 @@ export default function NavbarFactions(props: any) {
                           {faction.faction_name}
                         </Link>
                       </a>
-                      <ul className="dropdown-content absolute hidden text-gray-700 ml-44 -mt-10">
+                      <ul className="dropdown-content absolute hidden text-gray-700 ml-40 -mt-10">
                         <li>
                           <NavbarPopup
                             units={units}

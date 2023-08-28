@@ -21,7 +21,7 @@ export default function NavbarPopup(props: any) {
   return (
     <>
       <div>
-        <ul className="dropdown-content absolute border-4 border-l-0 border-neutral-400 divide-y divide-neutral-300 text-gray-700">
+        <ul className="dropdown-content absolute border-2  border-neutral-400 divide-y divide-neutral-300 text-gray-700 w-44">
           {roles.map((role: string, index: number) => {
             return (
               <li className="dropdown">
@@ -37,7 +37,7 @@ export default function NavbarPopup(props: any) {
                   <></>
                 )}
 
-                <ul className="dropdown-content absolute hidden text-gray-700 pl-5 ml-24 -mt-10">
+                <ul className="dropdown-content absolute hidden text-gray-700 pl-5 ml-36 -mt-10">
                   {units.map((unit: any) => {
                     if (unit.role == role && faction == unit.faction_id) {
                       return (
