@@ -1,5 +1,5 @@
-import { StringToHtml } from "./stringToHtml";
-export default function Tooltip(props: any) {
+import { StringToHtml } from "../../../stringToHtml";
+export function Tooltip(props: any) {
   let factionAbilites = props.factionAbilites;
 
   return (

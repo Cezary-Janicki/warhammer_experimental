@@ -1,9 +1,7 @@
 "use client";
 import * as React from "react";
-
 export default function UnitStatsTable(props: any) {
   const models = props.models;
-  console.log("model", models);
   return (
     <>
       <div
@@ -23,7 +21,7 @@ export default function UnitStatsTable(props: any) {
         <div className={"col-span-1 text-right"}>A</div>
         <div className={"col-span-1 text-right"}>Ld</div>
         <div className={"col-span-1 text-right"}>Sv</div>
-        <div className={"col-span-2 text-right"}>Base</div>
+        <div className={"col-span-2 text-right "}>Base</div>
       </div>
 
       {models.map((model: any, index: number) => (

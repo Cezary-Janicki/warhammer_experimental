@@ -1,13 +1,12 @@
 import Link from "next/link";
 import Datasheets from "../../../(components)/dataFetching/Datasheets";
-import UnitStatsTable from "@/app/(components)/pageComponents/UnitStatsTable";
-import UnitWargearTable from "@/app/(components)/pageComponents/UnitWargearTable";
+import UnitStatsTable from "@/app/(components)/pageComponents/unitPage/pageComponents/UnitStatsTable";
+import UnitWargearTable from "@/app/(components)/pageComponents/unitPage/pageComponents/UnitWargearTable";
+import UnitPage from "@/app/(components)/pageComponents/unitPage/index";
 import Datasheets_keywords from "@/app/(components)/dataFetching/Datasheets_keywords";
-import { datasheetOptions } from "@/app/(components)/datasheetOptions";
-import { createUnitTables } from "@/app/(components)/createUnitTables";
-import { selectUnitTables } from "@/app/(components)/selectUnitTables";
-import { datasheetsWargear } from "@/app/(components)/wargearOptions";
-import parse from "node-html-parser";
+import { datasheetOptions } from "@/app/(components)/pageComponents/unitPage/parseData/datasheetOptions";
+import { selectUnitTables } from "@/app/(components)/pageComponents/unitPage/parseData/selectUnitTables";
+import { datasheetsWargear } from "@/app/(components)/pageComponents/unitPage/parseData/wargearOptions";
 export async function generateStaticParams() {
   const xxx = await createArray();
   return xxx;
@@ -74,18 +73,11 @@ export default async function Page({
 }) {
   const { faction, unit } = await params;
   const modelId = await getModelId(unit);
-  // const unitTables = await createUnitTables(modelId);
   const selectTables = await selectUnitTables(modelId);
   const datasheets = await getDatasheetDataByModel(unit);
   const datasheets_options = await datasheetOptions(modelId);
   const unit_keywords = await getUnitKeywords(modelId);
   const faction_keywords = await getFactionKeywords(modelId);
-  // const cleanComp = datasheets[0].unit_composition.replace(/<\/?[^>]+(>|$)/g, "");
-  const cleanComp =
-    datasheets[0].unit_composition === null ||
-    datasheets[0].unit_composition === undefined
-      ? ""
-      : datasheets[0].unit_composition.replace(/<\/?[^>]+(>|$)/g, "");
   const wargear = await datasheetsWargear(modelId, faction);
   return (
     <>
@@ -98,32 +90,15 @@ export default async function Page({
       <p>
         <Link href={`./`}>Return to Main Page</Link>
       </p>
-      <div
-        className={
-          "bg-neutral-800 text-neutral-50 text-center text-2xl font-bold rounded-md p-2.5 drop-shadow-md"
-        }
-      >
-        {decodeURI(unit)}
-      </div>
-      <UnitStatsTable models={selectTables} />
-      <div
-        className={
-          "bg-neutral-50 border border-neutral-300 rounded-md p-2.5  drop-shadow-md"
-        }
-      >
-        <p className={"ml-2.5"}>{cleanComp}</p>
-      </div>
-      <UnitWargearTable
-        allWargear={wargear.allWargear}
-        allWargearList={wargear.allWargearList}
-        allCombiWeaponsList={wargear.allCombiWeaponsList}
-        modelAbilites={wargear.modelAbilites}
-        otherWargear={wargear.otherWargear}
+
+      <UnitPage
+        unit={unit}
+        wargear={wargear}
         datasheets_options={datasheets_options}
         unit_keywords={unit_keywords}
         faction_keywords={faction_keywords}
-        factionAbilites={wargear.factionAbilites}
         datasheets={datasheets}
+        models={selectTables}
       />
     </>
   );
