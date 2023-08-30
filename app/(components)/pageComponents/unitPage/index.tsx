@@ -1,7 +1,15 @@
 import Header from "./unitWargearTableComonents/tables/Header";
 import UnitStatsTable from "./pageComponents/UnitStatsTable";
 import UnitWargearTable from "./pageComponents/UnitWargearTable";
-export default function UnitPage(props) {
+export default function UnitPage(props: {
+  unit: string;
+  datasheets: any;
+  datasheets_options: any;
+  unit_keywords: any;
+  faction_keywords: any;
+  wargear: any;
+  models: any;
+}) {
   const unit = props.unit;
   const datasheets = props.datasheets;
   const datasheets_options = props.datasheets_options;

@@ -42,13 +42,13 @@ export default function NavbarPopup(props: any) {
                       if (unit.role == role && faction == unit.faction_id) {
                         return (
                           <li key={unit.link}>
-                            <p className="hover:bg-neutral-400 block w-48 break-inside-avoid-column">
+                            <div className="hover:bg-neutral-400 block w-48 break-inside-avoid-column">
                               <Link
                                 href={`/factions/${unit.faction_id}/${unit.name}`}
                               >
                                 {unit.name}
                               </Link>
-                            </p>
+                            </div>
                           </li>
                         );
                       }

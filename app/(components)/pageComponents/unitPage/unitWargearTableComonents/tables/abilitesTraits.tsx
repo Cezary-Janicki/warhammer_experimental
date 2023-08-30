@@ -18,10 +18,10 @@ export default function AbilitesTraits(props) {
           >
             <Tooltip factionAbilites={factionAbilites} />
             {modelAbilites.map((ability: any, index: number) => (
-              <p key={ability.name} className="break-inside-avoid-column">
+              <div key={ability.name} className="break-inside-avoid-column">
                 <div className="text-red-700 font-semibold">{ability.name}</div>
                 <div>{StringToHtml(ability.description)}</div>
-              </p>
+              </div>
             ))}
           </div>
         </div>
