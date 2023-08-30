@@ -24,14 +24,14 @@ export default function NavbarPopup(props: any) {
         <ul className="dropdown-content absolute border-4  border-neutral-400 divide-y divide-neutral-300 text-gray-700 w-44">
           {roles.map((role: string, index: number) => {
             return (
-              <li className="dropdown">
+              <li className="dropdown" key={index}>
                 {countRoles().includes(role) == true ? (
-                  <a
+                  <p
                     className="bg-neutral-200 hover:bg-neutral-400 py-2 px-4 block "
                     key={index}
                   >
                     {role}
-                  </a>
+                  </p>
                 ) : (
                   <></>
                 )}
@@ -41,14 +41,14 @@ export default function NavbarPopup(props: any) {
                     {units.map((unit: any) => {
                       if (unit.role == role && faction == unit.faction_id) {
                         return (
-                          <li key={unit.name}>
-                            <a className="hover:bg-neutral-400 block w-48 break-inside-avoid-column">
+                          <li key={unit.link}>
+                            <p className="hover:bg-neutral-400 block w-48 break-inside-avoid-column">
                               <Link
                                 href={`/factions/${unit.faction_id}/${unit.name}`}
                               >
                                 {unit.name}
                               </Link>
-                            </a>
+                            </p>
                           </li>
                         );
                       }
