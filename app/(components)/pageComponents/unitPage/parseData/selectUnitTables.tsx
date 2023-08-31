@@ -1,7 +1,7 @@
 import UnitStatsTable from "@/app/(components)/pageComponents/unitPage/pageComponents/UnitStatsTable";
 import { createUnitTables } from "./createUnitTables";
 import { createUnitTablesWithoutBrackets } from "./createUnitTablesWithoutBrackets";
-import Datsheets_damage from "@/app/(components)/dataFetching/Datasheets_Damage";
+import Datsheets_damage from "@/app/(components)/dataFetching/Datasheets_damage";
 export async function selectUnitTables(props: any) {
   const datasheetsDamage = await Datsheets_damage();
 

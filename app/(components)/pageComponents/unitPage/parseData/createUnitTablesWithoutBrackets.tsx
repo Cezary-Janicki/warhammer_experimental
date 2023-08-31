@@ -1,5 +1,5 @@
 import Datasheets_models from "@/app/(components)/dataFetching/Datasheets_models";
-import Datsheets_damage from "@/app/(components)/dataFetching/Datasheets_Damage";
+import Datsheets_damage from "@/app/(components)/dataFetching/Datasheets_damage";
 
 export async function createUnitTablesWithoutBrackets(props: number) {
   const datasheetModels = await Datasheets_models();
@@ -12,13 +12,13 @@ export async function createUnitTablesWithoutBrackets(props: number) {
     }
   };
   let filteredModels: any[] = [];
-  datasheetModels.map((item: { datasheet_id: string | number; }) => {
+  datasheetModels.map((item: { datasheet_id: string | number }) => {
     if (item.datasheet_id === modelId(props)) {
       return filteredModels.push(item);
     }
   });
   let damageTables: any[] = [];
-  datasheetsDamage.map((item: { datasheet_id: string | number; }) => {
+  datasheetsDamage.map((item: { datasheet_id: string | number }) => {
     ``;
     if (item.datasheet_id === modelId(props)) {
       return damageTables.push(item);
