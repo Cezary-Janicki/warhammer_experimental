@@ -1,6 +1,5 @@
 import stripHTML from "../../parseData/stripHTML";
-export default function CombiWeaponStats(props) {
-  const allCombiWeaponsList = props.allCombiWeaponsList;
+export default function CombiWeaponStats(allCombiWeaponsList: any) {
   return (
     <div>
       {allCombiWeaponsList.map((wargear: any, combiIndex: number) => (

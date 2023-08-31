@@ -1,4 +1,4 @@
-export default function Header(unit: string) {
+export default function Header({ unit }) {
   return (
     <div
       className={

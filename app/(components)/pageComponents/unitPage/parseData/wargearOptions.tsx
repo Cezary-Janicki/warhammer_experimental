@@ -179,7 +179,6 @@ export async function datasheetsWargear(props: string, faction: string) {
       }
     });
   });
-  console.log("datasheet abilities", datasheetsAbilites);
   return {
     allWargearList,
     allWargear,

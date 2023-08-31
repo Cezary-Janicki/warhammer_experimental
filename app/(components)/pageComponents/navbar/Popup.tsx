@@ -1,19 +1,27 @@
 // "use client";
 import Link from "next/link";
-export default function NavbarPopup({ units, roles, faction }: any) {
+import BattlefieldRoles from "../../dataFetching/BattlefieldRoles";
+
+export default function NavbarPopup(props: any) {
+  const units = props.units;
+  const faction = props.faction;
+  const roles = BattlefieldRoles();
   function countRoles() {
-    let result = units.reduce(function (
-      acc: { [x: string]: any },
-      val: { faction_id: any; role: string | number }
-    ) {
-      if (faction == val.faction_id) {
-        acc[val.role] = (acc[val.role] || 0) + 1;
-      }
-      return acc;
-    },
-    {});
+    let result = Array.isArray(units)
+      ? units.reduce(function (
+          acc: { [x: string]: any },
+          val: { faction_id: any; role: string | number }
+        ) {
+          if (faction == val.faction_id) {
+            acc[val.role] = (acc[val.role] || 0) + 1;
+          }
+          return acc;
+        },
+        {})
+      : 0;
     return Object.keys(result);
   }
+  console.log("units", units.values);
   return (
     <>
       <div>
