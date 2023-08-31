@@ -50,8 +50,8 @@ export async function createUnitTables(props: number) {
       return allBracketsWithKeys;
     };
 
-    function clearName(unitTable: any) {
-      let data = unitTable;
+    function clearName(props: any) {
+      let data = props;
       data["name"] = "";
       data["line"] = "";
       data["base_size"] = "";

@@ -1,5 +1,6 @@
 import stripHTML from "../../parseData/stripHTML";
-export default function WeaponStats(allWargearList: any) {
+export default function WeaponStats(props) {
+  const allWargearList = props.allWargearList;
   return (
     <div>
       <div

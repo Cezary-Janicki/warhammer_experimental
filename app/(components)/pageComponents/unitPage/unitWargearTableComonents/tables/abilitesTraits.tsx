@@ -1,9 +1,8 @@
 import { Tooltip } from "../tooltip";
 import { StringToHtml } from "@/app/(components)/stringToHtml";
-export default function AbilitesTraits({
-  modelAbilites,
-  factionAbilites,
-}: any) {
+export default function AbilitesTraits(props) {
+  const modelAbilites = props.modelAbilites;
+  const factionAbilites = props.facitonAbilities;
   return (
     <div>
       {" "}

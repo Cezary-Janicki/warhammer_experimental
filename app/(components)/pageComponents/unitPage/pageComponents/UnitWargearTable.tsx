@@ -8,17 +8,18 @@ import AbilitesTraits from "../unitWargearTableComonents/tables/abilitesTraits";
 import PriestPsyker from "../unitWargearTableComonents/tables/priestPsyker";
 import Keywords from "../unitWargearTableComonents/tables/keywords";
 import UnitComposition from "../unitWargearTableComonents/tables/UnitComposition";
-export default function UnitWargearTable({
-  datasheets,
-  allWargearList,
-  allCombiWeaponsList,
-  modelAbilites,
-  otherWargear,
-  datasheets_options,
-  unit_keywords,
-  faction_keywords,
-  factionAbilites,
-}: any) {
+export default function UnitWargearTable(props: any) {
+  const datasheets = props.datasheets;
+  const allWargearList = props.allWargearList;
+  const allCombiWeaponsList = props.allCombiWeaponsList;
+  const allWargear = props.allWargear;
+  const modelAbilites = props.modelAbilites;
+  const otherWargear = props.otherWargear;
+  const datasheets_options = props.datasheets_options;
+  const unit_keywords = props.unit_keywords;
+  const faction_keywords = props.faction_keywords;
+  const factionAbilites = props.factionAbilites;
+
   return (
     <div className={"relative z-0 drop-shadow-md"}>
       <MountCheck key={datasheets[0].id}>

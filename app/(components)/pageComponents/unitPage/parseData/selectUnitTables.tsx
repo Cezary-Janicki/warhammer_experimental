@@ -4,6 +4,7 @@ import { createUnitTablesWithoutBrackets } from "./createUnitTablesWithoutBracke
 import Datsheets_damage from "@/app/(components)/dataFetching/Datasheets_Damage";
 export async function selectUnitTables(props: any) {
   const datasheetsDamage = await Datsheets_damage();
+
   const modelId = (id: number) => {
     if (id.toString().length === 9) {
       return id;

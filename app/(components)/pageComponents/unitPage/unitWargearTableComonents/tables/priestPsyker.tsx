@@ -1,5 +1,6 @@
 import stripHTML from "../../parseData/stripHTML";
-export default function PriestPsyker(datasheets: any) {
+export default function PriestPsyker(props) {
+  const datasheets = props.datasheets;
   return (
     <div>
       {datasheets[0]?.priest != null ? (

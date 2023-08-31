@@ -1,8 +1,7 @@
 import stripHTML from "../../parseData/stripHTML";
-export default function OtherWargearOptions({
-  otherWargear,
-  datasheets_options,
-}: any) {
+export default function OtherWargearOptions(props) {
+  const otherWargear = props.otherWargear;
+  const datasheets_options = props.datasheets_options;
   return (
     <div>
       {/* Other wargear */}

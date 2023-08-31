@@ -1,11 +1,11 @@
 import React from "react";
 
-export default function UnitComposition(datasheets: any) {
+export default function UnitComposition(props) {
   const cleanComp =
-    datasheets[0].unit_composition === null ||
-    datasheets[0].unit_composition === undefined
+    props.datasheets[0].unit_composition === null ||
+    props.datasheets[0].unit_composition === undefined
       ? ""
-      : datasheets[0].unit_composition.replace(/<\/?[^>]+(>|$)/g, "");
+      : props.datasheets[0].unit_composition.replace(/<\/?[^>]+(>|$)/g, "");
   return (
     <div
       className={

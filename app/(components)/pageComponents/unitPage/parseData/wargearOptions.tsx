@@ -48,29 +48,7 @@ export async function datasheetsWargear(props: string, faction: string) {
     D: number;
     abilities: string;
   }
-  let allWargearList: IAllWargearList[] = [];
-  interface IWeapons {
-    wargear_id: number;
-    line: number;
-    name: string;
-    Range: string;
-    type: string;
-    S: number;
-    AP: number;
-    D: number;
-    abilities: string;
-  }
-  interface ICombiHeader {
-    id: number;
-    name: string;
-    type: string;
-    description: string;
-    source_id: number;
-    is_relic: string; // should be boolean
-    faction_id: string;
-    faction_name: string;
-    legend: string;
-  }
+  let allWargearList: IAllWargearList = [];
   let allCombiWeapons: any[] = []; // all weapons with duped combi guns
   let allCombiWeaponsList: any[] = []; // filtered combi weapons
   let testArray2: any[] = [];
@@ -82,25 +60,20 @@ export async function datasheetsWargear(props: string, faction: string) {
   });
 
   allWargear.map((item) => {
-    wargearList.map((item2: IAllWargearList) => {
+    wargearList.map((item2: { wargear_id: any }) => {
       if (item.wargear_id === item2.wargear_id) {
-        item2.wargear_id = Number(item2.wargear_id);
-        item2.line = Number(item2.line);
-        item2.S = Number(item2.S);
-        item2.AP = Number(item2.AP);
-        item2.D = Number(item2.D);
         allWargearList.push(item2);
       }
     });
   });
 
   allWargearList.map((item, index) => {
-    let filterResults = wargearList.filter(function (entry: IWeapons) {
+    let filterResults = wargearList.filter(function (entry: any) {
       return entry.wargear_id === item.wargear_id;
     });
     allCombiWeapons.filter(function (entry) {
       if (entry[0].wargear_id === filterResults[0].wargear_id) {
-        entry.forEach((item: IWeapons) => {
+        entry.forEach((item: any) => {
           testArray2.push(item);
         });
         allCombiWeaponsList.push(filterResults);
@@ -115,7 +88,7 @@ export async function datasheetsWargear(props: string, faction: string) {
     let filteredObject = arrayOfObjects.forEach((record, recordIndex) => {
       arrayOfObjects.forEach((rec, recIndex) => {
         if (
-          record[1]?.wargear_id == rec[1]?.wargear_id &&
+          record[1]?.wargear_id == rec[1]?.wargear_id && //
           record[1]?.name == rec[1]?.name &&
           recIndex != recordIndex
         ) {
@@ -131,53 +104,47 @@ export async function datasheetsWargear(props: string, faction: string) {
 
   // adding combi weapon headers
   allCombiWeaponsList.forEach((combi) => {
-    wargear.forEach((combiHeader: ICombiHeader) => {
-      if (combiHeader.id == combi[0].wargear_id) {
-        combiHeader.id = Number(combiHeader.id);
-        combiHeader.source_id = Number(combiHeader.source_id);
-        combi.unshift(combiHeader);
+    wargear.forEach((item: { id: number }) => {
+      if (item.id == combi[0].wargear_id) {
+        combi.unshift(item);
       }
     });
   });
 
   const datasheetsAbilites = await getDatasheetsAbilites();
   const abilites = await getAbilites();
-  interface IAbilities {
-    id: number;
-    type: string;
-    name: string;
-    legend: string;
-    is_other_wargear: string;
-    faction_id: string;
-    description: string;
-  }
   let modelAbilites: any[] = [];
   let factionAbilites: any[] = [];
   let otherWargear: any[] = [];
   let keyWords: any[] = [];
   datasheetsAbilites.map((item: { datasheet_id: string; ability_id: any }) => {
-    abilites.map((item2: IAbilities) => {
-      if (
-        item.datasheet_id === modelId &&
-        item2.id === item.ability_id &&
-        item2.faction_id == factionId
-      ) {
-        if (item2.is_other_wargear === "true") {
-          item2.id = Number(item2.id);
-          otherWargear.push(item2);
-        }
-        if (item2.type === "" && item2.is_other_wargear === "false") {
-          item2.id = Number(item2.id);
-          modelAbilites.push(item2);
-        }
-        if (item2.type === "Abilities") {
-          item2.id = Number(item2.id);
-          factionAbilites.push(item2);
-        } else {
-          keyWords.push(item2);
+    abilites.map(
+      (item2: {
+        id: any;
+        is_other_wargear: string;
+        type: string;
+        faction_id: string;
+      }) => {
+        if (
+          item.datasheet_id === modelId &&
+          item2.id === item.ability_id &&
+          item2.faction_id == factionId
+        ) {
+          //  modelAbilites.push(item2)
+          if (item2.is_other_wargear === "true") {
+            otherWargear.push(item2);
+          }
+          if (item2.type === "" && item2.is_other_wargear === "false") {
+            modelAbilites.push(item2);
+          }
+          if (item2.type === "Abilities") {
+            factionAbilites.push(item2);
+          } else {
+            keyWords.push(item2);
+          }
         }
       }
-    });
+    );
   });
   return {
     allWargearList,

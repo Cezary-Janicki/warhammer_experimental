@@ -1,5 +1,7 @@
 import { StringToHtml } from "../../../stringToHtml";
-export function Tooltip({ factionAbilites }: any) {
+export function Tooltip(props: any) {
+  let factionAbilites = props.factionAbilites;
+
   return (
     <>
       {factionAbilites.map((ability: any, index: number) => (
