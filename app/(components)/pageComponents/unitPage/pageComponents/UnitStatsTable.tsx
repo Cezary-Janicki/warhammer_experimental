@@ -1,7 +1,6 @@
 "use client";
 import * as React from "react";
-export default function UnitStatsTable(props: any) {
-  const models = props.models;
+export default function UnitStatsTable(models: any) {
   return (
     <>
       <div

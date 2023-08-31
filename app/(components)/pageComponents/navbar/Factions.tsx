@@ -2,9 +2,7 @@
 import NavbarPopup from "./Popup";
 import Link from "next/link";
 import ArmiesByFaction from "../../dataFetching/ArmiesByFaction";
-export default function NavbarFactions(props: any) {
-  const units = props.units;
-  const roles = props.roles;
+export default function NavbarFactions({ units, roles }: any) {
   const factions = ArmiesByFaction();
   return (
     <>

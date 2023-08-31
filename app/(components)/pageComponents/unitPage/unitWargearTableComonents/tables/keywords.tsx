@@ -1,6 +1,4 @@
-export default function Keywords(props) {
-  const unit_keywords = props.unit_keywords;
-  const faction_keywords = props.faction_keywords;
+export default function Keywords({ unit_keywords, faction_keywords }: any) {
   return (
     <div>
       {" "}

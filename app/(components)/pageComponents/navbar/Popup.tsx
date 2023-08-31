@@ -1,10 +1,6 @@
 // "use client";
 import Link from "next/link";
-export default function NavbarPopup(props: any) {
-  let units = props.units;
-  let roles = props.roles;
-  let faction = props.faction;
-
+export default function NavbarPopup({ units, roles, faction }: any) {
   function countRoles() {
     let result = units.reduce(function (
       acc: { [x: string]: any },

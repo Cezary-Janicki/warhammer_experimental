@@ -7,8 +7,7 @@ import NavbarFactions from "./Factions";
 //   const data = await getAllDatasheets();
 //   return data;
 // }
-export default function Navbar(props: { unitsByFaction: any }) {
-  const unitsByFaction = props.unitsByFaction;
+export default function Navbar(unitsByFaction: any) {
   const roles = BattlefieldRoles();
   return <NavbarFactions units={unitsByFaction} roles={roles} />;
 }
