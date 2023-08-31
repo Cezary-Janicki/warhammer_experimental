@@ -1,5 +1,5 @@
 import Datasheets_models from "@/app/(components)/dataFetching/Datasheets_models";
-import Datsheets_damage from "@/app/(components)/dataFetching/Datasheets_Damage";
+import Datsheets_damage from "@/app/(components)/dataFetching/Datasheets_damage";
 
 export async function createUnitTables(props: number) {
   const datasheetModels = await Datasheets_models();
