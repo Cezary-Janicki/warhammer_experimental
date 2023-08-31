@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function UnitComposition(props) {
+export default function UnitComposition(props: any) {
   const cleanComp =
     props.datasheets[0].unit_composition === null ||
     props.datasheets[0].unit_composition === undefined

@@ -1,6 +1,6 @@
 import { Tooltip } from "../tooltip";
 import { StringToHtml } from "@/app/(components)/stringToHtml";
-export default function AbilitesTraits(props) {
+export default function AbilitesTraits(props: any) {
   const modelAbilites = props.modelAbilites;
   const factionAbilites = props.facitonAbilities;
   return (

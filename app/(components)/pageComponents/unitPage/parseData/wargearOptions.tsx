@@ -39,16 +39,16 @@ export async function datasheetsWargear(props: string, faction: string) {
   let allWargear: any[] = [];
   interface IAllWargearList {
     wargear_id: number;
-    line: number;
-    name: string;
-    Range: string;
-    type: string;
-    S: number;
-    AP: number;
-    D: number;
-    abilities: string;
+    // line: number;
+    // name: string;
+    // Range: string;
+    // type: string;
+    // S: number;
+    // AP: number;
+    // D: number;
+    // abilities: string;
   }
-  let allWargearList: IAllWargearList = [];
+  let allWargearList: IAllWargearList[] = [];
   let allCombiWeapons: any[] = []; // all weapons with duped combi guns
   let allCombiWeaponsList: any[] = []; // filtered combi weapons
   let testArray2: any[] = [];
@@ -60,7 +60,7 @@ export async function datasheetsWargear(props: string, faction: string) {
   });
 
   allWargear.map((item) => {
-    wargearList.map((item2: { wargear_id: any }) => {
+    wargearList.map((item2: { wargear_id: number }) => {
       if (item.wargear_id === item2.wargear_id) {
         allWargearList.push(item2);
       }

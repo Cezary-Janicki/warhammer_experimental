@@ -21,7 +21,6 @@ export default function NavbarPopup(props: any) {
       : 0;
     return Object.keys(result);
   }
-  console.log("units", units.values);
   return (
     <>
       <div>

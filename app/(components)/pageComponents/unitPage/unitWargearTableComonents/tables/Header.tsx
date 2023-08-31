@@ -1,4 +1,4 @@
-export default function Header(props) {
+export default function Header(props: any) {
   return (
     <div
       className={

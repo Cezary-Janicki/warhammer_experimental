@@ -29,7 +29,7 @@ export async function createUnitTables(props: number) {
     let modelsKeys = Object.keys(filteredModels[0]);
     // creating the bracket damage keys array
     let damageKeys: string[] = Object.values(damageTables[0]);
-    damageKeys[0] = "datasheet_id"; // also trukkdoesnt bracket but it should
+    damageKeys[0] = "datasheet_id";
     damageKeys[1] = "line";
     damageKeys[2] = "W";
 
@@ -43,7 +43,7 @@ export async function createUnitTables(props: number) {
       bracketData().map((damage, i) => {
         let damageArrayWithKeys: { [key: string]: any } = {};
         damageKeys.forEach((key, index) => {
-          damageArrayWithKeys[key] = Object.values(damage)[index]; // this causes an error i need to read into this
+          damageArrayWithKeys[key] = Object.values(damage)[index];
         });
         allBracketsWithKeys.push(damageArrayWithKeys);
       });
@@ -65,7 +65,6 @@ export async function createUnitTables(props: number) {
         typeof damageBracketValues[1]["Model"] === "undefined"
           ? model["name"]
           : damageBracketValues[1]["Model"];
-      // Line above omits the name check if there is only one model (name is undefied then)
       if (model["name"] === bracketingModelName) {
         let tempModel = { ...model };
         damageBracketValues.map((damageValue, damageValueIndex) => {
@@ -86,7 +85,7 @@ export async function createUnitTables(props: number) {
           }); //dmg keys
           testObject.push(tempModel);
           tempModel = { ...model };
-          clearName(tempModel); // without this lin with e the code displays only the last iteration
+          clearName(tempModel);
         });
       }
     });
