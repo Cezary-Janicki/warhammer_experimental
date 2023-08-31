@@ -2,11 +2,18 @@ import "./globals.css";
 import { Suspense } from "react";
 import Loading from "./loading";
 import Navbar from "./(components)/pageComponents/navbar/Navbar";
-export default function RootLayout({
+import { getAllDatasheets } from "./(components)/dataFetching/Datasheets";
+async function getUnitsByFaction() {
+  const data = await getAllDatasheets();
+  return data;
+}
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const units = await getUnitsByFaction();
+
   return (
     <html lang="en">
       {/*
@@ -16,7 +23,7 @@ export default function RootLayout({
       <head />
       <body className={"text-gray-800 bg-stone-50"}>
         <div className="sticky top-0 z-40 pt-2 px-10 mb-2  bg-stone-200 border-b-2 border-stone-800 drop-shadow-xl">
-          <Navbar />
+          <Navbar units={units} />
         </div>
         <div className="max-w-5xl mx-auto">{children}</div>
       </body>
