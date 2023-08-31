@@ -81,16 +81,6 @@ export default async function Page({
   const wargear = await datasheetsWargear(modelId, faction);
   return (
     <>
-      <p>Faction: {faction}</p>
-      <p>Unit: {decodeURI(unit)}</p>
-      <p>Model id: {modelId}</p>
-      <p>
-        <Link href={`./factions/${faction}`}>Return to Faction Page</Link>
-      </p>
-      <p>
-        <Link href={`./`}>Return to Main Page</Link>
-      </p>
-
       <UnitPage
         unit={unit}
         wargear={wargear}

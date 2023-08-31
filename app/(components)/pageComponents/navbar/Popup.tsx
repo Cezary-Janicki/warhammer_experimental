@@ -1,9 +1,10 @@
 // "use client";
 import Link from "next/link";
 import BattlefieldRoles from "../../dataFetching/BattlefieldRoles";
-
+import sortArrayOfObjects from "../../sortObject";
 export default function NavbarPopup(props: any) {
   const units = props.units;
+  const sortedUnits = sortArrayOfObjects(units, "name");
   const faction = props.faction;
   const roles = BattlefieldRoles();
   function countRoles() {
@@ -40,8 +41,8 @@ export default function NavbarPopup(props: any) {
                 )}
 
                 <ul className="dropdown-content absolute hidden ml-36 -mt-10 border-4 bg-neutral-200 text-gray-700 border-neutral-500 p-2">
-                  <div className="columns-3 overflow-y-auto divide-y divide-neutral-300">
-                    {units.map((unit: any) => {
+                  <div className="columns-2 xl:columns-3 2xl:columns-3 overflow-hidden divide-y divide-neutral-300">
+                    {sortedUnits.map((unit: any) => {
                       if (unit.role == role && faction == unit.faction_id) {
                         return (
                           <li key={unit.link}>

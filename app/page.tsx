@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { Inter } from "@next/font/google";
-import Navbar from "./(components)/pageComponents/navbar/Navbar";
 import ArmiesByFaction from "./(components)/dataFetching/ArmiesByFaction";
 import { getAllDatasheets } from "./(components)/dataFetching/Datasheets";
 const inter = Inter({ subsets: ["latin"] });
@@ -13,10 +12,8 @@ async function getUnitsByFaction() {
 export default async function Home() {
   const factions = ArmiesByFaction();
   const unitsByFaction = await getUnitsByFaction();
-
   return (
     <>
-      <Navbar unitsByFaction={unitsByFaction} />
       <div className="flex">
         {Object.keys(factions).map((factionKeys: any, index) => {
           let factionArmies = Object.values(factions)[index];
