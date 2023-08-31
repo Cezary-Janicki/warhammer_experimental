@@ -5,10 +5,13 @@ import Datasheets, {
 } from "../../(components)/dataFetching/Datasheets";
 import { getDatasheetByFaction } from "../../(components)/dataFetching/Datasheets";
 import BattlefieldRoles from "../../(components)/dataFetching/BattlefieldRoles";
+import sortArrayOfObjects from "@/app/(components)/sortObject";
 
 async function getUnitsByFaction(props: string) {
   const data = await getDatasheetByFaction(props);
-  return data;
+  const sortedUnits = sortArrayOfObjects(data, "name");
+
+  return sortedUnits;
 }
 
 async function createArray() {
@@ -36,12 +39,6 @@ export default async function Page({
   return (
     <>
       <p>Faction: {faction}</p>
-      {/* <p>Unit: {unit}</p> */}
-      <p>
-        <Link href={`./`}>Return to main page</Link>
-      </p>
-      <p>All Faction units links</p>
-
       <div className="flex flex-wrap">
         {roles.map((role, roleIndex) => {
           return (
