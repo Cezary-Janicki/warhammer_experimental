@@ -8,8 +8,8 @@ import Datasheets_stratagems from "@/app/(components)/dataFetching/Datasheets_st
 import Stratagems from "@/app/(components)/dataFetching/Stratagems";
 import StratagemPhases from "@/app/(components)/dataFetching/StratagemPhases";
 export async function generateStaticParams() {
-  const xxx = await createArray();
-  return xxx;
+  const data = await createArray();
+  return data;
 }
 async function createArray() {
   const units = await Datasheets();
@@ -107,6 +107,7 @@ export default async function Page({
         faction_keywords={faction_keywords}
         datasheets={datasheets}
         models={selectTables}
+        stratagems={stratagems}
       />
     </>
   );
