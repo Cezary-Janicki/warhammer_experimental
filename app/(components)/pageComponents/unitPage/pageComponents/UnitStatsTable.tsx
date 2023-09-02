@@ -3,8 +3,6 @@ import * as React from "react";
 export default function UnitStatsTable(props: any) {
   const models = props.models;
   const datasheets = props.datasheets;
-  console.log("models", models);
-  console.log("datasheets", typeof datasheets[0].cost_per_unit);
   return (
     <>
       <div

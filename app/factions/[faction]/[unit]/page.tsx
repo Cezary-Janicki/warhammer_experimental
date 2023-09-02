@@ -1,12 +1,12 @@
-import Link from "next/link";
 import Datasheets from "../../../(components)/dataFetching/Datasheets";
-import UnitStatsTable from "@/app/(components)/pageComponents/unitPage/pageComponents/UnitStatsTable";
-import UnitWargearTable from "@/app/(components)/pageComponents/unitPage/pageComponents/UnitWargearTable";
 import UnitPage from "@/app/(components)/pageComponents/unitPage/index";
 import Datasheets_keywords from "@/app/(components)/dataFetching/Datasheets_keywords";
 import { datasheetOptions } from "@/app/(components)/pageComponents/unitPage/parseData/datasheetOptions";
 import { selectUnitTables } from "@/app/(components)/pageComponents/unitPage/parseData/selectUnitTables";
 import { datasheetsWargear } from "@/app/(components)/pageComponents/unitPage/parseData/wargearOptions";
+import Datasheets_stratagems from "@/app/(components)/dataFetching/Datasheets_stratagems";
+import Stratagems from "@/app/(components)/dataFetching/Stratagems";
+import StratagemPhases from "@/app/(components)/dataFetching/StratagemPhases";
 export async function generateStaticParams() {
   const xxx = await createArray();
   return xxx;
@@ -66,6 +66,23 @@ async function getDatasheetDataByModel(props: string) {
   });
   return filteredDatasheets;
 }
+async function getStratagems(datasheetId: string) {
+  const stratagemList = await Datasheets_stratagems();
+  const stratagems = await Stratagems();
+  let filteredStratagemsList: any[] = [];
+  stratagemList.map((item: { datasheet_id: string; stratagem_id: string }) => {
+    if (datasheetId == item.datasheet_id) {
+      // return filteredStratagemsList.push(item);
+      stratagems.forEach((stratagem: any) => {
+        if (stratagem.id === item.stratagem_id) {
+          return filteredStratagemsList.push(stratagem);
+        }
+      });
+    }
+  });
+
+  return filteredStratagemsList;
+}
 export default async function Page({
   params,
 }: {
@@ -79,6 +96,8 @@ export default async function Page({
   const unit_keywords = await getUnitKeywords(modelId);
   const faction_keywords = await getFactionKeywords(modelId);
   const wargear = await datasheetsWargear(modelId, faction);
+  const stratagems = await getStratagems(selectTables[0].datasheet_id);
+  console.log("strats", stratagems);
   return (
     <>
       <UnitPage
