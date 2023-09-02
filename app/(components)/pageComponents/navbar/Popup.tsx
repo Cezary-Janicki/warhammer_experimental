@@ -48,7 +48,9 @@ export default function NavbarPopup(props: any) {
                           <li key={unit.link}>
                             <div className="hover:bg-neutral-400 block w-48 break-inside-avoid-column">
                               <Link
-                                href={`/factions/${unit.faction_id}/${unit.name}`}
+                                href={`/factions/${
+                                  unit.faction_id
+                                }/${unit.name.replaceAll(" ", "_")}`}
                               >
                                 {unit.name}
                               </Link>

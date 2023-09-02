@@ -37,7 +37,7 @@ export default function UnitStatsTable(props: any) {
             {model.models_per_unit}
           </div>
           <div className={"col-span-3 font-semibold"}> {model.name}</div>
-          {datasheets[0].cost_per_unit === true ? (
+          {datasheets[0]?.cost_per_unit === true ? (
             <>
               {index === 0 ? (
                 <div

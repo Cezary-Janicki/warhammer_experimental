@@ -14,13 +14,6 @@ async function getUnitsByFaction(props: string) {
   return sortedUnits;
 }
 
-async function createArray() {
-  const units = await Datasheets();
-  return units.map((item: { faction_id: string; name: string }) => ({
-    faction: `${item.faction_id}`,
-    unit: `${item.name}`,
-  }));
-}
 export async function generateStaticParams() {
   const factions = await MainFactions();
   return factions.map((item: any) => ({
@@ -58,7 +51,9 @@ export default async function Page({
                       return (
                         <li key={unitIndex} className="list-none indent-6">
                           <Link
-                            href={`/factions/${unit1.faction_id}/${unit1.name}`}
+                            href={`/factions/${
+                              unit1.faction_id
+                            }/${unit1.name.replaceAll(" ", "_")}`}
                           >
                             {unit1.name}
                           </Link>

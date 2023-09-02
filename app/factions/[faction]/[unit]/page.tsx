@@ -15,7 +15,7 @@ async function createArray() {
   const units = await Datasheets();
   return units.map((item: { faction_id: string; name: string }) => ({
     faction: `${item.faction_id}`,
-    unit: `${item.name}`,
+    unit: `${item.name.replaceAll(" ", "_")}`,
   }));
 }
 async function getUnitKeywords(props: string) {
@@ -46,7 +46,7 @@ async function getFactionKeywords(props: string) {
 }
 
 async function getModelId(props: string) {
-  const model = decodeURI(props).replaceAll("%3A", ":");
+  const model = decodeURI(props).replaceAll("%3A", ":").replaceAll("_", " ");
   const models = await Datasheets();
   const filteredModels = models.filter(function (test: any) {
     if (test.name === model) {
@@ -72,8 +72,7 @@ async function getStratagems(datasheetId: string) {
   let filteredStratagemsList: any[] = [];
   stratagemList.map((item: { datasheet_id: string; stratagem_id: string }) => {
     if (datasheetId == item.datasheet_id) {
-      // return filteredStratagemsList.push(item);
-      stratagems.forEach((stratagem: any) => {
+      stratagems.forEach((stratagem: { id: string }) => {
         if (stratagem.id === item.stratagem_id) {
           return filteredStratagemsList.push(stratagem);
         }
@@ -88,7 +87,8 @@ export default async function Page({
 }: {
   params: { faction: string; unit: string };
 }) {
-  const { faction, unit } = await params;
+  const faction = await params.faction;
+  const unit = await params.unit.replaceAll("_", " ");
   const modelId = await getModelId(unit);
   const selectTables = await selectUnitTables(modelId);
   const datasheets = await getDatasheetDataByModel(unit);
@@ -97,7 +97,6 @@ export default async function Page({
   const faction_keywords = await getFactionKeywords(modelId);
   const wargear = await datasheetsWargear(modelId, faction);
   const stratagems = await getStratagems(selectTables[0].datasheet_id);
-  console.log("strats", stratagems);
   return (
     <>
       <UnitPage
