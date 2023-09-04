@@ -6,19 +6,23 @@ export default function UnitStratagems(props: any) {
   return (
     <>
       <div className="">Datasheet related stratagems</div>
-      {stratagems.map((stratagem: any, index: any) => {
-        return (
-          <div>
-            <div className="block border-2 border-cyan-300">
-              <div className="inline-block">{stratagem.name}</div>
-              <div className="inline-block">{stratagem.cp_cost}</div>
-              <div className="">{stratagem.type}</div>
-              <div className="italic">{stratagem.legend}</div>
-              <div className="">{StringToHtml(stratagem.description)}</div>
-            </div>
-          </div>
-        );
-      })}
+      <div className="columns-2 gap-8 break-inside-avoid-column">
+        {stratagems.map((stratagem: any, index: any) => {
+          return (
+            <ul className="block border-2 border-cyan-300 break-inside-avoid-column">
+              <li className="">
+                {stratagem.name}
+                <span className="float-right block">{stratagem.cp_cost}</span>
+              </li>
+              <li className="">{stratagem.type}</li>
+              <li className="italic">{stratagem.legend}</li>
+              <li className="text-justify">
+                {StringToHtml(stratagem.description)}
+              </li>
+            </ul>
+          );
+        })}
+      </div>
     </>
   );
 }

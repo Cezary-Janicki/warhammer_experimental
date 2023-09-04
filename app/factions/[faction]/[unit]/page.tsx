@@ -96,7 +96,7 @@ export default async function Page({
   const unit_keywords = await getUnitKeywords(modelId);
   const faction_keywords = await getFactionKeywords(modelId);
   const wargear = await datasheetsWargear(modelId, faction);
-  const stratagems = await getStratagems(selectTables[0].datasheet_id);
+  const stratagems = await getStratagems(selectTables[0]?.datasheet_id);
   return (
     <>
       <UnitPage
