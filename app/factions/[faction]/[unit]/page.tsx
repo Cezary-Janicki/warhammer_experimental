@@ -82,6 +82,11 @@ async function getStratagems(datasheetId: string) {
 
   return filteredStratagemsList;
 }
+
+async function getPhases() {
+  const data = await StratagemPhases();
+  return data;
+}
 export default async function Page({
   params,
 }: {
@@ -97,6 +102,7 @@ export default async function Page({
   const faction_keywords = await getFactionKeywords(modelId);
   const wargear = await datasheetsWargear(modelId, faction);
   const stratagems = await getStratagems(selectTables[0]?.datasheet_id);
+  const phases = await getPhases();
   return (
     <>
       <UnitPage
@@ -108,6 +114,7 @@ export default async function Page({
         datasheets={datasheets}
         models={selectTables}
         stratagems={stratagems}
+        phases={phases}
       />
     </>
   );

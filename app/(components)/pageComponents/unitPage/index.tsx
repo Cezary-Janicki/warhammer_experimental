@@ -12,6 +12,7 @@ export default function UnitPage(props: {
   wargear: any;
   models: any;
   stratagems: any;
+  phases: any;
 }) {
   const unit = props.unit;
   const datasheets = props.datasheets;
@@ -21,6 +22,7 @@ export default function UnitPage(props: {
   const wargear = props.wargear;
   const selectTables = props.models;
   const stratagems = props.stratagems;
+  const phases = props.phases;
 
   return (
     <div>
@@ -38,7 +40,7 @@ export default function UnitPage(props: {
         factionAbilites={wargear.factionAbilites}
         datasheets={datasheets}
       />
-      <UnitStratagems stratagems={stratagems} />
+      <UnitStratagems stratagems={stratagems} phases={phases} />
     </div>
   );
 }
