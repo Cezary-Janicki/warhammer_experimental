@@ -11,6 +11,8 @@ module.exports = {
   theme: {
     extend: {
       gridTemplateColumns: {
+        // 14 column grid
+        14: "repeat(14, minmax(0, 1fr))",
         // 15 column grid
         15: "repeat(15, minmax(0, 1fr))",
         // 16 column grid
@@ -19,6 +21,8 @@ module.exports = {
         20: "repeat(20, minmax(0, 1fr))",
       },
       gridColumn: {
+        // 15 column span
+        "span-14": "span 14 / span 14",
         // 15 column span
         "span-15": "span 15 / span 15",
         // 17 column span

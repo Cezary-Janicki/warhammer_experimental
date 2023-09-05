@@ -26,10 +26,13 @@ export default function UnitWargearTable(props: any) {
         {/* Unit Composition  */}
         <UnitComposition datasheets={datasheets} />
         {/* Weapon stats table */}
-        <WeaponStats allWargearList={allWargearList} />
+        <WeaponStats allWargearList={allWargearList} allWargear={allWargear} />
 
         {/* Combi weapons table section */}
-        <CombiWeaponStats allCombiWeaponsList={allCombiWeaponsList} />
+        <CombiWeaponStats
+          allCombiWeaponsList={allCombiWeaponsList}
+          allWargear={allWargear}
+        />
         {/* Other wargear and wargear options  */}
         <OtherWargearOptions
           otherWargear={otherWargear}

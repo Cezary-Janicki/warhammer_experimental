@@ -32,7 +32,6 @@ export default function UnitStratagemHeader(props: any) {
   let stratPhase = phases.find(
     (item: { stratagem_id: any }) => item.stratagem_id == stratagem.id
   );
-  console.log("stratphase", stratPhase);
   if (beforeBattle.includes(stratPhase.phase)) {
     return (
       <li className=" bg-orange-950 p-1 rounded-lg">

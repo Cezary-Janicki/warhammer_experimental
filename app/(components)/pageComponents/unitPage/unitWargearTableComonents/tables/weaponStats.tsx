@@ -9,12 +9,13 @@ export default function WeaponStats(props: any) {
         }
       >
         <div className={"ml-2.5 col-span-5"}>Weapon</div>
+        <div className={"col-span-1"}>cost</div>
         <div className={"col-span-1"}>Range</div>
         <div className={"col-span-2"}>Type</div>
         <div className={"col-span-1"}>S</div>
         <div className={"col-span-1"}>AP</div>
         <div className={"col-span-1"}>D</div>
-        <div className={"col-span-7"}>Abilities</div>
+        <div className={"col-span-6"}>Abilities</div>
       </div>
       {/* Unit weapon tables */}
       {allWargearList.map((wargear: any, index: number) => (
@@ -26,12 +27,13 @@ export default function WeaponStats(props: any) {
           <div className={"ml-2.5 col-span-5 font-semibold"}>
             {wargear.name}
           </div>
+          <div className={"col-span-1"}> cost</div>
           <div className={"col-span-1"}> {wargear?.Range}</div>
           <div className={"col-span-2"}> {wargear?.type}</div>
           <div className={"col-span-1"}> {wargear?.S}</div>
           <div className={"col-span-1"}> {wargear?.AP}</div>
           <div className={"col-span-1"}> {wargear?.D}</div>
-          <div className={"col-span-7"}>{stripHTML(wargear?.abilities)}</div>
+          <div className={"col-span-6"}>{stripHTML(wargear?.abilities)}</div>
         </div>
       ))}
     </div>
