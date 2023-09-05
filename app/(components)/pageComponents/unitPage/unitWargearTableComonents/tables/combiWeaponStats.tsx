@@ -2,7 +2,6 @@ import stripHTML from "../../parseData/stripHTML";
 export default function CombiWeaponStats(props: any) {
   const allCombiWeaponsList = props.allCombiWeaponsList;
   const allWargear = props.allWargear;
-  console.log("wargear", allCombiWeaponsList);
   return (
     <div>
       {allCombiWeaponsList.map((wargear: any, combiIndex: number) => (
@@ -17,12 +16,18 @@ export default function CombiWeaponStats(props: any) {
                 >
                   {/* Combi weapons headers */}
                   <div className={"col-span-20"}>
-                    <div className={"grid grid-cols-20"}>
-                      <div className={"ml-2.5 col-span-5  font-semibold"}>
+                    <div className={"grid grid-cols-20 gap-2"}>
+                      <div className={"ml-2.5 col-span-4  font-semibold"}>
                         {wargear[0].name}
                       </div>
                       {item.cost > 0 ? (
-                        <div className={"col-span-1"}> {item.cost}</div>
+                        <div
+                          className={
+                            "col-span-2 bg-red-700 text-center font-bold text-neutral-50 rounded-full h-7 w-16 items-center"
+                          }
+                        >
+                          {item.cost} pts
+                        </div>
                       ) : (
                         <div className={"col-span-1"}></div>
                       )}

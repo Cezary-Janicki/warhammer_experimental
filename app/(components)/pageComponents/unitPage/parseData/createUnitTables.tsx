@@ -55,6 +55,7 @@ export async function createUnitTables(props: number) {
       data["name"] = "";
       data["line"] = "";
       data["base_size"] = "";
+      data.models_per_unit = "";
       return data;
     }
 
