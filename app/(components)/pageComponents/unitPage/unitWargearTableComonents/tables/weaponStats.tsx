@@ -1,6 +1,8 @@
 import stripHTML from "../../parseData/stripHTML";
 export default function WeaponStats(props: any) {
   const allWargearList = props.allWargearList;
+  const allWargear = props.allWargear;
+  console.log("wargear", allWargearList);
   return (
     <div>
       <div
@@ -19,22 +21,54 @@ export default function WeaponStats(props: any) {
       </div>
       {/* Unit weapon tables */}
       {allWargearList.map((wargear: any, index: number) => (
-        <div
-          className={
-            "grid grid-cols-20 border border-neutral-300 rounded-md p-2.5   odd:bg-neutral-200 even:bg-neutral-50 "
-          }
-        >
-          <div className={"ml-2.5 col-span-5 font-semibold"}>
-            {wargear.name}
-          </div>
-          <div className={"col-span-1"}> cost</div>
-          <div className={"col-span-1"}> {wargear?.Range}</div>
-          <div className={"col-span-2"}> {wargear?.type}</div>
-          <div className={"col-span-1"}> {wargear?.S}</div>
-          <div className={"col-span-1"}> {wargear?.AP}</div>
-          <div className={"col-span-1"}> {wargear?.D}</div>
-          <div className={"col-span-6"}>{stripHTML(wargear?.abilities)}</div>
-        </div>
+        <>
+          {allWargear.map((item: any) => (
+            <>
+              {item.wargear_id == wargear.wargear_id ? (
+                <div
+                  className={
+                    "grid grid-cols-20 border border-neutral-300 rounded-md p-2.5   odd:bg-neutral-200 even:bg-neutral-50 "
+                  }
+                >
+                  <div className={"ml-2.5 col-span-5 font-semibold"}>
+                    {wargear.name}
+                  </div>
+                  {item.cost > 0 ? (
+                    <div className={"col-span-1"}> {item.cost}</div>
+                  ) : (
+                    <div className={"col-span-1"}></div>
+                  )}
+                  <div className={"col-span-1"}> {wargear?.Range}</div>
+                  <div className={"col-span-2"}> {wargear?.type}</div>
+                  <div className={"col-span-1"}> {wargear?.S}</div>
+                  <div className={"col-span-1"}> {wargear?.AP}</div>
+                  <div className={"col-span-1"}> {wargear?.D}</div>
+                  <div className={"col-span-6"}>
+                    {stripHTML(wargear?.abilities)}
+                  </div>
+                </div>
+              ) : (
+                <></>
+              )}
+            </>
+            // <div
+            //   className={
+            //     "grid grid-cols-20 border border-neutral-300 rounded-md p-2.5   odd:bg-neutral-200 even:bg-neutral-50 "
+            //   }
+            // >
+            //   <div className={"ml-2.5 col-span-5 font-semibold"}>
+            //     {wargear.name}
+            //   </div>
+            //   <div className={"col-span-1"}> cost</div>
+            //   <div className={"col-span-1"}> {wargear?.Range}</div>
+            //   <div className={"col-span-2"}> {wargear?.type}</div>
+            //   <div className={"col-span-1"}> {wargear?.S}</div>
+            //   <div className={"col-span-1"}> {wargear?.AP}</div>
+            //   <div className={"col-span-1"}> {wargear?.D}</div>
+            //   <div className={"col-span-6"}>{stripHTML(wargear?.abilities)}</div>
+            //     </div>
+          ))}
+        </>
       ))}
     </div>
   );
