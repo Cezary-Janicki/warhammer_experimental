@@ -9,8 +9,6 @@
   @apply visible z-50;
 }
 .dropdown:hover > .dropdown-content {
-  /* display: flex; */
-  /* flex-direction: column; */
   display: block;
 }
 @tailwind utilities;

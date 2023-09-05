@@ -7,7 +7,7 @@ export default async function UnitStratagems(props: any) {
   const phases = props.phases;
   return (
     <>
-      <div className="border border-neutral-300 bg-neutral-50 rounded-lg my-3  drop-shadow-2xl ">
+      <div className="border border-neutral-300 bg-neutral-50 rounded-lg my-3  drop-shadow-2xl z-0 relative">
         <div className="bg-neutral-800 text-neutral-50 text-center text-2xl font-bold rounded-md p-2.5">
           Datasheet related stratagems
         </div>
@@ -20,7 +20,6 @@ export default async function UnitStratagems(props: any) {
                 </div>
                 <div className="divide-y-2">
                   <li className="font-bold my-1">{stratagem.type}</li>
-                  {/* <li className="italic my-1 bg-neutral-200  rounded-lg border-2 border-neutral-400"> */}
                   <li className="italic my-1">{stratagem.legend}</li>
                   <li className="text-justify my-1">
                     {StringToHtml(stratagem.description)}

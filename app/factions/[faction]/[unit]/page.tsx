@@ -5,12 +5,14 @@ import { datasheetOptions } from "@/app/(components)/pageComponents/unitPage/par
 import { selectUnitTables } from "@/app/(components)/pageComponents/unitPage/parseData/selectUnitTables";
 import { datasheetsWargear } from "@/app/(components)/pageComponents/unitPage/parseData/wargearOptions";
 import Datasheets_stratagems from "@/app/(components)/dataFetching/Datasheets_stratagems";
+import Datasheet_abilities from "@/app/(components)/dataFetching/Datasheets_abilities";
 import Stratagems from "@/app/(components)/dataFetching/Stratagems";
 import StratagemPhases from "@/app/(components)/dataFetching/StratagemPhases";
 export async function generateStaticParams() {
   const data = await createArray();
   return data;
 }
+
 async function createArray() {
   const units = await Datasheets();
   return units.map((item: { faction_id: string; name: string }) => ({
@@ -43,6 +45,17 @@ async function getFactionKeywords(props: string) {
   });
   filter;
   return filteredKeywords;
+}
+async function getDatasheetsAbilites(props: string) {
+  const abilites = await Datasheet_abilities();
+  let filteredAbilites: any[] = [];
+  const filter = abilites.filter(function (ability: any) {
+    if (ability.datasheet_id == props) {
+      return filteredAbilites.push(ability);
+    }
+  });
+  filter;
+  return filteredAbilites;
 }
 
 async function getModelId(props: string) {
@@ -98,6 +111,7 @@ export default async function Page({
   const selectTables = await selectUnitTables(modelId);
   const datasheets = await getDatasheetDataByModel(unit);
   const datasheets_options = await datasheetOptions(modelId);
+  const datasheet_abilities = await getDatasheetsAbilites(modelId);
   const unit_keywords = await getUnitKeywords(modelId);
   const faction_keywords = await getFactionKeywords(modelId);
   const wargear = await datasheetsWargear(modelId, faction);
@@ -109,6 +123,7 @@ export default async function Page({
         unit={unit}
         wargear={wargear}
         datasheets_options={datasheets_options}
+        datasheet_abilities={datasheet_abilities}
         unit_keywords={unit_keywords}
         faction_keywords={faction_keywords}
         datasheets={datasheets}

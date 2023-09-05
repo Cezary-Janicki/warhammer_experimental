@@ -19,6 +19,7 @@ export default function UnitWargearTable(props: any) {
   const unit_keywords = props.unit_keywords;
   const faction_keywords = props.faction_keywords;
   const factionAbilites = props.factionAbilites;
+  const datasheet_abilities = props.datasheet_abilities;
 
   return (
     <div className={"relative z-0 drop-shadow-md"}>
@@ -37,6 +38,7 @@ export default function UnitWargearTable(props: any) {
         <OtherWargearOptions
           otherWargear={otherWargear}
           datasheets_options={datasheets_options}
+          datasheet_abilities={datasheet_abilities}
         />
         {/* Abilites/traits table */}
         <AbilitesTraits
