@@ -5,7 +5,7 @@ export function Tooltip(props: any) {
   return (
     <>
       {factionAbilites.map((ability: any, index: number) => (
-        <span className="has-tooltip">
+        <span key={index} className="has-tooltip">
           <span>
             <span className={"underline decoration-dotted"}>
               {ability.name}

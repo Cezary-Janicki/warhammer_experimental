@@ -14,22 +14,29 @@ export default async function Home() {
   const unitsByFaction = await getUnitsByFaction();
   return (
     <>
-      <div className="flex">
+      <div className="">
         {Object.keys(factions).map((factionKeys: any, index) => {
           let factionArmies = Object.values(factions)[index];
           return (
-            <ul key={index}>
-              <h1 className="font-semibold">{factionKeys}</h1>
-              {factionArmies.map((item: any) => {
-                return (
-                  <li className="list-none indent-6" key={item.faction_name}>
-                    <Link href={`/factions/${item.faction_id}`}>
-                      {item.faction_name}
-                    </Link>
-                  </li>
-                );
-              })}
-            </ul>
+            <div key={index}>
+              <div className="bg-neutral-800 text-neutral-50 text-center text-2xl font-bold rounded-md p-2.5 drop-shadow-md mb-6">
+                {factionKeys}
+              </div>
+              <ul className="columns-3">
+                {factionArmies.map((item: any) => {
+                  return (
+                    <li
+                      className="border-2 border-neutral-300 bg-neutral-200 mb-6 p-2.5 break-inside-avoid-column rounded-md  "
+                      key={item.faction_name}
+                    >
+                      <Link href={`/factions/${item.faction_id}`}>
+                        {item.faction_name}
+                      </Link>
+                    </li>
+                  );
+                })}
+              </ul>
+            </div>
           );
         })}
       </div>

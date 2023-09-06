@@ -2,7 +2,7 @@
 import { StringToHtml } from "@/app/(components)/stringToHtml";
 import UnitStratagemHeader from "./UnitStratagemHeader";
 
-export default async function UnitStratagems(props: any) {
+export default function UnitStratagems(props: any) {
   const stratagems = props.stratagems;
   const phases = props.phases;
   return (
@@ -14,7 +14,10 @@ export default async function UnitStratagems(props: any) {
         <div className="columns-2 gap-8 break-inside-avoid-column pt-4 px-3">
           {stratagems.map((stratagem: any, index: any) => {
             return (
-              <ul className="block break-inside-avoid-column mb-6 rounded-lg border-l-4 border-neutral-200">
+              <ul
+                key={index}
+                className="block break-inside-avoid-column mb-6 rounded-lg border-l-4 border-neutral-200"
+              >
                 <div className="text-slate-100 text-lg font-bold">
                   <UnitStratagemHeader stratagem={stratagem} phases={phases} />
                 </div>

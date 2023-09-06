@@ -1,23 +1,23 @@
-import { MainFactions } from '../(components)/dataFetching/Factions'
+import { MainFactions } from "../(components)/dataFetching/Factions";
 
-async function fetchFactions () {
-  const data = await MainFactions()
-  return data
+async function fetchFactions() {
+  const data = await MainFactions();
+  return data;
 }
 
-export default async function about () {
-  const data = await fetchFactions()
+export default async function about() {
+  const data = await fetchFactions();
 
-  const factionNames = []
+  const factionNames = [];
   data.map((item, index) => {
-    factionNames.push(item.name)
-  })
+    factionNames.push(item.name);
+  });
   return (
-    <div>
+    <>
       <p>about</p>
       {factionNames.map((factionName, FactionIndex) => {
-        return <div key={FactionIndex}>Faction: {factionName}</div>
+        return <div key={FactionIndex}>Faction: {factionName}</div>;
       })}
-    </div>
-  )
+    </>
+  );
 }

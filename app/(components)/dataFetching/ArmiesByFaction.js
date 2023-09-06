@@ -2,6 +2,10 @@ export default function ArmiesByFaction() {
   const Armies = {
     Imperium: [
       {
+        faction_name: "Adeptus Astartes",
+        faction_id: "SM",
+      },
+      {
         faction_name: "Adepta Sororitas",
         faction_id: "AS",
       },
@@ -28,10 +32,6 @@ export default function ArmiesByFaction() {
       {
         faction_name: "Rouge Traders",
         faction_id: "RT",
-      },
-      {
-        faction_name: "Space Marines",
-        faction_id: "SM",
       },
       {
         faction_name: "Titan Legions",
@@ -67,10 +67,10 @@ export default function ArmiesByFaction() {
         faction_name: "Thousand Sons",
         faction_id: "TS",
       },
-      {
-        faction_name: "World Eaters",
-        faction_id: "WE",
-      },
+      // {
+      //   faction_name: "World Eaters",
+      //   faction_id: "WE",
+      // },
     ],
     Xenos: [
       {

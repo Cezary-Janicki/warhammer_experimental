@@ -1,5 +1,3 @@
-import StratagemPhases from "@/app/(components)/dataFetching/StratagemPhases";
-
 export default function UnitStratagemHeader(props: any) {
   const stratagem = props.stratagem;
   const phases = props.phases;
