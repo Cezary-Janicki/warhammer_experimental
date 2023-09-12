@@ -36,7 +36,7 @@ export default function UnitStatsTable(props: any) {
             {" "}
             {model.models_per_unit}
           </div>
-          <div className={"col-span-3 font-semibold"}> {model.name}</div>
+          <div className={"col-span-3 font-semibold "}> {model.name}</div>
           {datasheets[0]?.cost_per_unit === true ? (
             <>
               {index === 0 ? (
@@ -56,7 +56,7 @@ export default function UnitStatsTable(props: any) {
               {model.name.length >= 1 ? (
                 <div
                   className={
-                    "col-span-1 bg-red-700 text-center text-neutral-50 font-bold rounded-full"
+                    "col-span-1 bg-red-700 text-center text-neutral-50 font-bold rounded-full h-7 w-20"
                   }
                 >
                   {model?.Cost} pts

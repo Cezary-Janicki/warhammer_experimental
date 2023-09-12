@@ -26,15 +26,20 @@ export default function UnitWargearTable(props: any) {
       <MountCheck key={datasheets[0].id}>
         {/* Unit Composition  */}
         <UnitComposition datasheets={datasheets} />
-        {/* Weapon stats table */}
-        <WeaponStats allWargearList={allWargearList} allWargear={allWargear} />
+        <div className="border rounded-lg  border-neutral-500">
+          {/* Weapon stats table */}
+          <WeaponStats
+            allWargearList={allWargearList}
+            allWargear={allWargear}
+          />
 
-        {/* Combi weapons table section */}
-        <CombiWeaponStats
-          allCombiWeaponsList={allCombiWeaponsList}
-          allWargear={allWargear}
-          allWargearList={allWargearList}
-        />
+          {/* Combi weapons table section */}
+          <CombiWeaponStats
+            allCombiWeaponsList={allCombiWeaponsList}
+            allWargear={allWargear}
+            allWargearList={allWargearList}
+          />
+        </div>
         {/* Other wargear and wargear options  */}
         <OtherWargearOptions
           otherWargear={otherWargear}
