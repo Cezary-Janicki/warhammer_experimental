@@ -30,7 +30,7 @@ export default async function Page({
   const roles = BattlefieldRoles();
   return (
     <>
-      <div className="bg-neutral-800 text-neutral-50 text-center text-2xl font-bold rounded-md p-2.5 drop-shadow-md mb-6">
+      <div className="bg-neutral-800 text-neutral-50 text-center text-2xl tracking-widest font-bold rounded-md p-2.5 drop-shadow-md mb-6">
         {getFactionName(faction)}
       </div>
       <div className="columns-3 gap-3 ">

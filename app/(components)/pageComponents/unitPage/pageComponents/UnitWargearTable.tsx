@@ -33,6 +33,7 @@ export default function UnitWargearTable(props: any) {
         <CombiWeaponStats
           allCombiWeaponsList={allCombiWeaponsList}
           allWargear={allWargear}
+          allWargearList={allWargearList}
         />
         {/* Other wargear and wargear options  */}
         <OtherWargearOptions
