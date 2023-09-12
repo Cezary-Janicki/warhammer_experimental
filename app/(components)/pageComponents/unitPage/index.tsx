@@ -43,6 +43,7 @@ export default function UnitPage(props: {
         datasheets={datasheets}
         datasheet_abilities={datasheet_abilities}
       />
+
       <UnitStratagems stratagems={stratagems} phases={phases} />
     </div>
   );

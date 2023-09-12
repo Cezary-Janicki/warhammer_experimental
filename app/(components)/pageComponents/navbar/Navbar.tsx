@@ -11,8 +11,9 @@ export default function Navbar(props: any) {
   const unitsByFaction = props.units;
   // const unitsByFaction = await getUnitsByFaction();
   return (
-    <div className="flex flex-row  ">
+    <div className="flex flex-row overscroll-none mb-1 ">
       <NavbarFactions className="" units={unitsByFaction} />
+
       <button className=" bg-neutral-400 text-neutral-50 font-semibold py-2 px-4 rounded items-center w-[12rem] ml-auto">
         <Link href={`/`}>Return to Main Page</Link>
       </button>

@@ -32,7 +32,7 @@ export default function UnitStratagemHeader(props: any) {
   );
   if (beforeBattle.includes(stratPhase.phase)) {
     return (
-      <li className=" bg-orange-950 p-1 rounded-lg">
+      <li className=" bg-orange-950 p-2 rounded-lg">
         {stratagem.name}
         <span className="float-right block">{stratagem.cp_cost} CP</span>
       </li>
@@ -40,7 +40,7 @@ export default function UnitStratagemHeader(props: any) {
   }
   if (anyTime.includes(stratPhase.phase)) {
     return (
-      <li className=" bg-fuchsia-600 p-1 rounded-lg">
+      <li className=" bg-fuchsia-600 p-2 rounded-lg">
         {stratagem.name}
         <span className="float-right block">{stratagem.cp_cost} CP</span>
       </li>
@@ -48,7 +48,7 @@ export default function UnitStratagemHeader(props: any) {
   }
   if (others.includes(stratPhase.phase)) {
     return (
-      <li className=" bg-pink-950 p-1 rounded-lg">
+      <li className=" bg-pink-950 p-2 rounded-lg">
         {stratagem.name}
         <span className="float-right block">{stratagem.cp_cost} CP</span>
       </li>
@@ -56,7 +56,7 @@ export default function UnitStratagemHeader(props: any) {
   }
   if (commandPhase.includes(stratPhase.phase)) {
     return (
-      <li className=" bg-stone-600 p-1 rounded-lg">
+      <li className=" bg-stone-600 p-2 rounded-lg">
         {stratagem.name}
         <span className="float-right block">{stratagem.cp_cost} CP</span>
       </li>
@@ -64,7 +64,7 @@ export default function UnitStratagemHeader(props: any) {
   }
   if (movementPhase.includes(stratPhase.phase)) {
     return (
-      <li className=" bg-yellow-600 p-1 rounded-lg">
+      <li className=" bg-yellow-600 p-2 rounded-lg">
         {stratagem.name}
         <span className="float-right block">{stratagem.cp_cost} CP</span>
       </li>
@@ -72,7 +72,7 @@ export default function UnitStratagemHeader(props: any) {
   }
   if (psychicPhase.includes(stratPhase.phase)) {
     return (
-      <li className=" bg-blue-600 p-1 rounded-lg">
+      <li className=" bg-blue-600 p-2 rounded-lg">
         {stratagem.name}
         <span className="float-right block">{stratagem.cp_cost} CP</span>
       </li>
@@ -80,7 +80,7 @@ export default function UnitStratagemHeader(props: any) {
   }
   if (shootingPhase.includes(stratPhase.phase)) {
     return (
-      <li className=" bg-green-600 p-1 rounded-lg">
+      <li className=" bg-green-600 p-2 rounded-lg">
         {stratagem.name}
         <span className="float-right block">{stratagem.cp_cost} CP</span>
       </li>
@@ -88,7 +88,7 @@ export default function UnitStratagemHeader(props: any) {
   }
   if (chargeFightPhase.includes(stratPhase.phase)) {
     return (
-      <li className=" bg-red-600 p-1 rounded-lg">
+      <li className=" bg-red-600 p-2 rounded-lg">
         {stratagem.name}
         <span className="float-right block">{stratagem.cp_cost} CP</span>
       </li>
@@ -96,14 +96,14 @@ export default function UnitStratagemHeader(props: any) {
   }
   if (moralePhase.includes(stratPhase.phase)) {
     return (
-      <li className=" bg-rose-600 p-1 rounded-lg">
+      <li className=" bg-rose-600 p-2 rounded-lg">
         {stratagem.name}
         <span className="float-right block">{stratagem.cp_cost} CP</span>
       </li>
     );
   } else {
     return (
-      <li className=" bg-stone-600 p-1 rounded-lg">
+      <li className=" bg-stone-600 p-2 rounded-lg">
         {stratagem.name}
         <span className="float-right block">{stratagem.cp_cost} CP</span>
       </li>
