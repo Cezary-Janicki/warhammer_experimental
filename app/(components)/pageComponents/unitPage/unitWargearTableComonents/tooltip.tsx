@@ -11,7 +11,7 @@ export function Tooltip(props: any) {
               {ability.name}
             </span>{" "}
           </span>
-          <div className="tooltip roundedbg bg-neutral-50 border-2 border-neutral-600 rounded-md p-2.5 shadow-lg shadow-neutral-600 mx-16 mt-3">
+          <div className="tooltip roundedbg bg-neutral-50 border-2 border-neutral-600 rounded-md p-2.5 shadow-lg shadow-neutral-600 mx-16 mt-3 w-160">
             <p className={"font-bold text-red-700"}>{ability.name}</p>
             <p className="font-light italic">{ability.legend}</p>
             {StringToHtml(ability.description)}

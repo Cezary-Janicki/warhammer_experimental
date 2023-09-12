@@ -22,7 +22,7 @@ export default function UnitWargearTable(props: any) {
   const datasheet_abilities = props.datasheet_abilities;
 
   return (
-    <div className={"relative z-0 drop-shadow-md"}>
+    <div className={"relative z-30 drop-shadow-md"}>
       <MountCheck key={datasheets[0].id}>
         {/* Unit Composition  */}
         <UnitComposition datasheets={datasheets} />

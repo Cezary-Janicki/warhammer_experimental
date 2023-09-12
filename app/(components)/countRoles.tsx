@@ -1,4 +1,4 @@
-export default function countRoles(units, faction) {
+export default function countRoles(units: any, faction: any) {
   //   const units = props.units;
   //   const faction = props.faction;
   let result = Array.isArray(units)

@@ -6,8 +6,14 @@ export default function UnitStratagems(props: any) {
   const stratagems = props.stratagems;
   const phases = props.phases;
   return (
-    <>
-      <div className="border border-neutral-300 bg-neutral-50 rounded-lg my-3  drop-shadow-2xl z-0 relative">
+    <div className="pb-5">
+      <div
+        className={
+          Object.keys(stratagems).length >= 1
+            ? "border border-neutral-300 bg-neutral-50 rounded-lg my-3  drop-shadow-2xl pb-5"
+            : "hidden"
+        }
+      >
         <div className="bg-neutral-800 text-neutral-50 text-center text-2xl  tracking-widest font-bold rounded-md p-2.5 ">
           Datasheet related stratagems
         </div>
@@ -33,6 +39,6 @@ export default function UnitStratagems(props: any) {
           })}
         </div>
       </div>
-    </>
+    </div>
   );
 }

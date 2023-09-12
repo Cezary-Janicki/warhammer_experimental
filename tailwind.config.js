@@ -10,6 +10,9 @@ module.exports = {
   ],
   theme: {
     extend: {
+      width: {
+        160: "40rem",
+      },
       gridTemplateColumns: {
         // 14 column grid
         14: "repeat(14, minmax(0, 1fr))",
@@ -20,6 +23,7 @@ module.exports = {
         // 20 column grid
         20: "repeat(20, minmax(0, 1fr))",
       },
+
       gridColumn: {
         // 15 column span
         "span-14": "span 14 / span 14",
