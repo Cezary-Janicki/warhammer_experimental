@@ -28,7 +28,7 @@ export default function UnitPage(props: {
 
   return (
     <div>
-      <Header unit={unit} />
+      <Header unit={unit} datasheets={datasheets} />
       <UnitStatsTable models={selectTables} datasheets={datasheets} />
       <UnitWargearTable
         allWargear={wargear.allWargear}
