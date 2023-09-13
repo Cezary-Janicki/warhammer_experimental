@@ -1,6 +1,7 @@
 import stripHTML from "../../parseData/stripHTML";
 export default function PriestPsyker(props: any) {
   const datasheets = props.datasheets;
+  console.log("datasheets", datasheets);
   return (
     <div>
       {datasheets[0]?.priest != null ? (
@@ -26,7 +27,22 @@ export default function PriestPsyker(props: any) {
           </div>
         </div>
       ) : (
-        <></>
+        <>
+          {datasheets[0]?.transport != null ? (
+            <div
+              className={
+                "flex flex-row gap-1 bg-neutral-50 border border-neutral-300 rounded-md p-2.5 "
+              }
+            >
+              <p className={"basis-1/5 p-2 font-semibold"}>Transport</p>
+              <div className={" break-inside-avoid-column basis-4/5"}>
+                <div>{stripHTML(datasheets[0]?.transport)}</div>
+              </div>
+            </div>
+          ) : (
+            <></>
+          )}
+        </>
       )}
     </div>
   );
