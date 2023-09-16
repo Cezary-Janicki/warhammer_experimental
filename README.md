@@ -1,5 +1,7 @@
 # warhammer_experimental
 
-This is a project. I am currently working on. It's a damage calculator for a tabletop wargame Warhammer 40 000. 
-The damage dealt in agame by various units is heavily decided by random chance. 
-This project's goal is helping players making better informed decision inthe game. Currently, the project is hosted at https://warhammer-40k.vercel.app
+This is a project. I am currently working on. Warhammer 40 000 hasmany various units for players to choose. 
+This website’s mainpurpose is to help players with that choice. The website uses exported data from an already existing website to achieve that
+
+The webpage it's accessible at
+https://warhammer-40k.vercel.app
